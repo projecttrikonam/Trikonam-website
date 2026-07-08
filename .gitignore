@@ -1,0 +1,40 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# local Claude Code harness settings (machine-specific, not for version control)
+.claude/settings.local.json
+
+# Raw/unsorted client photo library dropped in the project root — NOT the site's
+# asset source. Curated, actually-used source photos live in assets/source-images/;
+# the optimized web images they produce live in public/images/ (both are committed).
+/Images/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# generated / optimized image cache (rebuilt from source by scripts/optimize-images.mjs)
+# NOTE: public/images/ IS committed — it is the served asset set. The line below only
+# ignores the sharp working cache, not the final images.
+/.image-cache/

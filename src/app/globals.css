@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ *
+ * DESIGN TOKENS (Section 4.2 of the handoff document)
+ * Single source of truth for colour. Do not hardcode hex in components —
+ * these variables are mapped into Tailwind in tailwind.config.ts.
+ * ------------------------------------------------------------------ */
+:root {
+  /* Colours are stored as space-separated RGB channels (not hex) so Tailwind can apply
+   * opacity modifiers — e.g. `text-moss/20`, `ring-gold/15` — via
+   * rgb(var(--token) / <alpha-value>). In raw CSS, wrap them as rgb(var(--token)). */
+
+  /* Backgrounds */
+  --color-bg: 250 247 239; /* warm ivory — primary background */
+  --color-bg-alt: 239 231 214; /* soft sand — alternate section background */
+  --color-surface: 255 255 255; /* card/panel white — used sparingly */
+
+  /* Text */
+  --color-text-primary: 42 38 32; /* deep espresso-charcoal, never pure black */
+  --color-text-secondary: 95 86 75; /* warm muted brown-grey — darkened from #6B6155 to meet WCAG AA */
+  --color-text-inverse: 250 247 239; /* text on dark/accent backgrounds */
+
+  /* Accents */
+  --color-accent-moss: 91 107 78; /* primary accent — links, icons, secondary buttons, dividers */
+  --color-accent-moss-dark: 70 84 60; /* hover state for moss elements */
+  --color-accent-gold: 138 98 48; /* primary CTA — deepened from #A87C3D so ivory CTA text meets WCAG AA (see note) */
+  --color-accent-gold-dark: 110 77 36; /* hover state for gold CTA */
+
+  /* Structural */
+  --color-border: 226 217 198; /* hairline dividers, card borders */
+  --color-focus-ring: 70 84 60; /* visible keyboard focus — non-negotiable */
+
+  /* Elevation — layered, soft shadows for real depth (Creative Director layer). */
+  --shadow-soft: 0 1px 2px rgba(42, 38, 32, 0.04), 0 8px 30px rgba(42, 38, 32, 0.06);
+  --shadow-lift: 0 2px 6px rgba(42, 38, 32, 0.05), 0 18px 50px rgba(42, 38, 32, 0.11);
+  --shadow-float:
+    0 4px 10px rgba(42, 38, 32, 0.06), 0 30px 80px rgba(42, 38, 32, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.5) inset;
+
+  /* Atmospheric tints — used sparingly for soft radial gradient washes. */
+  --wash-moss: rgba(91, 107, 78, 0.06);
+  --wash-gold: rgba(138, 98, 48, 0.05);
+}
+
+/* CONTRAST NOTES (WCAG AA 4.5:1 is a non-negotiable quality floor — Handoff §11.2).
+ * Two tokens were deepened from the handoff's suggested hexes so real text passes AA;
+ * measured ratios against the ivory background (#FAF7EF):
+ *   --color-text-secondary  #6B6155 → #5F564B   (was ~4.3:1, now 6.72:1)
+ *   --color-accent-gold      #A87C3D → #8A6230   (ivory CTA label was 3.49:1, now ~5:1)
+ * Gold is used ONLY as a CTA fill with ivory text — never body text or a large bg. */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  }
+
+  body {
+    /* Soft radial washes over the ivory base give the transparent areas (hero, seams)
+     * gentle depth instead of a flat fill. */
+    background-color: rgb(var(--color-bg));
+    background-image:
+      radial-gradient(120% 80% at 100% 0%, var(--wash-gold) 0%, transparent 55%),
+      radial-gradient(120% 90% at 0% 100%, var(--wash-moss) 0%, transparent 55%);
+    background-attachment: fixed;
+    color: rgb(var(--color-text-primary));
+    font-family: var(--font-karla), system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Fine grain over the WHOLE viewport — a tactile, printed-paper quality (Aesop /
+   * editorial) at a whisper-low opacity, sitting above the opaque tonal sections so the
+   * texture reads everywhere. A single self-contained fixed overlay: pointer-events are
+   * off (clicks pass through) and it never touches other elements' positioning, so the
+   * sticky header is unaffected. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 400; /* never bold-heavy — Fraunces at regular/medium only */
+    color: rgb(var(--color-text-primary));
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-focus-ring));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  a, button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: rgb(var(--color-accent-moss));
+    color: rgb(var(--color-text-inverse));
+  }
+
+  /* Refined, quiet scrollbar (WebKit) — a small premium detail. */
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--color-bg));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d8ccb4;
+    border: 3px solid rgb(var(--color-bg));
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c9ba9c;
+  }
+}
+
+@layer components {
+  .prose-measure {
+    max-width: 65ch;
+  }
+
+  /* Eyebrow with a small leading tick — a quiet editorial signature. */
+  .eyebrow {
+    font-family: var(--font-karla), system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgb(var(--color-accent-moss));
+  }
+  .eyebrow--tick {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .eyebrow--tick::before {
+    content: '';
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
+  }
+
+  .body-soft {
+    color: rgb(var(--color-text-primary));
+    opacity: 0.9;
+  }
+
+  /* Animated underline for text links (Handoff §4.6). */
+  .link-underline {
+    background-image: linear-gradient(rgb(var(--color-accent-moss)), rgb(var(--color-accent-moss)));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    padding-bottom: 2px;
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Refined glassmorphism — used with function (nav, overlays), never decoration. */
+  .glass {
+    background: rgba(250, 247, 239, 0.72);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+  }
+  .glass-dark {
+    background: rgba(42, 38, 32, 0.55);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+  }
+
+  /* Elevated surface with a faint top highlight — subtle layered depth. */
+  .surface-elevated {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 40%),
+      rgb(var(--color-surface));
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Gold gradient text — for a single accented display word (used sparingly). */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #a87c3d 0%, #6e4d24 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Hairline divider with a soft faded gradient (not a hard rule). */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--color-border)) 15%,
+      rgb(var(--color-border)) 85%,
+      transparent
+    );
+  }
+}
+
+@layer utilities {
+  /* Balance short headings for a more typeset look. */
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Scroll reveal (see RevealOnScroll). CSS-driven so it always settles to its final
+ * state. `.reveal-in` is toggled by an IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+/* Fail open: if scripting is unavailable, show content immediately. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * REDUCED MOTION — quality floor, not optional (Section 4.6, 11.2)
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
