@@ -19,10 +19,10 @@ export function Wordmark({ className = '', light = false }: { className?: string
       <Image
         src="/trikonam-logo.png"
         alt="Trikonam — Yoga, Meditation, Lifestyle"
-        width={900}
-        height={450}
+        width={1488}
+        height={496}
         priority
-        className="h-14 w-auto sm:h-20"
+        className="h-16 w-auto sm:h-[88px]"
       />
     </span>
   );
