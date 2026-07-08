@@ -56,13 +56,14 @@ export function Footer() {
         <div>
           <h2 className="eyebrow mb-4">Contact</h2>
           <ul className="space-y-2.5 text-body text-primary">
-            {contact.phones.map((phone) => (
-              <li key={phone}>
-                <a href={`tel:${phone}`} className="link-underline hover:text-moss">
-                  {phone}
-                </a>
-              </li>
-            ))}
+            <li>
+              <a
+                href={`tel:${contact.phone.replace(/\s/g, '')}`}
+                className="link-underline hover:text-moss"
+              >
+                {contact.phone}
+              </a>
+            </li>
             <li className="pt-1">
               <a
                 href={`mailto:${contact.email}`}

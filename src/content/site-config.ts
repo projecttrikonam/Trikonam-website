@@ -17,20 +17,25 @@ export const siteConfig = {
 
   // --- External forms (Handoff Section 3.4 & 12) ---------------------------
   // REGISTER: every "Register Now" button. ENQUIRE: Corporate & Schools/Colleges only.
+  // CONSULTATION: the Contact page's "Request a Consultation" button only.
   forms: {
     register:
       'https://docs.google.com/forms/d/e/1FAIpQLSfF6MSVE-mnGEELVaVjZfCES_i_8xh1sWjahh9kvSbgwDYhZw/viewform?usp=share_link&ouid=102767741845224190576',
     enquire: 'https://forms.gle/1gfKXoUs3B1a7XGW8',
+    consultation: 'https://forms.gle/u1yNdwR1tcaL2jCf8',
   },
 
   // --- Contact (Handoff Section 12) ----------------------------------------
   // Email: the client typed "Projecttrilonam@gmail.com" (with an L) but the verified
   // Google Drive account is "projecttrikonam@gmail.com" (with a K). We use the
   // Drive-verified spelling per Handoff Section 14, item 2.
+  //
+  // Phone: consolidated to a single number (2026 update) — one line for General
+  // Enquiries, Programs & Registrations, and Workshops alike, rather than three
+  // undifferentiated numbers. Also reachable on WhatsApp at the same number.
   contact: {
     email: 'projecttrikonam@gmail.com',
-    // All three numbers listed equally — no primary was designated (Handoff §14.4).
-    phones: ['9491527020', '9985898518', '9537278706'],
+    phone: '+91 9537278706',
   },
 
   // --- Social (Handoff §12): none supplied yet. Footer row stays structurally

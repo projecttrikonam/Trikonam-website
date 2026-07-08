@@ -69,7 +69,7 @@ export function organizationJsonLd() {
     description: siteConfig.description,
     url: siteConfig.url,
     email: siteConfig.contact.email,
-    telephone: siteConfig.contact.phones,
+    telephone: siteConfig.contact.phone,
     image: absolute('/og-image.jpg'),
     knowsAbout: [
       'Classical Hatha Yoga',
