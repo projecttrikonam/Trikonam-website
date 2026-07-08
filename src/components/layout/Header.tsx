@@ -38,7 +38,7 @@ export function Header() {
         scrolled ? 'glass shadow-[0_1px_0_rgba(226,217,198,0.9)]' : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6 sm:px-8">
+      <div className="mx-auto flex h-full max-w-6xl items-center justify-between pl-6 pr-6 sm:pl-8 sm:pr-8 xl:pr-0">
         <Link
           href="/"
           aria-label="Trikonam — home"
