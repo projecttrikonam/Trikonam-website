@@ -7,6 +7,9 @@
 /.next/
 /out/
 
+# wrangler (Cloudflare Pages CLI) local deploy cache
+/.wrangler/
+
 # production
 /build
 
