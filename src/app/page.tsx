@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Hero } from '@/components/sections/Hero';
 import { AboutPreview } from '@/components/sections/AboutPreview';
 import { FullBleedInterlude } from '@/components/sections/FullBleedInterlude';
@@ -7,6 +8,19 @@ import { SadhguruQuote } from '@/components/sections/SadhguruQuote';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { Button } from '@/components/ui/Button';
 import { quotes } from '@/content/quotes';
+import { siteConfig } from '@/content/site-config';
+import { pageMetadata } from '@/lib/seo';
+
+// The home page previously had no metadata of its own (it only inherited the root
+// layout's defaults), which meant it emitted no canonical URL and no page-specific
+// Open Graph `url`. Every other route uses pageMetadata() for this; the home page now
+// does too, using `title: { absolute }` so it keeps the layout's exact default title
+// instead of picking up the `%s · Trikonam` template.
+export const metadata: Metadata = pageMetadata({
+  title: { absolute: 'Trikonam · Classical Hatha Yoga' },
+  description: siteConfig.description,
+  path: '/',
+});
 
 /**
  * Home — a single, unfolding story rather than a stack of sections (client redesign).

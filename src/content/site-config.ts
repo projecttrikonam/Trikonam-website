@@ -12,7 +12,7 @@ export const siteConfig = {
     'Trikonam offers authentic Classical Hatha Yoga — preserved in its original form — to cultivate health, inner balance, and a deeper connection with oneself. Serving Andhra Pradesh & Telangana.',
   // Used for canonical URLs, sitemap, Open Graph. Update to the real production
   // domain once it is registered.
-  url: 'https://trikonam.org',
+  url: 'https://trikonam.in',
   serviceArea: 'Andhra Pradesh & Telangana, India',
 
   // --- External forms (Handoff Section 3.4 & 12) ---------------------------

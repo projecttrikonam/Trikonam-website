@@ -39,7 +39,7 @@ canonical logic, or OG defaults, edit that one file.
 These require accounts / DNS and cannot be done in the repo:
 
 1. **Real production domain** — set `siteConfig.url` in `src/content/site-config.ts`
-   (currently `https://trikonam.org`). Everything canonical/sitemap/OG derives from it.
+   (currently `https://trikonam.in`). Everything canonical/sitemap/OG derives from it.
 2. **Google Search Console** — verify the domain, submit `https://<domain>/sitemap.xml`.
 3. **Bing Webmaster Tools** — same.
 4. **Google Business Profile** — for local pack ranking (Hyderabad). Add the real

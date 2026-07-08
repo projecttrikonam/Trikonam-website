@@ -24,7 +24,13 @@ export function pageMetadata({
   modifiedTime,
   noIndex = false,
 }: {
-  title: string;
+  /**
+   * Plain string titles are run through the root layout's `%s · Trikonam` template
+   * (e.g. 'About' → 'About · Trikonam'). Pass `{ absolute: '...' }` to bypass the
+   * template entirely — used by the home page, which wants the layout's own default
+   * title verbatim rather than a templated variant.
+   */
+  title: string | { absolute: string };
   description: string;
   path: string;
   type?: 'website' | 'article';
@@ -33,6 +39,7 @@ export function pageMetadata({
   modifiedTime?: string;
   noIndex?: boolean;
 }): Metadata {
+  const flatTitle = typeof title === 'string' ? title : title.absolute;
   return {
     title,
     description,
@@ -41,13 +48,13 @@ export function pageMetadata({
     openGraph: {
       type,
       url: absolute(path),
-      title,
+      title: flatTitle,
       description,
       siteName: siteConfig.name,
       images: [{ url: image, width: 1200, height: 630 }],
       ...(type === 'article' ? { publishedTime, modifiedTime } : {}),
     },
-    twitter: { card: 'summary_large_image', title, description, images: [image] },
+    twitter: { card: 'summary_large_image', title: flatTitle, description, images: [image] },
   };
 }
 
