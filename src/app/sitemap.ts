@@ -24,6 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/about',
     '/teachers',
     '/practices',
+    '/online-programs',
     '/programs',
     '/programs/corporate',
     '/programs/schools-colleges',
@@ -36,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${base}${path}`,
     lastModified: now,
     changeFrequency: 'monthly' as const,
-    priority: path === '' ? 1 : 0.7,
+    priority: path === '' ? 1 : path === '/online-programs' ? 0.9 : 0.7,
   }));
 
   const practiceRoutes = practices.map((p) => ({

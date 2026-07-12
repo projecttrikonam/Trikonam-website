@@ -5,6 +5,7 @@ import { FullBleedInterlude } from '@/components/sections/FullBleedInterlude';
 import { TestimonialBlock } from '@/components/sections/TestimonialBlock';
 import { DeeperVisionClosing } from '@/components/sections/DeeperVisionClosing';
 import { SadhguruQuote } from '@/components/sections/SadhguruQuote';
+import { OnlinePromoCard } from '@/components/sections/OnlinePromoCard';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { Button } from '@/components/ui/Button';
 import { quotes } from '@/content/quotes';
@@ -32,6 +33,10 @@ export const metadata: Metadata = pageMetadata({
 export default function HomePage() {
   return (
     <>
+      {/* v2.0: a calm one-time invitation to the live Online Programs. Additive only —
+          it overlays nothing structural and the sections below are unchanged. */}
+      <OnlinePromoCard />
+
       <Hero />
 
       {/* A held breath — the frame, in Sadhguru's words. */}

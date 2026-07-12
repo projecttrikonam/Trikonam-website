@@ -16,13 +16,21 @@ export const siteConfig = {
   serviceArea: 'Andhra Pradesh & Telangana, India',
 
   // --- External forms (Handoff Section 3.4 & 12) ---------------------------
-  // REGISTER: every "Register Now" button. ENQUIRE: Corporate & Schools/Colleges only.
-  // CONSULTATION: the Contact page's "Request a Consultation" button only.
+  // REGISTER: the OFFLINE programmes' "Register Now" (still a Google Form). ENQUIRE:
+  // Corporate & Schools/Colleges. CONSULTATION: the Contact page's "Request a
+  // Consultation" button.
+  //
+  // appsScript (v2.0): the deployed Google Apps Script Web App /exec URL that receives
+  // the in-site Online Registration & Corporate Enquiry submissions (logs each to a
+  // Google Sheet + emails the team). Paste the deployed URL here after following
+  // docs/apps-script/README.md. While empty, the in-site forms fall back to opening a
+  // pre-filled email so no registration is ever lost.
   forms: {
     register:
       'https://docs.google.com/forms/d/e/1FAIpQLSfF6MSVE-mnGEELVaVjZfCES_i_8xh1sWjahh9kvSbgwDYhZw/viewform?usp=share_link&ouid=102767741845224190576',
     enquire: 'https://forms.gle/1gfKXoUs3B1a7XGW8',
     consultation: 'https://forms.gle/u1yNdwR1tcaL2jCf8',
+    appsScript: '',
   },
 
   // --- Contact (Handoff Section 12) ----------------------------------------
@@ -43,19 +51,62 @@ export const siteConfig = {
   social: [] as { label: string; href: string }[],
 } as const;
 
-// --- Primary navigation (Handoff §3.1): 6 items + 1 CTA --------------------
+// --- Primary navigation (v2.0) ---------------------------------------------
+// "Programs" is no longer a standalone item — it now lives inside the Classical
+// Hatha Yoga mega menu (see chyMega below). "Online Programs" is promoted to a
+// top-level item. The item carrying `mega: 'chy'` renders as a dropdown trigger in
+// the header (and an expandable group in the mobile nav); it still navigates to
+// /practices on click.
 export const primaryNav = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Meet the Teachers', href: '/teachers' },
-  { label: 'Classical Hatha Yoga', href: '/practices' },
-  { label: 'Programs', href: '/programs' },
+  { label: 'Classical Hatha Yoga', href: '/practices', mega: 'chy' },
+  { label: 'Online Programs', href: '/online-programs' },
   { label: 'Journal', href: '/journal' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 
-// --- Footer navigation (Handoff §3.3) --------------------------------------
+// --- Classical Hatha Yoga mega menu (v2.0) ---------------------------------
+// Behaviour inspired by Isha's Yoga & Meditation menu; the visual language is
+// entirely Trikonam's own. Practice links resolve to existing /practices/[slug]
+// pages. "Ways to Learn" bridges to the offline (/programs) and online
+// (/online-programs) gateways.
+export const chyMega = {
+  columns: [
+    {
+      heading: 'Core Practices',
+      items: [
+        { label: 'Upa-Yoga', href: '/practices/upa-yoga' },
+        { label: 'Surya Kriya', href: '/practices/surya-kriya' },
+        { label: 'Surya Shakti', href: '/practices/surya-shakti' },
+        { label: 'Angamardhana', href: '/practices/angamardhana' },
+        { label: 'Yogasanas', href: '/practices/yogasanas' },
+        { label: 'Bhuta Shuddhi', href: '/practices/bhuta-shuddhi' },
+      ],
+    },
+    {
+      heading: 'Other Practices',
+      items: [
+        { label: 'Eye Care', href: '/practices/sunayana-eye-care' },
+        { label: 'Shanmukhi Mudra', href: '/practices/shanmukhi-mudra' },
+        { label: 'Bhastrika Kriya', href: '/practices/bhastrika-kriya' },
+        { label: 'Pavanamuktasana', href: '/practices/pavanamuktasana' },
+      ],
+    },
+    {
+      heading: 'Ways to Learn',
+      items: [
+        { label: 'Offline Programs', href: '/programs' },
+        { label: 'Online Programs', href: '/online-programs' },
+      ],
+    },
+  ],
+} as const;
+
+// --- Footer navigation (Handoff §3.3; v2.0 adds Online Programs) ------------
 export const footerNav = [
+  { label: 'Online Programs', href: '/online-programs' },
   { label: 'Journal', href: '/journal' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Testimonials', href: '/testimonials' },

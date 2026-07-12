@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { primaryNav } from '@/content/site-config';
 import { RegisterButton } from '@/components/ui/RegisterButton';
+import { MegaMenu } from './MegaMenu';
 import { MobileNav } from './MobileNav';
 import { Wordmark } from './Wordmark';
 
@@ -29,8 +30,9 @@ export function Header() {
 
   const current = pathname?.replace(/\/+$/, '') || '/';
 
-  // Light type only while resting over the home hero (before any scroll).
-  const overHero = current === '/' && !scrolled;
+  // Light type while resting over a full-bleed dark hero (home and the Online Programs
+  // flagship), before any scroll. Both pages open with an immersive image the nav sits on.
+  const overHero = (current === '/' || current === '/online-programs') && !scrolled;
 
   return (
     <header
@@ -47,9 +49,25 @@ export function Header() {
           <Wordmark light={overHero} />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
           {primaryNav.slice(1).map((item) => {
-            const active = current === item.href;
+            // The CHY item is a nested branch of /practices (e.g. /practices/upa-yoga),
+            // so treat it as active for any /practices* path.
+            const active =
+              'mega' in item ? current === item.href || current.startsWith('/practices') : current === item.href;
+
+            if ('mega' in item) {
+              return (
+                <MegaMenu
+                  key={item.href}
+                  label={item.label}
+                  href={item.href}
+                  overHero={overHero}
+                  active={active}
+                />
+              );
+            }
+
             return (
               <Link
                 key={item.href}

@@ -7,15 +7,20 @@ import { ResponsiveImage } from '@/components/ui/ResponsiveImage';
 import { BreathDivider } from '@/components/ui/BreathDivider';
 import { RegisterButton } from '@/components/ui/RegisterButton';
 import { programSections, programCallouts } from '@/content/programs';
+import { siteConfig } from '@/content/site-config';
 
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Programs',
+  title: 'Offline Programs',
   description:
-    'Workshops, private sessions, children’s programs, retreats, and online & offline classes — all in authentic Classical Hatha Yoga.',
+    'In-person Classical Hatha Yoga across Andhra Pradesh & Telangana — workshops, private sessions, children’s programs, and retreats. Looking to learn online? See our live Online Programs.',
   path: '/programs',
 });
+
+// The offline Programs page keeps its own "Register Now" pointing at the existing
+// Google registration form (v2.0 repointed the global default to online registration).
+const OFFLINE_REGISTER = siteConfig.forms.register;
 
 /**
  * Programs hub (Handoff §6.6, client-revised). Same-page anchored sections. Each
@@ -28,9 +33,9 @@ export default function ProgramsHubPage() {
     <>
       <Section tone="bg" width="wide">
         <PageHeader
-          eyebrow="Programs"
+          eyebrow="Offline Programs"
           title="Ways to begin, and to keep going."
-          intro="Every program is conducted with the same emphasis on authenticity, safety, and individual attention. Choose the setting that suits you — the integrity of the practice stays the same throughout."
+          intro="Our in-person programs are conducted with the same emphasis on authenticity, safety, and individual attention. Choose the setting that suits you — the integrity of the practice stays the same throughout. Prefer to learn live from home? Explore our Online Programs."
         />
       </Section>
 
@@ -62,7 +67,7 @@ export default function ProgramsHubPage() {
                 </p>
               )}
               <div className="mt-7">
-                <RegisterButton />
+                <RegisterButton href={OFFLINE_REGISTER} external />
               </div>
             </RevealOnScroll>
 
@@ -123,7 +128,7 @@ export default function ProgramsHubPage() {
             practices, and a gentle way to encourage others to begin their own.
           </p>
           <div className="mt-8 flex justify-center">
-            <RegisterButton label="Register Your Group" />
+            <RegisterButton label="Register Your Group" href={OFFLINE_REGISTER} external />
           </div>
         </RevealOnScroll>
       </Section>

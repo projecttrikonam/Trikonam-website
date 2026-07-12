@@ -5,6 +5,7 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { PracticeGrid } from '@/components/sections/PracticeGrid';
 import { SadhguruQuote } from '@/components/sections/SadhguruQuote';
 import { CtaBand } from '@/components/sections/CtaBand';
+import { Button } from '@/components/ui/Button';
 import { RegisterButton } from '@/components/ui/RegisterButton';
 import { quotes } from '@/content/quotes';
 
@@ -72,6 +73,25 @@ export default function PracticesHubPage() {
             </div>
           </RevealOnScroll>
         </div>
+      </Section>
+
+      {/* Ways to Learn (v2.0) — the bridge to the offline and online gateways. */}
+      <Section tone="bg-alt" width="narrow">
+        <RevealOnScroll>
+          <span className="eyebrow eyebrow--tick mb-4">Ways to Learn</span>
+          <h2 className="text-balance text-h2">Meet the practice in the way that suits you.</h2>
+          <p className="prose-measure mt-5 text-body-lg text-secondary">
+            Classical Hatha Yoga can be experienced through a variety of learning formats,
+            depending on your schedule, goals, and stage of practice. Whether you are
+            looking for immersive workshops, private sessions, retreats, children’s
+            offerings, or live online programs, each format preserves the authenticity of
+            these timeless yogic sciences while making them accessible to a wider community.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button href="/online-programs">Explore Online Programs</Button>
+            <Button href="/programs" variant="secondary">Explore Offline Programs</Button>
+          </div>
+        </RevealOnScroll>
       </Section>
 
       <CtaBand
