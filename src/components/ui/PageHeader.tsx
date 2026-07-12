@@ -38,7 +38,7 @@ export function PageHeader({
           {eyebrow}
         </motion.span>
       )}
-      <motion.h1 variants={item} className="text-balance font-serif text-[clamp(2rem,4vw,3.25rem)] font-normal leading-[1.08] tracking-[-0.015em] text-primary">
+      <motion.h1 variants={item} className="text-balance font-serif text-[clamp(1.75rem,3.6vw,2.95rem)] font-normal leading-[1.08] tracking-[-0.015em] text-primary">
         {title}
       </motion.h1>
       {intro && (

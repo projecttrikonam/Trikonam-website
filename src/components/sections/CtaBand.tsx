@@ -28,7 +28,7 @@ export function CtaBand({
             opacity={0.14}
           />
           <div className="relative">
-            <h2 className="text-balance font-serif text-[clamp(1.6rem,3vw,2.25rem)] leading-[1.2] text-primary">
+            <h2 className="text-balance font-serif text-[clamp(1.38rem,2.7vw,2.05rem)] leading-[1.2] text-primary">
               {title}
             </h2>
             {text && (

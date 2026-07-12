@@ -114,7 +114,7 @@ export default function ProgramsHubPage() {
       <Section tone="bg-alt" width="default" className="text-center">
         <RevealOnScroll className="relative mx-auto max-w-2xl">
           <span className="eyebrow eyebrow--tick mx-auto mb-5 w-fit">Practice Together</span>
-          <h2 className="text-balance font-serif text-[clamp(1.6rem,3vw,2.25rem)] leading-[1.25] text-primary">
+          <h2 className="text-balance font-serif text-[clamp(1.38rem,2.7vw,2.05rem)] leading-[1.25] text-primary">
             Begin together, and go further.
           </h2>
           <p className="prose-measure mx-auto mt-5 text-body-lg text-secondary">

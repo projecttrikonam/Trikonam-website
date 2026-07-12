@@ -38,7 +38,7 @@ export function FeaturedArticle({
         <div className={article.coverImage ? 'md:col-span-5' : 'md:col-span-9'}>
           <span className="eyebrow eyebrow--tick mb-5">Featured</span>
           <ArticleMeta article={article} category={category} readingMinutes={readingTime(article)} className="mb-4" />
-          <h2 className="font-serif text-[clamp(1.9rem,3.4vw,2.75rem)] leading-[1.1] tracking-[-0.01em] text-primary">
+          <h2 className="font-serif text-[clamp(1.64rem,3.06vw,2.5rem)] leading-[1.1] tracking-[-0.01em] text-primary">
             <Link href={`/journal/${article.slug}`} className="transition-colors hover:text-moss">
               {article.title}
             </Link>

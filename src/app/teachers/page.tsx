@@ -17,9 +17,10 @@ export const metadata: Metadata = pageMetadata({
 });
 
 /**
- * Meet the Teachers (Handoff §6.3, client-revised). Names only for now — bios to come.
- * The credentials paragraph and the gurukulam training image establish the teachers'
- * authenticity. No photo is captioned with a name until confirmed (§14.5).
+ * Meet the Teachers (Handoff §6.3, v1.1 finalized). Each card links through to a full
+ * bio at /teachers/[slug]. The credentials paragraph and the gurukulam training image
+ * establish the teachers' authenticity. No photo is captioned with a name until
+ * confirmed (§14.5).
  */
 export default function TeachersPage() {
   return (
@@ -28,7 +29,7 @@ export default function TeachersPage() {
         <PageHeader
           eyebrow="Meet the Teachers"
           title="The people who safeguard the path, and guide each person along it."
-          intro="Fuller introductions to each teacher will be added here soon. What they share is a common grounding — in an unbroken tradition, and in years of dedicated practice and teaching."
+          intro="Trikonam is not defined by individual teachers, but by a shared commitment to the practice itself. It is a growing community of Classical Hatha Yoga teachers united by one intention—to offer these timeless yogic sciences in their authentic form, with humility, sincerity, and deep respect for the tradition. While every teacher brings their own journey and presence, what unites them is a sincere aspiration to create the conditions for transformation, allowing every seeker to experience greater balance, clarity, vitality, and inner well-being through the practice itself."
         />
       </Section>
 
@@ -69,7 +70,10 @@ export default function TeachersPage() {
       <Section tone="bg" width="wide">
         <RevealOnScroll className="mb-12">
           <span className="eyebrow eyebrow--tick mb-4">Our Teachers</span>
-          <h2 className="text-h2">Five teachers, one lineage.</h2>
+          <h2 className="text-h2">One lineage. Many teachers. One intention.</h2>
+          <p className="mt-3 text-body-lg text-secondary">
+            A growing community of Classical Hatha Yoga teachers.
+          </p>
         </RevealOnScroll>
         <TeacherGrid />
       </Section>

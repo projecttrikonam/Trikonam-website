@@ -37,7 +37,7 @@ export function DeeperVisionClosing() {
         <motion.p
           custom={0}
           variants={line}
-          className="font-serif text-[clamp(1.9rem,4vw,3rem)] leading-[1.3] text-inverse"
+          className="font-serif text-[clamp(1.64rem,3.6vw,2.73rem)] leading-[1.3] text-inverse"
         >
           Trikonam exists to help people return to themselves.
         </motion.p>

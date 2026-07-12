@@ -79,7 +79,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
               readingMinutes={readingTime(article)}
               className="justify-center"
             />
-            <h1 className="mt-5 text-balance font-serif text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.08] tracking-[-0.015em] text-primary">
+            <h1 className="mt-5 text-balance font-serif text-[clamp(1.75rem,4.05vw,2.95rem)] leading-[1.08] tracking-[-0.015em] text-primary">
               {article.title}
             </h1>
             <p className="prose-measure mx-auto mt-6 text-body-lg italic text-secondary">

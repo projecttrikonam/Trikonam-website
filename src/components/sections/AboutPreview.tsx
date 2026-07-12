@@ -16,7 +16,7 @@ export function AboutPreview() {
         {/* Text — a narrow, quiet column. */}
         <RevealOnScroll className="md:col-span-4">
           <span className="eyebrow mb-6 block">A space, not a studio</span>
-          <p className="font-serif text-[clamp(1.35rem,2.2vw,1.7rem)] leading-[1.5] text-primary">
+          <p className="font-serif text-[clamp(1.17rem,1.98vw,1.55rem)] leading-[1.5] text-primary">
             Trikonam is a place to meet the practice in its original form — offered with
             sincerity, and the trust that consistency, not persuasion, is what creates
             change.

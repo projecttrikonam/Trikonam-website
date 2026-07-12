@@ -44,7 +44,7 @@ export default function HomePage() {
       <section className="px-6 py-16 sm:px-8 md:py-24">
         <RevealOnScroll className="mx-auto max-w-xl text-center">
           <span className="eyebrow mb-6 block">Classical Hatha Yoga</span>
-          <p className="font-serif text-[clamp(1.5rem,2.6vw,2rem)] leading-[1.4] text-primary">
+          <p className="font-serif text-[clamp(1.3rem,2.34vw,1.82rem)] leading-[1.4] text-primary">
             A set of practices, kept in their original form and structured by Sadhguru —
             each one a quiet, deliberate process rather than a posture to perfect.
           </p>

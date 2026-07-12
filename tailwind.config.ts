@@ -38,9 +38,12 @@ const config: Config = {
         // Type scale (Section 4.3). Each token carries a sensible line-height /
         // tracking default; responsive sizing is handled with clamp() in globals.css
         // utility classes rather than duplicating breakpoints here.
+        // v1.1 refinement: H1/H2 scaled down ~9% at desktop / ~13.5% at mobile for
+        // readability (client-requested). H3 and below unchanged — a supporting label
+        // size (FAQ triggers, card titles), not a "large heading".
         'display': ['clamp(2.25rem, 5.5vw, 4rem)', { lineHeight: '1.05', letterSpacing: '-0.01em' }],
-        'h1': ['clamp(1.875rem, 3.5vw, 2.75rem)', { lineHeight: '1.1' }],
-        'h2': ['clamp(1.625rem, 2.6vw, 2rem)', { lineHeight: '1.2' }],
+        'h1': ['clamp(1.625rem, 3.15vw, 2.5rem)', { lineHeight: '1.1' }],
+        'h2': ['clamp(1.4rem, 2.34vw, 1.8rem)', { lineHeight: '1.2' }],
         'h3': ['clamp(1.1875rem, 1.6vw, 1.375rem)', { lineHeight: '1.3' }],
         'body-lg': ['clamp(1.0625rem, 1.2vw, 1.125rem)', { lineHeight: '1.7' }],
         'body': ['clamp(0.9375rem, 1vw, 1rem)', { lineHeight: '1.7' }],

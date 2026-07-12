@@ -67,7 +67,7 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
               </span>
               <RevealOnScroll className="relative">
                 <span className="eyebrow eyebrow--tick mb-5">Classical Hatha Yoga</span>
-                <h1 className="text-balance font-serif text-[clamp(2.25rem,4.5vw,3.5rem)] leading-[1.05] tracking-[-0.015em] text-primary">
+                <h1 className="text-balance font-serif text-[clamp(1.95rem,4.05vw,3.19rem)] leading-[1.05] tracking-[-0.015em] text-primary">
                   {practice.name}
                 </h1>
                 <p className="prose-measure mt-8 text-body-lg leading-[1.8] text-secondary text-pretty">
@@ -97,7 +97,7 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
               </span>
             </div>
             <span className="eyebrow eyebrow--tick mx-auto mb-5 w-fit">Classical Hatha Yoga</span>
-            <h1 className="text-balance font-serif text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.05] tracking-[-0.015em] text-primary">
+            <h1 className="text-balance font-serif text-[clamp(1.95rem,4.5vw,3.41rem)] leading-[1.05] tracking-[-0.015em] text-primary">
               {practice.name}
             </h1>
             <p className="mx-auto mt-8 max-w-[62ch] text-body-lg leading-[1.85] text-secondary text-pretty">

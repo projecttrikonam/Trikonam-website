@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { siteConfig } from '@/content/site-config';
 import { practices } from '@/content/practices';
+import { teachers } from '@/content/teachers';
 import {
   ARTICLES_PER_PAGE,
   getAllArticles,
@@ -45,6 +46,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const teacherRoutes = teachers.map((t) => ({
+    url: `${base}/teachers/${t.slug}`,
+    lastModified: now,
+    changeFrequency: 'yearly' as const,
+    priority: 0.6,
+  }));
+
   // --- Journal ---
   const articles = await getAllArticles();
   const articleRoutes = articles.map((a) => ({
@@ -77,6 +85,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticRoutes,
     ...practiceRoutes,
+    ...teacherRoutes,
     ...articleRoutes,
     ...categoryRoutes,
     ...paginationRoutes,

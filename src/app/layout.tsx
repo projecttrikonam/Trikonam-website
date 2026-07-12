@@ -45,11 +45,15 @@ export const metadata: Metadata = {
   },
   // No global canonical — each page sets its own via pageMetadata() in src/lib/seo.ts.
   //
-  // Favicon / app icon, generated from the client's trikonam-favicon.png (see
+  // Favicon / app icon — regenerated for v1.1 from the bolder icon mark (cropped from
+  // the current header logo, public/trikonam-logo.png) composited onto the same ivory
+  // circle-on-white badge treatment as before, sized up to fill more of the frame. The
+  // original thin-stroke mark read as a faint grey smudge at 16–32px; this version
+  // trades a little fine detail for legibility at true favicon sizes.
   // scripts/optimize-images.mjs is NOT used here — these are one-off, hand-run sizes;
-  // regenerate by re-running the favicon generation snippet in the project notes if the
-  // source art ever changes). Set once here so every page inherits it — no page defines
-  // its own `icons`, so nothing overrides this.
+  // source master lives at assets/source-images/trikonam-favicon-source.png — regenerate
+  // all sizes from it (or a newer source) if the mark ever changes again. Set once here
+  // so every page inherits it — no page defines its own `icons`, so nothing overrides this.
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },

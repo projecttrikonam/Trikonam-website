@@ -49,7 +49,7 @@ export function FullBleedInterlude({
           <>
             <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 mx-auto max-w-3xl px-6 pb-16 text-center sm:px-8">
-              <p className="font-serif text-[clamp(1.35rem,2.6vw,2rem)] leading-[1.4] text-inverse">
+              <p className="font-serif text-[clamp(1.17rem,2.34vw,1.82rem)] leading-[1.4] text-inverse">
                 {caption}
               </p>
             </div>
@@ -75,7 +75,7 @@ export function FullBleedInterlude({
         <>
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 mx-auto max-w-3xl px-6 pb-16 text-center sm:px-8">
-            <p className="font-serif text-[clamp(1.35rem,2.6vw,2rem)] leading-[1.4] text-inverse">
+            <p className="font-serif text-[clamp(1.17rem,2.34vw,1.82rem)] leading-[1.4] text-inverse">
               {caption}
             </p>
           </div>

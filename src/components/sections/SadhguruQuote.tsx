@@ -34,7 +34,7 @@ export function SadhguruQuote({
       <RevealOnScroll className="relative mx-auto max-w-3xl text-center">
         <span aria-hidden className="mx-auto mb-8 block h-px w-12 bg-gradient-to-r from-gold/0 via-gold to-gold/0" />
         <blockquote
-          className={`text-balance font-serif text-[clamp(1.5rem,3.2vw,2.4rem)] font-normal leading-[1.36] ${
+          className={`text-balance font-serif text-[clamp(1.3rem,2.88vw,2.18rem)] font-normal leading-[1.36] ${
             dark ? 'text-inverse' : 'text-primary'
           }`}
         >
