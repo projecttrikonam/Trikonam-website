@@ -6,7 +6,7 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage';
 import { BreathMark } from '@/components/ui/BreathMark';
 import { CtaBand } from '@/components/sections/CtaBand';
-import { RegisterButton } from '@/components/ui/RegisterButton';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { practices, getPractice } from '@/content/practices';
 import { pageMetadata } from '@/lib/seo';
 
@@ -127,9 +127,9 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
 
       <CtaBand
         title="Learn this practice with guidance."
-        text="Register for a program or workshop to begin, at your own pace and with attentive instruction."
+        text="Begin at your own pace, with attentive instruction — tell us what you’re looking for."
       >
-        <RegisterButton />
+        <BeginJourneyButton journey="classical-hatha-yoga" />
       </CtaBand>
     </>
   );

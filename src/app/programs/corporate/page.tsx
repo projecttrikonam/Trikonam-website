@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage';
 import { CtaBand } from '@/components/sections/CtaBand';
-import { EnquireButton } from '@/components/ui/EnquireButton';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 
 import { pageMetadata } from '@/lib/seo';
 
@@ -62,7 +62,7 @@ export default function CorporatePage() {
         title="Bring Trikonam to your workplace."
         text="Tell us a little about your organisation and we’ll take it from there."
       >
-        <EnquireButton />
+        <BeginJourneyButton journey="corporate-wellness" />
       </CtaBand>
     </>
   );

@@ -3,9 +3,8 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { BreathMark } from '@/components/ui/BreathMark';
 
 /**
- * Quiet call-to-action band (Creative Director revision). The button (Register or
- * Enquire) is passed in as a child, so this component never hardcodes a form URL —
- * CTA logic lives in the RegisterButton / EnquireButton components (Handoff §3.4).
+ * Quiet call-to-action band (Creative Director revision). The button is passed in as a
+ * child (v2.1: the single BeginJourneyButton), so this component never hardcodes a route.
  *
  * Presented on an elevated glass panel with a soft gradient wash and the breath mark,
  * giving the closing invitation on each page a sense of arrival.

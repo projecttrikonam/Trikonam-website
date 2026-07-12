@@ -3,7 +3,7 @@ import { Section } from '@/components/ui/Section';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Accordion } from '@/components/ui/Accordion';
 import { CtaBand } from '@/components/sections/CtaBand';
-import { RegisterButton } from '@/components/ui/RegisterButton';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { faqs } from '@/content/faqs';
 
 import { pageMetadata } from '@/lib/seo';
@@ -45,9 +45,9 @@ export default function FaqsPage() {
 
       <CtaBand
         title="Ready to begin?"
-        text="Registration is a short form away."
+        text="Tell us what you’re looking for and we’ll guide you from there."
       >
-        <RegisterButton />
+        <BeginJourneyButton />
       </CtaBand>
 
       <script

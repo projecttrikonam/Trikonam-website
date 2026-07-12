@@ -6,27 +6,31 @@ import { siteConfig } from '@/content/site-config';
 export type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 /**
- * Submits an in-site form to the Google Apps Script Web App (v2.0).
+ * Submits a Welcome System journey to the one Google Apps Script Web App (v2.1).
  *
- * On a static site the browser cannot read an Apps Script response (no CORS headers),
- * so we POST with `mode: 'no-cors'` and form-encoded data — fire-and-forget — then show
- * our own in-site confirmation. The request succeeds silently server-side (the script
- * logs to a Sheet + emails the team); it only rejects on a genuine network failure.
+ * The submitted `data` carries a `category` (the journey id) which the backend uses to
+ * route the row to the correct tab in the Trikonam Student Hub spreadsheet, plus a
+ * `journey` label and `sheet` name for the internal email / logging.
  *
- * Resilience: if the endpoint isn't configured yet (`forms.appsScript` empty) or the
- * network fails, we open a pre-filled email so a registration is never lost.
+ * On a static site the browser cannot read an Apps Script response (no CORS headers), so
+ * we POST with `mode: 'no-cors'` and form-encoded data — fire-and-forget — then show our
+ * own in-site confirmation. The request succeeds silently server-side (script logs to the
+ * Sheet + emails); it only rejects on a genuine network failure.
+ *
+ * Resilience: if the endpoint isn't configured yet or the network fails, we open a
+ * pre-filled email so a submission is never lost.
  */
-export function useFormSubmit(formType: string) {
+export function useFormSubmit() {
   const [status, setStatus] = useState<SubmitStatus>('idle');
 
   async function submit(data: Record<string, string>) {
     setStatus('submitting');
     const endpoint = siteConfig.forms.appsScript;
-    const payload = { ...data, formType, submittedAt: new Date().toISOString() };
+    const payload = { ...data, submittedAt: new Date().toISOString() };
 
     // Endpoint not configured yet — fall back to a pre-filled email, then confirm.
     if (!endpoint) {
-      openMailFallback(formType, payload);
+      openMailFallback(payload);
       setStatus('success');
       return;
     }
@@ -41,7 +45,7 @@ export function useFormSubmit(formType: string) {
       setStatus('success');
     } catch {
       // Genuine network failure — hand off to email so the submission still arrives.
-      openMailFallback(formType, payload);
+      openMailFallback(payload);
       setStatus('error');
     }
   }
@@ -49,14 +53,11 @@ export function useFormSubmit(formType: string) {
   return { status, submit };
 }
 
-function openMailFallback(formType: string, data: Record<string, string>) {
+function openMailFallback(data: Record<string, string>) {
   if (typeof window === 'undefined') return;
-  const subject =
-    formType === 'corporate-enquiry'
-      ? 'Corporate Enquiry — Trikonam Online Programs'
-      : 'Online Program Registration — Trikonam';
+  const subject = `Trikonam — ${data.journey || 'Registration'}`;
   const body = Object.entries(data)
-    .filter(([, v]) => v)
+    .filter(([k, v]) => v && k !== 'category' && k !== 'sheet')
     .map(([k, v]) => `${labelize(k)}: ${v}`)
     .join('\n');
   const href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

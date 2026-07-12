@@ -1,98 +1,160 @@
 /**
- * Trikonam — Online Programs form receiver (v2.0)
- * ------------------------------------------------
- * Receives registration & corporate-enquiry submissions from the website
- * (POST, application/x-www-form-urlencoded) and:
- *   1. appends each one to a tab in this Google Sheet, and
- *   2. emails a copy to the team.
+ * Trikonam Student Hub — the Welcome System receiver (v2.1)
+ * --------------------------------------------------------
+ * ONE Apps Script backend for every registration journey on the website. Each submission
+ * arrives as a POST (application/x-www-form-urlencoded) carrying a `category` + `sheet`
+ * (from src/content/registration.ts). This script:
+ *   1. routes the row to the correct tab of this spreadsheet (auto-created on demand),
+ *   2. seeds internal CRM columns on each tab,
+ *   3. emails the team the full details, and
+ *   4. emails the visitor a warm autoresponder.
  *
- * The website posts with `mode: 'no-cors'`, so it never reads this response — it just
- * shows its own confirmation screen. This script therefore does not need CORS headers.
+ * The website posts with `mode: 'no-cors'`, so it never reads this response — it shows its
+ * own confirmation screen. No CORS headers needed.
  *
- * SETUP: see README.md in this folder. In short — create a Google Sheet, open
- * Extensions → Apps Script, paste this file, set TEAM_EMAIL below, then Deploy as a
- * Web App (Execute as: Me, Who has access: Anyone) and paste the /exec URL into
- * `siteConfig.forms.appsScript` in the website.
+ * SETUP / REDEPLOY: see README.md. In short — paste this file into the bound Apps Script,
+ * then Deploy → Manage deployments → Edit → New version (the /exec URL stays the same, so
+ * no website change is needed). Optionally rename this spreadsheet "Trikonam Student Hub".
  */
 
-// Where to email each submission. Keep in sync with the site's contact email.
 var TEAM_EMAIL = 'projecttrikonam@gmail.com';
+
+// Internal-only CRM columns, seeded first on every tab (for Trikonam admins).
+var CRM_COLUMNS = [
+  'Timestamp',
+  'Status',
+  'Payment Status',
+  'Payment Link Sent',
+  'Assigned Teacher',
+  'Assigned Batch',
+  'Follow-up Date',
+  'Internal Notes',
+];
+
+// Fallback category → tab map (used if a submission omits `sheet`).
+var CATEGORY_SHEETS = {
+  'classical-hatha-yoga': 'Classical Hatha Yoga',
+  'online-programs': 'Online Programs',
+  'group-workshops': 'Group Workshops',
+  'private-sessions': 'Private Sessions',
+  'childrens-programs': "Children's Programs",
+  'retreats': 'Retreats',
+  'corporate-wellness': 'Corporate Wellness',
+  'enquiry': 'Contact Enquiries',
+};
+
+// Routing / meta keys that should not become their own data columns.
+var META_KEYS = { category: 1, sheet: 1, formType: 1, submittedAt: 1 };
 
 function doPost(e) {
   try {
     var data = (e && e.parameter) ? e.parameter : {};
-    var formType = data.formType || 'submission';
-    var isCorporate = formType === 'corporate-enquiry';
-    var tabName = isCorporate ? 'Corporate' : 'Registrations';
+    var sheetName = data.sheet || CATEGORY_SHEETS[data.category] || 'Submissions';
 
-    appendRow_(tabName, data);
-    sendEmail_(formType, isCorporate, data);
+    appendRow_(sheetName, data);
+    emailTeam_(sheetName, data);
+    emailVisitor_(data);
 
     return json_({ ok: true });
   } catch (err) {
-    // Still record the failure so nothing is silently lost.
     try { appendRow_('Errors', { error: String(err), raw: JSON.stringify(e && e.parameter) }); } catch (_) {}
     return json_({ ok: false, error: String(err) });
   }
 }
 
-// Simple health check when visiting the /exec URL in a browser.
+// Health check when visiting the /exec URL in a browser.
 function doGet() {
-  return json_({ ok: true, service: 'Trikonam form receiver' });
+  return json_({ ok: true, service: 'Trikonam Student Hub' });
 }
 
-/** Append a submission to a sheet tab, growing the header row as new fields appear. */
-function appendRow_(tabName, data) {
+/** Append a submission to its tab, seeding CRM columns and growing data columns. */
+function appendRow_(sheetName, data) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(tabName) || ss.insertSheet(tabName);
+  var sheet = ss.getSheetByName(sheetName) || ss.insertSheet(sheetName);
+
+  // Incoming data columns (prettified labels), excluding routing/meta keys.
+  var incoming = [];
+  Object.keys(data).forEach(function (k) {
+    if (!META_KEYS[k]) incoming.push(k);
+  });
 
   var headers = sheet.getLastColumn() > 0
     ? sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
     : [];
 
   if (headers.length === 0) {
-    headers = ['submittedAt'];
-    Object.keys(data).forEach(function (k) { if (headers.indexOf(k) === -1) headers.push(k); });
+    headers = CRM_COLUMNS.concat(incoming.map(pretty_));
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]).setFontWeight('bold');
+    sheet.setFrozenRows(1);
   } else {
-    // Add any keys we haven't seen before as new columns.
     var added = false;
-    Object.keys(data).forEach(function (k) {
-      if (headers.indexOf(k) === -1) { headers.push(k); added = true; }
+    incoming.forEach(function (k) {
+      if (headers.indexOf(pretty_(k)) === -1) { headers.push(pretty_(k)); added = true; }
     });
     if (added) sheet.getRange(1, 1, 1, headers.length).setValues([headers]).setFontWeight('bold');
   }
 
+  var byLabel = {};
+  incoming.forEach(function (k) { byLabel[pretty_(k)] = data[k]; });
+
   var row = headers.map(function (h) {
-    if (h === 'submittedAt') return data.submittedAt || new Date().toISOString();
-    return data[h] !== undefined ? data[h] : '';
+    if (h === 'Timestamp') return data.submittedAt || new Date().toISOString();
+    if (h === 'Status') return 'New';
+    if (CRM_COLUMNS.indexOf(h) !== -1) return ''; // other CRM columns left blank for admins
+    return byLabel[h] !== undefined ? byLabel[h] : '';
   });
   sheet.appendRow(row);
 }
 
-/** Email a readable copy of the submission to the team. */
-function sendEmail_(formType, isCorporate, data) {
-  var subject = isCorporate
-    ? 'Corporate Enquiry — ' + (data.company || 'New') + ' — Trikonam'
-    : 'Online Registration — ' + (data.name || 'New') + ' — Trikonam';
-
+/** Email the team the full submission. */
+function emailTeam_(sheetName, data) {
+  var who = data.name || data.contactPerson || data.guardianName || data.company || 'New';
+  var subject = 'New ' + (data.journey || sheetName) + ' — ' + who + ' — Trikonam';
   var lines = [];
   Object.keys(data).forEach(function (k) {
-    if (k === 'formType') return;
-    if (data[k]) lines.push(prettify_(k) + ': ' + data[k]);
+    if (META_KEYS[k]) return;
+    if (data[k]) lines.push(pretty_(k) + ': ' + data[k]);
   });
-  var body = 'A new ' + (isCorporate ? 'corporate enquiry' : 'registration') +
-    ' has arrived from the website.\n\n' + lines.join('\n');
-
+  var body = 'A new submission has arrived from the website (' + sheetName + ').\n\n' + lines.join('\n');
   MailApp.sendEmail({ to: TEAM_EMAIL, subject: subject, body: body, replyTo: data.email || TEAM_EMAIL });
 }
 
-function prettify_(key) {
+/** Email the visitor a warm autoresponder (only if a plausible email was given). */
+function emailVisitor_(data) {
+  var email = (data.email || '').trim();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
+
+  var subject = 'We’ve received your registration | Trikonam';
+  var body = [
+    'Thank you for taking the first step with Trikonam.',
+    '',
+    'We have successfully received your registration.',
+    '',
+    'Here’s what happens next.',
+    '',
+    '1. We’ll review your registration.',
+    '2. We’ll send your payment link.',
+    '3. We’ll confirm your batch.',
+    '4. We’ll send your joining instructions.',
+    '',
+    'We look forward to welcoming you.',
+    '',
+    'Warm regards,',
+    'Trikonam',
+  ].join('\n');
+
+  try {
+    MailApp.sendEmail({ to: email, subject: subject, body: body, name: 'Trikonam', replyTo: TEAM_EMAIL });
+  } catch (_) {
+    // A bad address must never drop the row or the internal email.
+  }
+}
+
+function pretty_(key) {
+  if (key === 'journey') return 'Journey';
   return key.replace(/([A-Z])/g, ' $1').replace(/^./, function (c) { return c.toUpperCase(); });
 }
 
 function json_(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }

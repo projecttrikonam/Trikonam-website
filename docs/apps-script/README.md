@@ -1,48 +1,53 @@
-# Online Programs forms — Google Apps Script backend
+# Trikonam Student Hub — Welcome System backend
 
-The website's **Online Registration** and **Corporate Enquiry** forms POST to a Google
-Apps Script Web App that (1) logs each submission to a Google Sheet and (2) emails your
-team. No payment gateway — you send payment links manually by email afterward.
+Every registration journey on the website (Classical Hatha Yoga, Online Programs, Group
+Workshops, Private Sessions, Children's Programs, Retreats, Corporate Wellness, and a
+general Enquiry) posts to **one** Google Apps Script Web App. It (1) routes each submission
+to its own tab in this spreadsheet, (2) seeds internal CRM columns, (3) emails your team the
+full details, and (4) emails the visitor a warm autoresponder. No payment gateway — you send
+payment links manually afterward.
 
-This is a **one-time setup**. After it's done, the forms work forever.
+## Updating to v2.1 (you already have the script deployed)
 
-## Setup (≈5 minutes)
+You do **not** need a new spreadsheet or a new URL — just update the code and redeploy:
 
-1. **Create a Google Sheet** — go to <https://sheets.new>, name it e.g. "Trikonam Registrations".
-2. In that sheet, open **Extensions → Apps Script**. Delete the sample `myFunction` code.
-3. **Paste** the entire contents of [`Code.gs`](./Code.gs) into the editor.
-4. Confirm the `TEAM_EMAIL` line near the top is the address that should receive
-   submissions (default: `projecttrikonam@gmail.com`). Save (⌘/Ctrl-S).
-5. Click **Deploy → New deployment**. Choose type **Web app**. Set:
-   - **Execute as:** Me
-   - **Who has access:** **Anyone**
-6. Click **Deploy**, then **Authorize access** and allow the permissions (Sheets + send
-   email as you). Google may show an "unverified app" screen — click *Advanced → Go to
-   (project) → Allow*; this is your own script.
-7. Copy the **Web app URL** (it ends in `/exec`).
+1. Open your existing sheet → **Extensions → Apps Script**.
+2. Select all the code and replace it with the contents of [`Code.gs`](./Code.gs). Save.
+3. Confirm `TEAM_EMAIL` near the top is correct (default `projecttrikonam@gmail.com`).
+4. **Deploy → Manage deployments →** click the ✏️ (edit) on your Web App → **Version: New
+   version** → **Deploy**. (Execute as: Me · Who has access: Anyone.)
+5. *(Optional, tidy)* rename the spreadsheet to **Trikonam Student Hub**.
 
-## Connect it to the website
+That's it — the `/exec` URL is unchanged, so nothing on the website needs to change.
 
-Paste that `/exec` URL into **`src/content/site-config.ts`**:
+## First-time setup (only if you're starting fresh)
 
-```ts
-forms: {
-  // …
-  appsScript: 'https://script.google.com/macros/s/AKfyc…/exec',
-},
-```
+1. Create a Google Sheet at <https://sheets.new>, name it **Trikonam Student Hub**.
+2. **Extensions → Apps Script**, paste [`Code.gs`](./Code.gs), save.
+3. **Deploy → New deployment → Web app** — Execute as: **Me**, Who has access: **Anyone** —
+   Deploy, authorize, and copy the **/exec** URL.
+4. Paste that URL into `forms.appsScript` in `src/content/site-config.ts`, commit + push.
 
-Commit + push — Cloudflare redeploys and the forms go live. That's the only change needed.
+## What it does automatically
 
-## How it behaves
+- **Tabs** are created on demand — one per journey (`Classical Hatha Yoga`, `Online
+  Programs`, `Group Workshops`, `Private Sessions`, `Children's Programs`, `Retreats`,
+  `Corporate Wellness`, `Contact Enquiries`).
+- Each tab starts with **CRM columns** for your team: `Timestamp`, `Status` (set to *New*),
+  `Payment Status`, `Payment Link Sent`, `Assigned Teacher`, `Assigned Batch`,
+  `Follow-up Date`, `Internal Notes` — followed by the submitted fields (columns grow as new
+  fields appear).
+- **Two emails per submission:** the full details to your team (reply-to = the visitor), and
+  a "We've received your registration | Trikonam" autoresponder to the visitor.
 
-- Each submission adds a row to a **Registrations** or **Corporate** tab (columns are
-  created automatically) and emails you a readable copy (with the person's email as
-  reply-to, so you can respond directly).
-- Until the URL is set, the forms **fall back to opening a pre-filled email** so no
-  registration is ever lost during setup.
+## Future-ready
 
-## Updating the script later
+The row-per-submission + status columns are designed so you can later bolt on Razorpay /
+Stripe, automatic payment confirmation, Zoom/Meet links, calendar invites, reminders,
+attendance, and certificates — by updating `Status` / `Payment Status` and adding columns,
+without changing the website's registration experience.
 
-If you edit `Code.gs`, redeploy with **Deploy → Manage deployments → (edit) → New
-version**. The `/exec` URL stays the same, so no website change is needed.
+## Testing
+
+Visit the `/exec` URL in a browser → you should see `{"ok":true,"service":"Trikonam Student
+Hub"}`. A real submission from the site adds a row to the matching tab and sends both emails.

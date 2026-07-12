@@ -3,11 +3,10 @@ import { Section } from '@/components/ui/Section';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { BreathDivider } from '@/components/ui/BreathDivider';
-import { Button } from '@/components/ui/Button';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { Accordion } from '@/components/ui/Accordion';
 import { ContactDetails } from '@/components/sections/ContactDetails';
 import { CtaBand } from '@/components/sections/CtaBand';
-import { siteConfig } from '@/content/site-config';
 import { contactFaqs } from '@/content/contact-faqs';
 
 import { pageMetadata } from '@/lib/seo';
@@ -78,9 +77,7 @@ export default function ContactPage() {
         text="Request a short consultation and we’ll help you find the right place to begin."
       >
         <div className="flex flex-col items-center gap-4">
-          <Button href={siteConfig.forms.consultation} external variant="primary">
-            Request a Consultation
-          </Button>
+          <BeginJourneyButton journey="enquiry" />
           <p className="text-[0.85rem] text-secondary">
             We usually respond within 24 hours.
           </p>

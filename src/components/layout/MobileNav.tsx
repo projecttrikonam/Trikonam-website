@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { primaryNav, chyMega } from '@/content/site-config';
-import { RegisterButton } from '@/components/ui/RegisterButton';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
@@ -159,7 +159,7 @@ export function MobileNav({
               className="mt-8"
               onClick={onClose}
             >
-              <RegisterButton />
+              <BeginJourneyButton />
             </motion.div>
           </nav>
         </motion.div>

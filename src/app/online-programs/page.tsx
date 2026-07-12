@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Section } from '@/components/ui/Section';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { BreathMark } from '@/components/ui/BreathMark';
-import { CtaBand } from '@/components/sections/CtaBand';
-import { RegisterButton } from '@/components/ui/RegisterButton';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import {
   whyOnline,
   generalPrograms,
@@ -27,13 +25,10 @@ export const metadata: Metadata = pageMetadata({
  * exactly like the home page (see Header `overHero`).
  */
 
-/** One programme card — elevated surface, calm hover lift, gold hairline (shared shell). */
-function ProgramCard({ program, formPath }: { program: OnlineProgram; formPath: string }) {
+/** One programme card — informational (v2.1): elevated surface, calm, no per-card CTA. */
+function ProgramCard({ program }: { program: OnlineProgram }) {
   return (
-    <Link
-      href={`${formPath}?program=${program.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-[12px] surface-elevated p-7 ring-1 ring-black/[0.04] transition-all duration-500 ease-calm hover:-translate-y-1 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2"
-    >
+    <div className="flex h-full flex-col rounded-[12px] surface-elevated p-7 ring-1 ring-black/[0.04]">
       {program.timeOfDay && (
         <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1 text-[0.72rem] uppercase tracking-[0.14em] text-moss">
           {program.timeOfDay}
@@ -46,12 +41,7 @@ function ProgramCard({ program, formPath }: { program: OnlineProgram; formPath: 
         <span>{program.duration}</span>
       </div>
       <p className="mt-4 flex-1 text-body text-secondary">{program.blurb}</p>
-      <span className="mt-6 inline-flex items-center gap-2 text-[0.8rem] font-medium uppercase tracking-[0.12em] text-moss">
-        Register
-        <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-      </span>
-      <span className="pointer-events-none absolute inset-x-7 bottom-0 h-px origin-left scale-x-0 bg-gradient-to-r from-gold/60 to-transparent transition-transform duration-700 ease-calm group-hover:scale-x-100" />
-    </Link>
+    </div>
   );
 }
 
@@ -62,8 +52,8 @@ export default function OnlineProgramsPage() {
       <section className="relative -mt-24 flex h-[82vh] min-h-[560px] w-full items-end overflow-hidden bg-primary">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/home/interlude.webp"
-          alt="Practitioners in a sunrise Classical Hatha Yoga session, mountains softening into the distance."
+          src="/images/online-programs/hero.webp"
+          alt="A student in white joins a live online Classical Hatha Yoga session on a laptop, seated in a sunlit garden."
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/45 to-transparent" />
@@ -82,7 +72,7 @@ export default function OnlineProgramsPage() {
               teachers — the same practice, the same attention, wherever you are.
             </p>
             <div className="mt-9">
-              <RegisterButton />
+              <BeginJourneyButton journey="online-programs" />
             </div>
           </RevealOnScroll>
         </div>
@@ -119,11 +109,14 @@ export default function OnlineProgramsPage() {
         </RevealOnScroll>
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {generalPrograms.map((program) => (
-            <li key={program.slug} className="relative">
-              <ProgramCard program={program} formPath="/online-programs/register" />
+            <li key={program.slug}>
+              <ProgramCard program={program} />
             </li>
           ))}
         </ul>
+        <RevealOnScroll className="mt-12 text-center">
+          <BeginJourneyButton journey="online-programs" />
+        </RevealOnScroll>
       </Section>
 
       {/* CORPORATE PROGRAMS — separated */}
@@ -144,19 +137,15 @@ export default function OnlineProgramsPage() {
         </RevealOnScroll>
         <ul className="grid gap-6 sm:grid-cols-2">
           {corporatePrograms.map((program) => (
-            <li key={program.slug} className="relative">
-              <ProgramCard program={program} formPath="/online-programs/corporate" />
+            <li key={program.slug}>
+              <ProgramCard program={program} />
             </li>
           ))}
         </ul>
+        <RevealOnScroll className="mt-12 text-center">
+          <BeginJourneyButton journey="corporate-wellness" />
+        </RevealOnScroll>
       </Section>
-
-      <CtaBand
-        title="Begin your practice, live from anywhere."
-        text="Register in a few minutes. Our team will follow up by email with your batch details and next steps."
-      >
-        <RegisterButton />
-      </CtaBand>
     </>
   );
 }

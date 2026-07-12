@@ -5,28 +5,23 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage';
 import { BreathDivider } from '@/components/ui/BreathDivider';
-import { RegisterButton } from '@/components/ui/RegisterButton';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { programSections, programCallouts } from '@/content/programs';
-import { siteConfig } from '@/content/site-config';
 
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Offline Programs',
   description:
-    'In-person Classical Hatha Yoga across Andhra Pradesh & Telangana — workshops, private sessions, children’s programs, and retreats. Looking to learn online? See our live Online Programs.',
+    'In-person Classical Hatha Yoga across Andhra Pradesh & Telangana — group workshops, private sessions, children’s programs, and retreats. Looking to learn online? See our live Online Programs.',
   path: '/programs',
 });
 
-// The offline Programs page keeps its own "Register Now" pointing at the existing
-// Google registration form (v2.0 repointed the global default to online registration).
-const OFFLINE_REGISTER = siteConfig.forms.register;
-
 /**
- * Programs hub (Handoff §6.6, client-revised). Same-page anchored sections. Each
- * registrable section carries a Register Now CTA and, where relevant, its group
- * minimum. Two enquiry-gated callouts (Corporate, Schools & Colleges) sit at the foot,
- * followed by an invitation to bring friends for a group discount.
+ * Offline Programs hub (v2.1). Same-page anchored sections describe each in-person
+ * format as calm, informational content — no per-section register buttons. Two callouts
+ * (Corporate, Schools & Colleges) link to their pages, and the page closes with the one
+ * site-wide CTA: "Begin Your Journey" (the Trikonam Welcome System).
  */
 export default function ProgramsHubPage() {
   return (
@@ -66,9 +61,6 @@ export default function ProgramsHubPage() {
                   {section.minimum}
                 </p>
               )}
-              <div className="mt-7">
-                <RegisterButton href={OFFLINE_REGISTER} external />
-              </div>
             </RevealOnScroll>
 
             {section.image && (
@@ -104,7 +96,7 @@ export default function ProgramsHubPage() {
                 <h3 className="font-serif text-h3 text-primary">{c.title}</h3>
                 <p className="mt-3 flex-1 text-body-lg text-secondary">{c.excerpt}</p>
                 <span className="mt-5 inline-flex items-center gap-1 text-[0.9rem] font-medium text-moss">
-                  Enquire
+                  Learn more
                   <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
                     →
                   </span>
@@ -128,7 +120,7 @@ export default function ProgramsHubPage() {
             practices, and a gentle way to encourage others to begin their own.
           </p>
           <div className="mt-8 flex justify-center">
-            <RegisterButton label="Register Your Group" href={OFFLINE_REGISTER} external />
+            <BeginJourneyButton />
           </div>
         </RevealOnScroll>
       </Section>

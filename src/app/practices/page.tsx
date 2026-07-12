@@ -5,8 +5,8 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { PracticeGrid } from '@/components/sections/PracticeGrid';
 import { SadhguruQuote } from '@/components/sections/SadhguruQuote';
 import { CtaBand } from '@/components/sections/CtaBand';
-import { Button } from '@/components/ui/Button';
-import { RegisterButton } from '@/components/ui/RegisterButton';
+import Link from 'next/link';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { quotes } from '@/content/quotes';
 
 import { pageMetadata } from '@/lib/seo';
@@ -17,6 +17,14 @@ export const metadata: Metadata = pageMetadata({
     'The Classical Hatha Yoga practices taught at Trikonam — structured by Sadhguru and preserved in their original form, from Upa-Yoga to Pregnancy Yoga, with meditation and pranayama.',
   path: '/practices',
 });
+
+/** The offline learning formats, linking to their sections on the Programs page. */
+const waysToLearn = [
+  { label: 'Group Workshops', href: '/programs#workshops' },
+  { label: 'Private One-to-One Sessions', href: '/programs#private-sessions' },
+  { label: "Children's Programs", href: '/programs#children' },
+  { label: 'Retreats', href: '/programs#retreats' },
+];
 
 /**
  * Classical Hatha Yoga hub (Handoff §6.4, client-revised). Heading no longer states a
@@ -75,7 +83,7 @@ export default function PracticesHubPage() {
         </div>
       </Section>
 
-      {/* Ways to Learn (v2.0) — the bridge to the offline and online gateways. */}
+      {/* Ways to Learn (v2.1) — the offline learning formats, as submenu links. */}
       <Section tone="bg-alt" width="narrow">
         <RevealOnScroll>
           <span className="eyebrow eyebrow--tick mb-4">Ways to Learn</span>
@@ -83,22 +91,31 @@ export default function PracticesHubPage() {
           <p className="prose-measure mt-5 text-body-lg text-secondary">
             Classical Hatha Yoga can be experienced through a variety of learning formats,
             depending on your schedule, goals, and stage of practice. Whether you are
-            looking for immersive workshops, private sessions, retreats, children’s
-            offerings, or live online programs, each format preserves the authenticity of
-            these timeless yogic sciences while making them accessible to a wider community.
+            looking for immersive workshops, private sessions, retreats, or children’s
+            offerings, each format preserves the authenticity of these timeless yogic
+            sciences while making them accessible to a wider community.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button href="/online-programs">Explore Online Programs</Button>
-            <Button href="/programs" variant="secondary">Explore Offline Programs</Button>
-          </div>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            {waysToLearn.map((w) => (
+              <li key={w.href}>
+                <Link
+                  href={w.href}
+                  className="group flex items-center justify-between rounded-[10px] border border-border/70 bg-surface/50 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-moss/40 hover:shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2"
+                >
+                  <span className="font-serif text-[1.1rem] text-primary">{w.label}</span>
+                  <span aria-hidden className="text-moss transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </RevealOnScroll>
       </Section>
 
       <CtaBand
         title="Begin where you are."
-        text="No prior experience is needed. Register for a program or workshop and take the first step."
+        text="No prior experience is needed. Tell us what you’re looking for and we’ll guide you from there."
       >
-        <RegisterButton />
+        <BeginJourneyButton journey="classical-hatha-yoga" />
       </CtaBand>
     </>
   );

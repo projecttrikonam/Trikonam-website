@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { primaryNav } from '@/content/site-config';
-import { RegisterButton } from '@/components/ui/RegisterButton';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { MegaMenu } from './MegaMenu';
 import { MobileNav } from './MobileNav';
 import { Wordmark } from './Wordmark';
@@ -49,7 +49,7 @@ export function Header() {
           <Wordmark light={overHero} />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex">
           {primaryNav.slice(1).map((item) => {
             // The CHY item is a nested branch of /practices (e.g. /practices/upa-yoga),
             // so treat it as active for any /practices* path.
@@ -91,7 +91,7 @@ export function Header() {
               </Link>
             );
           })}
-          <RegisterButton />
+          <BeginJourneyButton className="px-5" />
         </nav>
 
         {/* Mobile menu toggle */}

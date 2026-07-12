@@ -24,7 +24,7 @@ export interface ProgramSection {
 export const programSections: ProgramSection[] = [
   {
     id: 'workshops',
-    title: 'Workshops',
+    title: 'Group Workshops',
     body: [
       'From time to time we hold focused workshops for communities and organisations — a way to experience these practices together, in a shared and unhurried setting.',
       'Each workshop keeps the same emphasis on authenticity and individual attention that runs through everything we teach.',
