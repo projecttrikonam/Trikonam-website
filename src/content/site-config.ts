@@ -30,7 +30,8 @@ export const siteConfig = {
       'https://docs.google.com/forms/d/e/1FAIpQLSfF6MSVE-mnGEELVaVjZfCES_i_8xh1sWjahh9kvSbgwDYhZw/viewform?usp=share_link&ouid=102767741845224190576',
     enquire: 'https://forms.gle/1gfKXoUs3B1a7XGW8',
     consultation: 'https://forms.gle/u1yNdwR1tcaL2jCf8',
-    appsScript: '',
+    appsScript:
+      'https://script.google.com/macros/s/AKfycbxow61RKzmHTgOtnTm2W7UfLLRkSpHR-I5QxLUNQPbNo49UJw7jAO5jhqZp9q08_moJ/exec',
   },
 
   // --- Contact (Handoff Section 12) ----------------------------------------
