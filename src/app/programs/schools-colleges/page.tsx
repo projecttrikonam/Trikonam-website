@@ -60,7 +60,7 @@ export default function SchoolsCollegesPage() {
         title="Bring Trikonam to your students."
         text="Tell us about your school or college and we’ll take it from there."
       >
-        <BeginJourneyButton journey="enquiry" />
+        <BeginJourneyButton label="Enquire Now" journey="enquiry" />
       </CtaBand>
     </>
   );

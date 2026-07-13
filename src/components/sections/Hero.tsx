@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
@@ -62,6 +63,14 @@ export function Hero() {
           >
             A quiet space for the practice, kept in its original form.
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: reduced ? 0 : 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
+            className="mt-9"
+          >
+            <BeginJourneyButton />
+          </motion.div>
         </div>
       </div>
 

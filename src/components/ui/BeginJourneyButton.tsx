@@ -6,29 +6,42 @@ import { Button } from './Button';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
- * "Begin Your Journey" — the ONE registration CTA across the entire site (v2.1). It opens
- * the Trikonam Welcome System at /begin. Pass a `journey` to deep-link straight to that
- * journey's form (e.g. journey="online-programs"); omit it to land on the chooser.
+ * The single button that opens the Trikonam Welcome System at /begin (v2.1).
  *
- * There is deliberately no other registration button anywhere — this replaces every former
- * Register / Register Now / Enquire button. Carries the signature breath ring on hover
- * (Handoff §4.5), frozen under prefers-reduced-motion.
+ * `label` is context-specific — "Begin Your Journey" is reserved for the header, mobile
+ * nav, and homepage hero; elsewhere it reads "Register", "Register for {practice}",
+ * "Plan a Workshop", "Request a Consultation", etc. Pass a `journey` to deep-link into
+ * that journey's form, and an optional `practice` (or `program`) to pre-select a dropdown
+ * inside it. Carries the signature breath ring on hover (Handoff §4.5), frozen under
+ * prefers-reduced-motion.
  */
 export function BeginJourneyButton({
   label = 'Begin Your Journey',
   journey,
+  practice,
+  program,
   variant = 'primary',
   className = '',
 }: {
   label?: string;
   /** Optional journey id to preselect in the Welcome System. */
   journey?: string;
+  /** Optional practice name to pre-select the practice dropdown (CHY journey). */
+  practice?: string;
+  /** Optional program name to pre-select the program dropdown (online/corporate). */
+  program?: string;
   variant?: 'primary' | 'secondary' | 'text';
   className?: string;
 }) {
   const reduced = usePrefersReducedMotion();
   const [hovered, setHovered] = useState(false);
-  const href = journey ? `/begin?journey=${journey}` : '/begin';
+
+  const params = new URLSearchParams();
+  if (journey) params.set('journey', journey);
+  if (practice) params.set('practice', practice);
+  if (program) params.set('program', program);
+  const qs = params.toString();
+  const href = qs ? `/begin?${qs}` : '/begin';
 
   return (
     <span

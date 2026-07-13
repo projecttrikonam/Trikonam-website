@@ -92,7 +92,7 @@ export default function TeacherPage({ params }: { params: { slug: string } }) {
         title="Learn with guidance like this."
         text="Begin at your own pace, with attentive instruction — tell us what you’re looking for."
       >
-        <BeginJourneyButton journey="classical-hatha-yoga" />
+        <BeginJourneyButton label="Register for a Practice" journey="classical-hatha-yoga" />
       </CtaBand>
     </>
   );

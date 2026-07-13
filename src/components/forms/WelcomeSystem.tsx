@@ -20,10 +20,18 @@ import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 export function WelcomeSystem() {
   const reduced = usePrefersReducedMotion();
   const [selected, setSelected] = useState<Journey | null>(null);
+  const [prefill, setPrefill] = useState<Record<string, string>>({});
 
-  // Deep-link: ?journey=<id> jumps to that form (static-export friendly — no Suspense).
+  // Deep-link: ?journey=<id> jumps to that form; any other params (e.g. ?practice= or
+  // ?program=) pre-fill the matching field. Static-export friendly — no Suspense.
   useEffect(() => {
-    const id = new URLSearchParams(window.location.search).get('journey');
+    const params = new URLSearchParams(window.location.search);
+    const map: Record<string, string> = {};
+    params.forEach((value, key) => {
+      if (key !== 'journey') map[key] = value;
+    });
+    setPrefill(map);
+    const id = params.get('journey');
     if (id) {
       const j = getJourney(id);
       if (j) setSelected(j);
@@ -34,8 +42,10 @@ export function WelcomeSystem() {
     return (
       <JourneyForm
         journey={selected}
+        prefill={prefill}
         onBack={() => {
           setSelected(null);
+          setPrefill({});
           // Clear the query so a refresh returns to the chooser.
           if (typeof window !== 'undefined') window.history.replaceState(null, '', '/begin');
         }}
@@ -83,7 +93,15 @@ const inputClass =
 const labelClass = 'mb-2 block text-[0.8rem] font-medium tracking-[0.02em] text-primary';
 
 /** Renders one journey's field schema and submits it through the unified backend. */
-function JourneyForm({ journey, onBack }: { journey: Journey; onBack: () => void }) {
+function JourneyForm({
+  journey,
+  prefill = {},
+  onBack,
+}: {
+  journey: Journey;
+  prefill?: Record<string, string>;
+  onBack: () => void;
+}) {
   const { status, submit } = useFormSubmit();
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -120,17 +138,17 @@ function JourneyForm({ journey, onBack }: { journey: Journey; onBack: () => void
           {journey.fields.map((field) =>
             field.full ? (
               <FieldFull key={field.name}>
-                <Field field={field} />
+                <Field field={field} initial={prefill[field.name]} />
               </FieldFull>
             ) : (
-              <Field key={field.name} field={field} />
+              <Field key={field.name} field={field} initial={prefill[field.name]} />
             ),
           )}
         </FieldGrid>
 
         <div className="pt-2">
           <SubmitButton pending={status === 'submitting'}>
-            {status === 'submitting' ? 'Sending…' : 'Begin Your Journey'}
+            {status === 'submitting' ? 'Sending…' : journey.submitLabel}
           </SubmitButton>
           {status === 'error' && (
             <p className="mt-4 text-body text-secondary">
@@ -144,8 +162,9 @@ function JourneyForm({ journey, onBack }: { journey: Journey; onBack: () => void
   );
 }
 
-/** One schema-driven field (uncontrolled; read via FormData on submit). */
-function Field({ field }: { field: JourneyField }) {
+/** One schema-driven field (uncontrolled; read via FormData on submit). `initial`
+ *  pre-fills the field from a query param (e.g. a pre-selected practice). */
+function Field({ field, initial }: { field: JourneyField; initial?: string }) {
   const req = field.required;
   return (
     <div>
@@ -160,6 +179,7 @@ function Field({ field }: { field: JourneyField }) {
           name={field.name}
           required={req}
           placeholder={field.placeholder}
+          defaultValue={initial}
           rows={4}
           className={`${inputClass} resize-y`}
         />
@@ -169,7 +189,7 @@ function Field({ field }: { field: JourneyField }) {
             id={field.name}
             name={field.name}
             required={req}
-            defaultValue=""
+            defaultValue={initial ?? ''}
             className={`${inputClass} appearance-none pr-10`}
           >
             <option value="" disabled={req}>
@@ -205,6 +225,7 @@ function Field({ field }: { field: JourneyField }) {
           required={req}
           placeholder={field.placeholder}
           autoComplete={field.autoComplete}
+          defaultValue={initial}
           className={inputClass}
         />
       )}

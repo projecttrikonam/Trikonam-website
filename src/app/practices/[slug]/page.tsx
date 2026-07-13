@@ -7,8 +7,32 @@ import { ResponsiveImage } from '@/components/ui/ResponsiveImage';
 import { BreathMark } from '@/components/ui/BreathMark';
 import { CtaBand } from '@/components/sections/CtaBand';
 import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
-import { practices, getPractice } from '@/content/practices';
+import { practices, getPractice, type PracticeDetails } from '@/content/practices';
 import { pageMetadata } from '@/lib/seo';
+
+/** A calm "at a glance" block — format, duration, suitability — never a loud list. */
+function AtAGlance({ details }: { details: PracticeDetails }) {
+  const rows: { label: string; value: string }[] = [
+    { label: 'Format', value: details.formats.join(' · ') },
+    { label: 'Each Session', value: details.duration },
+    { label: 'Suitability', value: details.age },
+  ];
+  if (details.prerequisite) rows.push({ label: 'Prerequisite', value: details.prerequisite });
+
+  return (
+    <dl className="mt-9 grid gap-x-10 gap-y-5 border-t border-border pt-7 sm:grid-cols-2">
+      {rows.map((r) => (
+        <div key={r.label}>
+          <dt className="text-[0.72rem] uppercase tracking-[0.16em] text-moss">{r.label}</dt>
+          <dd className="mt-1 text-body-lg text-primary">{r.value}</dd>
+        </div>
+      ))}
+      {details.note && (
+        <p className="text-body italic text-secondary sm:col-span-2">{details.note}</p>
+      )}
+    </dl>
+  );
+}
 
 // Static export needs every dynamic path enumerated at build time.
 export function generateStaticParams() {
@@ -73,6 +97,7 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
                 <p className="prose-measure mt-8 text-body-lg leading-[1.8] text-secondary text-pretty">
                   {practice.description}
                 </p>
+                {practice.details && <AtAGlance details={practice.details} />}
               </RevealOnScroll>
             </div>
 
@@ -103,6 +128,11 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
             <p className="mx-auto mt-8 max-w-[62ch] text-body-lg leading-[1.85] text-secondary text-pretty">
               {practice.description}
             </p>
+            {practice.details && (
+              <div className="mx-auto mt-2 max-w-lg text-left">
+                <AtAGlance details={practice.details} />
+              </div>
+            )}
           </RevealOnScroll>
         )}
       </Section>
@@ -126,10 +156,14 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
       </Section>
 
       <CtaBand
-        title="Learn this practice with guidance."
-        text="Begin at your own pace, with attentive instruction — tell us what you’re looking for."
+        title={`Learn ${practice.name} with guidance.`}
+        text="Begin at your own pace, with attentive instruction from certified teachers."
       >
-        <BeginJourneyButton journey="classical-hatha-yoga" />
+        <BeginJourneyButton
+          label={`Register for ${practice.name}`}
+          journey="classical-hatha-yoga"
+          practice={practice.name}
+        />
       </CtaBand>
     </>
   );

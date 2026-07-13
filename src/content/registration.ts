@@ -39,6 +39,8 @@ export interface Journey {
   blurb: string;
   /** The spreadsheet tab this journey routes to. */
   sheet: string;
+  /** The submit button's resting label, phrased for this journey's intent. */
+  submitLabel: string;
   fields: JourneyField[];
 }
 
@@ -102,6 +104,7 @@ export const journeys: Journey[] = [
     label: 'Classical Hatha Yoga',
     blurb: 'Learn a classical practice in its original form, guided by certified teachers.',
     sheet: 'Classical Hatha Yoga',
+    submitLabel: 'Submit Registration',
     fields: [
       {
         name: 'practice',
@@ -130,6 +133,7 @@ export const journeys: Journey[] = [
     label: 'Online Programs',
     blurb: 'Join a live online program and learn from anywhere in the world.',
     sheet: 'Online Programs',
+    submitLabel: 'Submit Registration',
     fields: [
       { name: 'program', label: 'Program', type: 'select', required: true, full: true, options: onlineProgramNames },
       nameField,
@@ -150,6 +154,7 @@ export const journeys: Journey[] = [
     label: 'Group Workshops',
     blurb: 'Experience these practices together, in a shared and unhurried setting.',
     sheet: 'Group Workshops',
+    submitLabel: 'Send Request',
     fields: [
       { name: 'workshop', label: 'Workshop', type: 'select', required: true, full: true, options: WORKSHOP_OPTIONS },
       nameField,
@@ -167,6 +172,7 @@ export const journeys: Journey[] = [
     label: 'Private One-to-One Sessions',
     blurb: 'Individual guidance, met to your own pace, body, and needs.',
     sheet: 'Private Sessions',
+    submitLabel: 'Request Consultation',
     fields: [
       nameField,
       emailField,
@@ -182,6 +188,7 @@ export const journeys: Journey[] = [
     label: "Children's Programs",
     blurb: 'A gentle, age-appropriate practice, grounded in the classical tradition.',
     sheet: "Children's Programs",
+    submitLabel: 'Send Enquiry',
     fields: [
       { name: 'childName', label: "Child's Name", type: 'text', required: true },
       { name: 'childAge', label: 'Age', type: 'number' },
@@ -199,6 +206,7 @@ export const journeys: Journey[] = [
     label: 'Retreats',
     blurb: 'Time away to practise, rest, and return to yourself in a quieter setting.',
     sheet: 'Retreats',
+    submitLabel: 'Send Enquiry',
     fields: [
       { name: 'retreat', label: 'Retreat', type: 'select', required: true, full: true, options: RETREAT_OPTIONS },
       nameField,
@@ -216,6 +224,7 @@ export const journeys: Journey[] = [
     label: 'Corporate Wellness',
     blurb: 'Bring steadiness, clarity, and wellbeing into your workplace.',
     sheet: 'Corporate Wellness',
+    submitLabel: 'Request Consultation',
     fields: [
       { name: 'program', label: 'Program', type: 'select', required: true, full: true, options: corporateProgramNames },
       { name: 'company', label: 'Company Name', type: 'text', required: true, autoComplete: 'organization' },
@@ -235,6 +244,7 @@ export const journeys: Journey[] = [
     label: 'General Enquiry',
     blurb: 'Just have a question? Tell us a little and we’ll be glad to help.',
     sheet: 'Contact Enquiries',
+    submitLabel: 'Send Enquiry',
     fields: [
       nameField,
       emailField,

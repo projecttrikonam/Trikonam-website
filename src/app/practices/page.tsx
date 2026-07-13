@@ -18,12 +18,12 @@ export const metadata: Metadata = pageMetadata({
   path: '/practices',
 });
 
-/** The offline learning formats, linking to their sections on the Programs page. */
+/** The four learning pathways, each a dedicated page in the /learn section. */
 const waysToLearn = [
-  { label: 'Group Workshops', href: '/programs#workshops' },
-  { label: 'Private One-to-One Sessions', href: '/programs#private-sessions' },
-  { label: "Children's Programs", href: '/programs#children' },
-  { label: 'Retreats', href: '/programs#retreats' },
+  { label: 'Group Workshops', href: '/learn/group-workshops' },
+  { label: 'Private One-to-One Guidance', href: '/learn/private-guidance' },
+  { label: "Children's Yoga", href: '/learn/childrens-yoga' },
+  { label: 'Retreats', href: '/learn/retreats' },
 ];
 
 /**
@@ -83,7 +83,7 @@ export default function PracticesHubPage() {
         </div>
       </Section>
 
-      {/* Ways to Learn (v2.1) — the offline learning formats, as submenu links. */}
+      {/* Ways to Learn (v2.1) — the four learning pathways, each its own page under /learn. */}
       <Section tone="bg-alt" width="narrow">
         <RevealOnScroll>
           <span className="eyebrow eyebrow--tick mb-4">Ways to Learn</span>
@@ -115,7 +115,7 @@ export default function PracticesHubPage() {
         title="Begin where you are."
         text="No prior experience is needed. Tell us what you’re looking for and we’ll guide you from there."
       >
-        <BeginJourneyButton journey="classical-hatha-yoga" />
+        <BeginJourneyButton label="Register for a Practice" journey="classical-hatha-yoga" />
       </CtaBand>
     </>
   );

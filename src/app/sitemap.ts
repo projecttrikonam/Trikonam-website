@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { siteConfig } from '@/content/site-config';
 import { practices } from '@/content/practices';
 import { teachers } from '@/content/teachers';
+import { learningPaths } from '@/content/learning-paths';
 import {
   ARTICLES_PER_PAGE,
   getAllArticles,
@@ -55,6 +56,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const learningRoutes = learningPaths.map((p) => ({
+    url: `${base}/learn/${p.slug}`,
+    lastModified: now,
+    changeFrequency: 'yearly' as const,
+    priority: 0.6,
+  }));
+
   // --- Journal ---
   const articles = await getAllArticles();
   const articleRoutes = articles.map((a) => ({
@@ -88,6 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticRoutes,
     ...practiceRoutes,
     ...teacherRoutes,
+    ...learningRoutes,
     ...articleRoutes,
     ...categoryRoutes,
     ...paginationRoutes,

@@ -3,84 +3,54 @@ import Link from 'next/link';
 import { Section } from '@/components/ui/Section';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
-import { ResponsiveImage } from '@/components/ui/ResponsiveImage';
 import { BreathDivider } from '@/components/ui/BreathDivider';
+import { Card } from '@/components/ui/Card';
 import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
-import { programSections, programCallouts } from '@/content/programs';
+import { learningPaths } from '@/content/learning-paths';
+import { programCallouts } from '@/content/programs';
 
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Offline Programs',
+  title: 'Ways to Learn',
   description:
-    'In-person Classical Hatha Yoga across Andhra Pradesh & Telangana — group workshops, private sessions, children’s programs, and retreats. Looking to learn online? See our live Online Programs.',
+    'The ways to experience Classical Hatha Yoga with Trikonam — group workshops, private one-to-one guidance, children’s yoga, and retreats, plus corporate and school programs.',
   path: '/programs',
 });
 
 /**
- * Offline Programs hub (v2.1). Same-page anchored sections describe each in-person
- * format as calm, informational content — no per-section register buttons. Two callouts
- * (Corporate, Schools & Colleges) link to their pages, and the page closes with the one
- * site-wide CTA: "Begin Your Journey" (the Trikonam Welcome System).
+ * Ways to Learn overview (v2.1) — the in-person learning pathways as an index of dedicated
+ * pages under /learn, plus the enquiry-gated Corporate & Schools callouts. Replaces the
+ * former "Offline Programs" hub; each pathway now has its own editorial page.
  */
-export default function ProgramsHubPage() {
+export default function WaysToLearnPage() {
   return (
     <>
       <Section tone="bg" width="wide">
         <PageHeader
-          eyebrow="Offline Programs"
-          title="Ways to begin, and to keep going."
-          intro="Our in-person programs are conducted with the same emphasis on authenticity, safety, and individual attention. Choose the setting that suits you — the integrity of the practice stays the same throughout. Prefer to learn live from home? Explore our Online Programs."
+          eyebrow="Ways to Learn"
+          title="Learn in the way that suits you."
+          intro="Classical Hatha Yoga can be experienced through a variety of formats, depending on your schedule, goals, and stage of practice. Each pathway preserves the authenticity of these timeless practices while making them accessible in the way that fits your life."
         />
-      </Section>
-
-      {programSections.map((section, i) => (
-        <Section
-          key={section.id}
-          id={section.id}
-          tone={i % 2 === 0 ? 'bg-alt' : 'bg'}
-          width="wide"
-          className="scroll-mt-24"
-        >
-          <div
-            className={`grid items-center gap-10 ${
-              section.image ? 'md:grid-cols-2 md:gap-16' : ''
-            }`}
-          >
-            <RevealOnScroll className={section.image && i % 2 === 0 ? 'md:order-2' : ''}>
-              <span className="eyebrow eyebrow--tick mb-4">Program</span>
-              <h2 className="text-balance text-h2">{section.title}</h2>
-              <div className="prose-measure mt-5 space-y-4 text-body-lg text-secondary">
-                {section.body.map((para) => (
-                  <p key={para}>{para}</p>
-                ))}
-              </div>
-              {section.minimum && (
-                <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-[0.82rem] tracking-wide text-secondary">
-                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-moss" />
-                  {section.minimum}
-                </p>
-              )}
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
+          {learningPaths.map((p) => (
+            <RevealOnScroll as="li" key={p.slug}>
+              <Card
+                href={`/learn/${p.slug}`}
+                title={p.name}
+                excerpt={p.tagline}
+                image={p.image}
+                imageAlt={p.imageAlt}
+                aspect="aspect-[3/2]"
+              />
             </RevealOnScroll>
-
-            {section.image && (
-              <RevealOnScroll className={i % 2 === 0 ? 'md:order-1' : ''}>
-                <ResponsiveImage
-                  src={section.image}
-                  alt={section.imageAlt ?? ''}
-                  aspect="aspect-[4/3]"
-                  contain
-                  sizes="(min-width: 768px) 45vw, 100vw"
-                />
-              </RevealOnScroll>
-            )}
-          </div>
-        </Section>
-      ))}
+          ))}
+        </ul>
+      </Section>
 
       <BreathDivider className="py-4" />
 
-      {/* Enquiry-gated callouts (Handoff §6.6 foot). These use Enquire, not Register. */}
+      {/* Enquiry-gated callouts — Corporate & Schools/Colleges. */}
       <Section tone="bg" width="wide" className="pt-6">
         <RevealOnScroll className="mb-10 text-center">
           <span className="eyebrow eyebrow--tick mx-auto mb-4 w-fit">Tailored Programs</span>
@@ -107,7 +77,7 @@ export default function ProgramsHubPage() {
         </ul>
       </Section>
 
-      {/* Bring-a-friend invitation — group registrations, shared discount. */}
+      {/* Bring-a-friend invitation — a group is a lovely way to begin. */}
       <Section tone="bg-alt" width="default" className="text-center">
         <RevealOnScroll className="relative mx-auto max-w-2xl">
           <span className="eyebrow eyebrow--tick mx-auto mb-5 w-fit">Practice Together</span>
@@ -115,12 +85,11 @@ export default function ProgramsHubPage() {
             Begin together, and go further.
           </h2>
           <p className="prose-measure mx-auto mt-5 text-body-lg text-secondary">
-            Practice deepens in good company. Bring your friends or family along and your
-            whole group enjoys a special discount — a small thank-you for sharing these
-            practices, and a gentle way to encourage others to begin their own.
+            Practice deepens in good company. Bring your friends or family along, and we’ll
+            shape a workshop around your group — a gentle, shared way to begin.
           </p>
           <div className="mt-8 flex justify-center">
-            <BeginJourneyButton />
+            <BeginJourneyButton label="Plan a Workshop" journey="group-workshops" />
           </div>
         </RevealOnScroll>
       </Section>

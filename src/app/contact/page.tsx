@@ -77,7 +77,7 @@ export default function ContactPage() {
         text="Request a short consultation and we’ll help you find the right place to begin."
       >
         <div className="flex flex-col items-center gap-4">
-          <BeginJourneyButton journey="enquiry" />
+          <BeginJourneyButton label="Send an Enquiry" journey="enquiry" />
           <p className="text-[0.85rem] text-secondary">
             We usually respond within 24 hours.
           </p>

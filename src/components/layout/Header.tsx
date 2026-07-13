@@ -49,7 +49,7 @@ export function Header() {
           <Wordmark light={overHero} />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-4 lg:flex">
           {primaryNav.slice(1).map((item) => {
             // The CHY item is a nested branch of /practices (e.g. /practices/upa-yoga),
             // so treat it as active for any /practices* path.
@@ -91,7 +91,7 @@ export function Header() {
               </Link>
             );
           })}
-          <BeginJourneyButton className="px-5" />
+          <BeginJourneyButton className="px-4" />
         </nav>
 
         {/* Mobile menu toggle */}

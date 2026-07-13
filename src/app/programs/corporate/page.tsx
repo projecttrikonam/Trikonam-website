@@ -62,7 +62,7 @@ export default function CorporatePage() {
         title="Bring Trikonam to your workplace."
         text="Tell us a little about your organisation and we’ll take it from there."
       >
-        <BeginJourneyButton journey="corporate-wellness" />
+        <BeginJourneyButton label="Request a Consultation" journey="corporate-wellness" />
       </CtaBand>
     </>
   );

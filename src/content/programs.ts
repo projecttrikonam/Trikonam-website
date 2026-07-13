@@ -63,17 +63,6 @@ export const programSections: ProgramSection[] = [
     image: '/images/programs/retreats/retreats.webp',
     imageAlt: 'A group seated in a circle around a fire at dusk, mountains beyond, on retreat.',
   },
-  {
-    id: 'online-offline',
-    title: 'Online & Offline Classes',
-    body: [
-      'Offline classes are held in person at our locations across Andhra Pradesh and Telangana. Online classes are conducted live, with the same attentive guidance, from wherever you are.',
-      'Both offer the same authentic instruction — the setting changes, the integrity of the practice does not.',
-    ],
-    minimum: 'Conducted for groups of ten or more.',
-    image: '/images/programs/online/online.webp',
-    imageAlt: 'A practitioner in an online Classical Hatha Yoga session.',
-  },
 ];
 
 /** The two enquiry-gated callouts shown at the foot of the Programs hub. */

@@ -72,7 +72,7 @@ export default function OnlineProgramsPage() {
               teachers — the same practice, the same attention, wherever you are.
             </p>
             <div className="mt-9">
-              <BeginJourneyButton journey="online-programs" />
+              <BeginJourneyButton label="Register" journey="online-programs" />
             </div>
           </RevealOnScroll>
         </div>
@@ -115,7 +115,7 @@ export default function OnlineProgramsPage() {
           ))}
         </ul>
         <RevealOnScroll className="mt-12 text-center">
-          <BeginJourneyButton journey="online-programs" />
+          <BeginJourneyButton label="Register" journey="online-programs" />
         </RevealOnScroll>
       </Section>
 
@@ -143,7 +143,7 @@ export default function OnlineProgramsPage() {
           ))}
         </ul>
         <RevealOnScroll className="mt-12 text-center">
-          <BeginJourneyButton journey="corporate-wellness" />
+          <BeginJourneyButton label="Request a Consultation" journey="corporate-wellness" />
         </RevealOnScroll>
       </Section>
     </>

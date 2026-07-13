@@ -98,8 +98,10 @@ export const chyMega = {
     {
       heading: 'Ways to Learn',
       items: [
-        { label: 'Offline Programs', href: '/programs' },
-        { label: 'Online Programs', href: '/online-programs' },
+        { label: 'Group Workshops', href: '/learn/group-workshops' },
+        { label: 'Private One-to-One Guidance', href: '/learn/private-guidance' },
+        { label: "Children's Yoga", href: '/learn/childrens-yoga' },
+        { label: 'Retreats', href: '/learn/retreats' },
       ],
     },
   ],

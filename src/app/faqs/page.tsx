@@ -47,7 +47,7 @@ export default function FaqsPage() {
         title="Ready to begin?"
         text="Tell us what you’re looking for and we’ll guide you from there."
       >
-        <BeginJourneyButton />
+        <BeginJourneyButton label="Explore Programs" />
       </CtaBand>
 
       <script
