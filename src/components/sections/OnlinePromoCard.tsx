@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { BreathMark } from '@/components/ui/BreathMark';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
@@ -12,14 +12,12 @@ import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
  * in the bottom-right corner (bottom-full-width on mobile), with the breath mark and a
  * gold hairline, in Trikonam's own language.
  *
- * Behaviour: appears once, after ~2.5s OR a small scroll (whichever comes first). It
- * never blocks content — there is no backdrop. Dismissing it (× / Not Now / Escape)
- * records a timestamp so it stays hidden for ~7 days, then may gently return. Movement is
- * removed under prefers-reduced-motion. Rendered only on the home page (app/page.tsx).
+ * Behaviour: appears after ~2.5s OR a small scroll (whichever comes first). It never
+ * blocks content — there is no backdrop. Dismissing it (× / Not Now / Escape) hides it
+ * for the current page session ONLY (in-memory) — it is intentionally not persisted, so it
+ * gently reappears on every fresh visit or refresh. Movement is removed under
+ * prefers-reduced-motion. Rendered only on the home page (app/page.tsx).
  */
-
-const DISMISS_KEY = 'trikonam_online_promo_dismissed_at';
-const HIDE_DAYS = 7;
 
 const bullets = [
   'Live interactive sessions',
@@ -33,14 +31,8 @@ export function OnlinePromoCard() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    // Hidden if dismissed within the last HIDE_DAYS.
-    try {
-      const at = Number(localStorage.getItem(DISMISS_KEY));
-      if (at && Date.now() - at < HIDE_DAYS * 24 * 60 * 60 * 1000) return;
-    } catch {
-      /* private mode / storage blocked — treat as not dismissed */
-    }
-
+    // No persistence: the popup reveals on every fresh page load, then a dismissal only
+    // holds for this in-memory session (until the next refresh/visit).
     let done = false;
     const reveal = () => {
       if (done) return;
@@ -70,25 +62,23 @@ export function OnlinePromoCard() {
   }, [show]);
 
   function dismiss() {
-    try {
-      localStorage.setItem(DISMISS_KEY, String(Date.now()));
-    } catch {
-      /* ignore */
-    }
+    // Session-only: hide for this page view; no storage, so it returns on the next visit.
     setShow(false);
   }
 
+  // Rendered directly on `show` (not via AnimatePresence exit) so a dismissal unmounts
+  // the card cleanly — no stale, click-blocking overlay is ever left in the corner. The
+  // gentle fade + slide-up entrance is preserved via initial/animate.
+  if (!show) return null;
+
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.aside
-          initial={{ opacity: 0, y: reduced ? 0 : 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: reduced ? 0 : 16 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          aria-label="Online Programs announcement"
-          className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-sm sm:inset-x-auto sm:right-6 sm:bottom-6 sm:mx-0"
-        >
+    <motion.aside
+      initial={{ opacity: 0, y: reduced ? 0 : 28 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      aria-label="Online Programs announcement"
+      className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-sm sm:inset-x-auto sm:right-6 sm:bottom-6 sm:mx-0"
+    >
           <div className="relative overflow-hidden rounded-[18px] border border-border/70 bg-bg p-6 shadow-float sm:p-7">
             <BreathMark
               className="pointer-events-none absolute -right-8 -top-8 h-36 w-36"
@@ -141,8 +131,6 @@ export function OnlinePromoCard() {
               </div>
             </div>
           </div>
-        </motion.aside>
-      )}
-    </AnimatePresence>
+    </motion.aside>
   );
 }

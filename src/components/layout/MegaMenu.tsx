@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useId, useRef, useState } from 'react';
 import { chyMega } from '@/content/site-config';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
@@ -114,17 +114,16 @@ export function MegaMenu({
         )}
       </Link>
 
-      <AnimatePresence>
-        {open && (
+      {/* Rendered directly on `open` (no AnimatePresence exit) so the panel unmounts
+          cleanly when it closes — never left mounted at opacity 0 blocking clicks. The
+          fade + slide-in entrance is preserved. x:'-50%' stays in the motion transform
+          (not a Tailwind -translate-x-1/2 class) so the animated y doesn't overwrite the
+          horizontal centering. */}
+      {open && (
           <motion.div
             id={panelId}
-            // x:'-50%' is kept in the motion transform (not a Tailwind -translate-x-1/2
-            // class) so framer-motion's animated y doesn't overwrite the horizontal
-            // centering — otherwise `transform` would be replaced and the panel would
-            // drift right and clip off-screen.
             initial={{ opacity: 0, y: reduced ? 0 : -8, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
-            exit={{ opacity: 0, y: reduced ? 0 : -8, x: '-50%' }}
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             onMouseEnter={openNow}
             onMouseLeave={scheduleClose}
@@ -159,7 +158,6 @@ export function MegaMenu({
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
     </div>
   );
 }

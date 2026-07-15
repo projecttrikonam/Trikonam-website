@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { primaryNav } from '@/content/site-config';
 import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { MegaMenu } from './MegaMenu';
@@ -20,6 +20,9 @@ export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // Stable identity so <MobileNav> doesn't re-render on every header scroll tick — which
+  // was orphaning its exit animation and leaving a stale, click-blocking overlay.
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -35,11 +38,12 @@ export function Header() {
   const overHero = (current === '/' || current === '/online-programs') && !scrolled;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 h-24 transition-all duration-700 ease-calm ${
-        scrolled ? 'glass shadow-[0_1px_0_rgba(226,217,198,0.9)]' : 'bg-transparent'
-      }`}
-    >
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 h-24 transition-all duration-700 ease-calm ${
+          scrolled ? 'glass shadow-[0_1px_0_rgba(226,217,198,0.9)]' : 'bg-transparent'
+        }`}
+      >
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between pl-6 pr-6 sm:pl-8 sm:pr-8 xl:pr-0">
         <Link
           href="/"
@@ -115,8 +119,14 @@ export function Header() {
           </svg>
         </button>
       </div>
+      </header>
 
-      <MobileNav open={menuOpen} onClose={() => setMenuOpen(false)} currentPath={current} />
-    </header>
+      {/* Rendered OUTSIDE <header> on purpose: the scrolled header carries a
+          backdrop-filter (`glass`), which would otherwise become the containing block for
+          this overlay's `position: fixed` and trap it inside the 96px header box — the
+          cause of the "menu won't open when scrolled" bug. As a sibling it references the
+          viewport. The header keeps z-50 so its close (×) toggle sits above this z-40 overlay. */}
+      <MobileNav open={menuOpen} onClose={closeMenu} currentPath={current} />
+    </>
   );
 }

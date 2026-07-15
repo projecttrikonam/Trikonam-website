@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { primaryNav, chyMega } from '@/content/site-config';
 import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
@@ -40,17 +40,19 @@ export function MobileNav({
     if (!open) setChyOpen(false);
   }, [open]);
 
+  // The overlay is rendered directly on `open` (not via AnimatePresence exit): React then
+  // unmounts it the instant the menu closes, guaranteeing no stale, click-blocking overlay
+  // is ever left behind. The gentle fade-in is kept via initial/animate.
+  if (!open) return null;
+
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          id="mobile-nav"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="glass fixed inset-0 z-40 overflow-y-auto lg:hidden"
-        >
+    <motion.div
+      id="mobile-nav"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      className="glass fixed inset-0 z-40 overflow-y-auto lg:hidden"
+    >
           <nav
             aria-label="Mobile"
             className="flex min-h-full flex-col justify-center px-8 py-24"
@@ -102,12 +104,10 @@ export function MobileNav({
                         </button>
                       </div>
 
-                      <AnimatePresence initial={false}>
-                        {chyOpen && (
+                      {chyOpen && (
                           <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: reduced ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
                             className="overflow-hidden"
                           >
@@ -133,7 +133,6 @@ export function MobileNav({
                             </div>
                           </motion.div>
                         )}
-                      </AnimatePresence>
                     </>
                   ) : (
                     <Link
@@ -162,8 +161,6 @@ export function MobileNav({
               <BeginJourneyButton />
             </motion.div>
           </nav>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    </motion.div>
   );
 }
