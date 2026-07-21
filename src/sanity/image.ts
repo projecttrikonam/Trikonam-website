@@ -1,8 +1,8 @@
-import imageUrlBuilder from '@sanity/image-url';
+import { createImageUrlBuilder } from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url';
 import { projectId, dataset, hasSanity } from './env';
 
-const builder = hasSanity ? imageUrlBuilder({ projectId, dataset }) : null;
+const builder = hasSanity ? createImageUrlBuilder({ projectId, dataset }) : null;
 
 /**
  * Build a Sanity CDN image URL for a Portable Text image value (hero, body, gallery).
