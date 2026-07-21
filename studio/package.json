@@ -1,0 +1,27 @@
+{
+  "name": "trikonam-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Trikonam Journal — Sanity Studio (content editor for the Journal only).",
+  "main": "package.json",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy",
+    "import-seed": "sanity dataset import ./seed/journal-seed.ndjson production --replace"
+  },
+  "dependencies": {
+    "@sanity/vision": "^3",
+    "react": "^18",
+    "react-dom": "^18",
+    "sanity": "^3",
+    "styled-components": "^6"
+  },
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^4",
+    "@types/react": "^18",
+    "typescript": "^5"
+  }
+}

@@ -7,6 +7,10 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { ArticleBody } from '@/components/journal/ArticleBody';
 import { ArticleMeta } from '@/components/journal/ArticleMeta';
 import { ArticleGrid } from '@/components/journal/ArticleGrid';
+import { TableOfContents } from '@/components/journal/TableOfContents';
+import { ShareButtons } from '@/components/journal/ShareButtons';
+import { AuthorByline } from '@/components/journal/AuthorByline';
+import { RelatedOfferings } from '@/components/journal/RelatedOfferings';
 import {
   getAllArticles,
   getArticleBySlug,
@@ -15,35 +19,37 @@ import {
   getCategory,
   getRelatedArticles,
   readingTime,
+  formatDate,
 } from '@/lib/journal';
+import { extractHeadings } from '@/lib/journal-toc';
 import { articleJsonLd, pageMetadata } from '@/lib/seo';
+import { siteConfig } from '@/content/site-config';
 
 export async function generateStaticParams() {
   const articles = await getAllArticles();
   return articles.map((a) => ({ slug: a.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const article = await getArticleBySlug(params.slug);
   if (!article) return {};
-  return pageMetadata({
+  const meta = pageMetadata({
     title: article.seoTitle ?? article.title,
     description: article.seoDescription ?? article.excerpt,
     path: `/journal/${article.slug}`,
     type: 'article',
-    image: article.coverImage ?? '/og-image.jpg',
+    image: article.ogImage ?? article.coverImage ?? '/og-image.jpg',
     publishedTime: article.publishedAt,
     modifiedTime: article.updatedAt ?? article.publishedAt,
+    noIndex: article.noIndex,
   });
+  if (article.canonicalUrl) meta.alternates = { canonical: article.canonicalUrl };
+  return meta;
 }
 
 /**
- * Article template. Renders any article through the content model — no article text is
- * hardcoded. Emits Article + Breadcrumb JSON-LD for rich results.
+ * Article template — renders any article through the content model (local or Sanity).
+ * Emits Article + Breadcrumb JSON-LD. Nothing is hardcoded per-article.
  */
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const article = await getArticleBySlug(params.slug);
@@ -56,6 +62,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     getRelatedArticles(article, 3),
   ]);
 
+  const headings = extractHeadings(article.body);
+  const shareUrl = `${siteConfig.url}/journal/${article.slug}`;
+  const showUpdated = article.updatedAt && article.updatedAt.slice(0, 10) !== article.publishedAt.slice(0, 10);
   const jsonLd = articleJsonLd(article, author, category);
 
   return (
@@ -73,18 +82,29 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         <article>
           {/* Header */}
           <header className="mx-auto max-w-3xl text-center">
-            <ArticleMeta
-              article={article}
-              category={category}
-              readingMinutes={readingTime(article)}
-              className="justify-center"
-            />
+            {article.seriesTitle && article.series && (
+              <Link
+                href={`/journal/series/${article.series}`}
+                className="mb-4 inline-block text-[0.72rem] uppercase tracking-[0.18em] text-moss hover:text-moss-dark"
+              >
+                {article.seriesTitle}
+              </Link>
+            )}
+            <ArticleMeta article={article} category={category} readingMinutes={readingTime(article)} className="justify-center" />
             <h1 className="mt-5 text-balance font-serif text-[clamp(1.75rem,4.05vw,2.95rem)] leading-[1.08] tracking-[-0.015em] text-primary">
               {article.title}
             </h1>
-            <p className="prose-measure mx-auto mt-6 text-body-lg italic text-secondary">
-              {article.excerpt}
-            </p>
+            {article.subtitle && (
+              <p className="mx-auto mt-4 max-w-2xl text-balance font-serif text-[1.2rem] leading-snug text-secondary">
+                {article.subtitle}
+              </p>
+            )}
+            <p className="prose-measure mx-auto mt-6 text-body-lg italic text-secondary">{article.excerpt}</p>
+            {showUpdated && (
+              <p className="mt-4 text-[0.75rem] uppercase tracking-[0.12em] text-secondary/80">
+                Updated {formatDate(article.updatedAt as string)}
+              </p>
+            )}
           </header>
 
           {article.coverImage && (
@@ -93,15 +113,30 @@ export default async function ArticlePage({ params }: { params: { slug: string }
               <img
                 src={article.coverImage}
                 alt={article.coverAlt ?? ''}
+                loading="eager"
                 className="w-full rounded-[12px] shadow-lift ring-1 ring-black/[0.05]"
               />
             </RevealOnScroll>
           )}
 
-          {/* Body */}
+          {/* Table of contents */}
           <div className="mt-14">
-            <ArticleBody blocks={article.body} />
+            <TableOfContents headings={headings} />
           </div>
+
+          {/* Body */}
+          <ArticleBody blocks={article.body} />
+
+          {/* Share */}
+          <div className="prose-measure mx-auto mt-14 border-t border-border pt-8">
+            <ShareButtons url={shareUrl} title={article.title} />
+          </div>
+
+          {/* Author */}
+          {author && <AuthorByline author={author} />}
+
+          {/* Related practices / programs */}
+          <RelatedOfferings practices={article.relatedPractices} programs={article.relatedPrograms} />
 
           {/* Tags */}
           {article.tags.length > 0 && (
@@ -121,7 +156,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         </article>
       </Section>
 
-      {/* Related */}
+      {/* Related articles */}
       {related.length > 0 && (
         <Section tone="bg-alt" width="wide">
           <RevealOnScroll className="mb-12">

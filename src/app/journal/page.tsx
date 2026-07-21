@@ -2,31 +2,45 @@ import type { Metadata } from 'next';
 import { Section } from '@/components/ui/Section';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { CategoryNav } from '@/components/journal/CategoryNav';
+import { SeriesNav } from '@/components/journal/SeriesNav';
 import { FeaturedArticle } from '@/components/journal/FeaturedArticle';
 import { ArticleGrid } from '@/components/journal/ArticleGrid';
 import { Pagination } from '@/components/journal/Pagination';
+import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import {
   ARTICLES_PER_PAGE,
   getArticles,
   getCategories,
   getFeaturedArticle,
+  getSeriesList,
   paginate,
 } from '@/lib/journal';
 import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = pageMetadata({
+const journalMeta = pageMetadata({
   title: 'Journal',
   description:
     'Quiet writing on Classical Hatha Yoga — the practice, its philosophy, and living well around it. Reflections from Trikonam.',
   path: '/journal',
 });
+export const metadata: Metadata = {
+  ...journalMeta,
+  alternates: {
+    ...journalMeta.alternates,
+    types: { 'application/rss+xml': '/journal/rss.xml' },
+  },
+};
 
 /**
  * Journal landing (page 1). Featured article, then the rest paginated. All content is
  * read through src/lib/journal.ts — no article text is hardcoded here.
  */
 export default async function JournalPage() {
-  const [featured, categories] = await Promise.all([getFeaturedArticle(), getCategories()]);
+  const [featured, categories, series] = await Promise.all([
+    getFeaturedArticle(),
+    getCategories(),
+    getSeriesList(),
+  ]);
   const rest = await getArticles({ excludeSlug: featured?.slug });
   const { items, page, totalPages } = paginate(rest, 1, ARTICLES_PER_PAGE);
 
@@ -57,6 +71,14 @@ export default async function JournalPage() {
           buildHref={(n) => (n === 1 ? '/journal' : `/journal/page/${n}`)}
         />
       </Section>
+
+      {series.length > 0 && (
+        <Section tone="bg" width="wide">
+          <RevealOnScroll>
+            <SeriesNav series={series} />
+          </RevealOnScroll>
+        </Section>
+      )}
     </>
   );
 }

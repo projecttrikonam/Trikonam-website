@@ -9,8 +9,12 @@ import {
   getArticles,
   getCategories,
   getFeaturedArticle,
+  getSeriesList,
   paginate,
 } from '@/lib/journal';
+
+/** Parse an ISO date that may be date-only ("2026-06-02") or a full datetime. */
+const toDate = (iso: string) => new Date(iso.length <= 10 ? `${iso}T00:00:00` : iso);
 
 // Sitemap (Handoff §11.1 / SEO Phase 3). Emitted as /sitemap.xml at build time.
 // Static export requires this to be fully static — no request-time data.
@@ -67,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await getAllArticles();
   const articleRoutes = articles.map((a) => ({
     url: `${base}/journal/${a.slug}`,
-    lastModified: new Date(`${a.updatedAt ?? a.publishedAt}T00:00:00`),
+    lastModified: toDate(a.updatedAt ?? a.publishedAt),
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }));
@@ -75,6 +79,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const categories = await getCategories();
   const categoryRoutes = categories.map((c) => ({
     url: `${base}/journal/category/${c.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.5,
+  }));
+
+  const series = await getSeriesList();
+  const seriesRoutes = series.map((s) => ({
+    url: `${base}/journal/series/${s.slug}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.5,
@@ -99,6 +111,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...learningRoutes,
     ...articleRoutes,
     ...categoryRoutes,
+    ...seriesRoutes,
     ...paginationRoutes,
   ];
 }

@@ -12,6 +12,9 @@
     "optimize-images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
+    "@portabletext/react": "^6.2.0",
+    "@sanity/client": "^7.24.0",
+    "@sanity/image-url": "^2.1.1",
     "framer-motion": "^11.3.19",
     "next": "14.2.5",
     "react": "^18.3.1",

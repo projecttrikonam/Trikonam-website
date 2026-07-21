@@ -8,7 +8,8 @@ import type { Metadata } from 'next';
 import { siteConfig } from '@/content/site-config';
 import type { Article, Author, Category } from '@/content/journal/types';
 
-const absolute = (path: string) => `${siteConfig.url}${path === '/' ? '' : path}`;
+const absolute = (path: string) =>
+  /^https?:\/\//.test(path) ? path : `${siteConfig.url}${path === '/' ? '' : path}`;
 
 /**
  * Build page Metadata with a canonical URL and per-page Open Graph / Twitter cards.

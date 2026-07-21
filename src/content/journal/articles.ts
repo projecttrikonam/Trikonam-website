@@ -20,6 +20,8 @@ export const articles: Article[] = [
     publishedAt: '2026-06-02',
     author: 'trikonam',
     category: 'practice',
+    series: 'first-steps',
+    seriesTitle: 'First Steps',
     tags: ['beginners', 'consistency'],
     featured: true,
     body: [
@@ -60,6 +62,8 @@ export const articles: Article[] = [
     publishedAt: '2026-06-18',
     author: 'trikonam',
     category: 'well-being',
+    series: 'first-steps',
+    seriesTitle: 'First Steps',
     tags: ['breath', 'meditation'],
     body: [
       {
@@ -139,6 +143,8 @@ export const articles: Article[] = [
     publishedAt: '2026-05-06',
     author: 'trikonam',
     category: 'practice',
+    series: 'first-steps',
+    seriesTitle: 'First Steps',
     tags: ['consistency', 'beginners'],
     body: [
       {
