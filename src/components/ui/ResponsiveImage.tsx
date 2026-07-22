@@ -160,7 +160,11 @@ export function ResponsiveImg({
       className={className}
       style={style}
       loading={loading}
-      decoding={priority ? 'sync' : 'async'}
+      // Always async. `sync` makes the browser decode the image before it will present
+      // the frame, so a large hero stalls painting — which is visible as a flicker,
+      // especially with the page held at opacity 0 until hydration. Priority is
+      // expressed through fetchPriority/eager instead, which is what next/image does.
+      decoding="async"
       {...(priority ? { fetchPriority: 'high' as const } : {})}
     />
   );
