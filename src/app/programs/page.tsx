@@ -67,9 +67,6 @@ export default function WaysToLearnPage() {
                 <p className="mt-3 flex-1 text-body-lg text-secondary">{c.excerpt}</p>
                 <span className="mt-5 inline-flex items-center gap-1 text-[0.9rem] font-medium text-moss">
                   Learn more
-                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
                 </span>
               </Link>
             </RevealOnScroll>

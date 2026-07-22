@@ -78,7 +78,6 @@ export function WelcomeSystem() {
               <p className="mt-2 flex-1 text-body text-secondary">{j.blurb}</p>
               <span className="mt-5 inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.12em] text-moss">
                 Continue
-                <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </span>
             </button>
           </motion.li>
@@ -127,7 +126,7 @@ function JourneyForm({
         onClick={onBack}
         className="link-underline mb-8 inline-flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.16em] text-moss"
       >
-        <span aria-hidden>←</span> Choose a different journey
+        Choose a different journey
       </button>
 
       <span className="eyebrow eyebrow--tick mb-4">{journey.label}</span>

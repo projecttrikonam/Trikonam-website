@@ -24,7 +24,7 @@ export function Pagination({
           rel="prev"
           className="px-3 py-2 text-[0.85rem] text-moss hover:text-moss-dark"
         >
-          ← Previous
+          Previous
         </Link>
       )}
       <ul className="flex items-center gap-1">
@@ -48,7 +48,7 @@ export function Pagination({
           rel="next"
           className="px-3 py-2 text-[0.85rem] text-moss hover:text-moss-dark"
         >
-          Next →
+          Next
         </Link>
       )}
     </nav>

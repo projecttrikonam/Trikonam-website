@@ -21,7 +21,6 @@ function LinkCard({ href, eyebrow, title }: { href: string; eyebrow: string; tit
         <span className="block text-[0.68rem] uppercase tracking-[0.14em] text-moss">{eyebrow}</span>
         <span className="mt-0.5 block font-serif text-[1.1rem] text-primary">{title}</span>
       </span>
-      <span aria-hidden className="text-moss transition-transform duration-300 group-hover:translate-x-1">→</span>
     </Link>
   );
 }

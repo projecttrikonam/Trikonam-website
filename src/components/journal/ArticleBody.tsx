@@ -271,7 +271,7 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
                 <span className="text-moss">{f.n}.</span>
                 <span>
                   {f.text}{' '}
-                  <a href={`#fnref-${f.n}`} className="text-moss no-underline" aria-label="Back to text">↩</a>
+                  <a href={`#fnref-${f.n}`} className="text-[0.78rem] text-moss">Back to text</a>
                 </span>
               </li>
             ))}

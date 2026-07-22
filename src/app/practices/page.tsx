@@ -103,7 +103,6 @@ export default function PracticesHubPage() {
                   className="group flex items-center justify-between rounded-[10px] border border-border/70 bg-surface/50 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-moss/40 hover:shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   <span className="font-serif text-[1.1rem] text-primary">{w.label}</span>
-                  <span aria-hidden className="text-moss transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </Link>
               </li>
             ))}

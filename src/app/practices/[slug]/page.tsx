@@ -76,7 +76,7 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
           href="/practices"
           className="link-underline mb-10 inline-flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.16em] text-moss"
         >
-          <span aria-hidden>←</span> All practices
+          All practices
         </Link>
 
         {hasImage ? (
@@ -148,9 +148,6 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
             className="group inline-flex items-center gap-3 font-serif text-[1.5rem] text-primary transition-colors hover:text-moss"
           >
             {next.name}
-            <span aria-hidden className="text-moss transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
           </Link>
         </div>
       </Section>

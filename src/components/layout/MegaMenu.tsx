@@ -142,12 +142,6 @@ export function MegaMenu({
                             className="group/mm flex items-center justify-between rounded-md px-3 py-2 font-serif text-[1.05rem] text-primary transition-colors hover:bg-moss/[0.06] hover:text-moss focus-visible:outline-2 focus-visible:outline-offset-2"
                           >
                             {it.label}
-                            <span
-                              aria-hidden
-                              className="text-moss/0 transition-all duration-300 group-hover/mm:translate-x-0.5 group-hover/mm:text-moss"
-                            >
-                              →
-                            </span>
                           </Link>
                         </li>
                       ))}

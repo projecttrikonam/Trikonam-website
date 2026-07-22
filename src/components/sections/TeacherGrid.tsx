@@ -50,12 +50,6 @@ export function TeacherGrid() {
               <p className="flex-1 text-[0.85rem] leading-relaxed text-secondary">{t.summary}</p>
               <span className="mt-5 inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.12em] text-moss">
                 Read more
-                <span
-                  aria-hidden
-                  className={`transition-transform duration-300 ${reduced ? '' : 'group-hover:translate-x-1'}`}
-                >
-                  →
-                </span>
               </span>
             </motion.article>
           </Link>

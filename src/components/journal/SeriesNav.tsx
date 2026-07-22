@@ -25,9 +25,7 @@ export function SeriesNav({ series }: { series: Series[] }) {
               {s.description && (
                 <span className="mt-2 text-body text-secondary line-clamp-3">{s.description}</span>
               )}
-              <span aria-hidden className="mt-4 text-[0.85rem] text-moss transition-transform duration-300 group-hover:translate-x-1">
-                Explore →
-              </span>
+              <span className="mt-4 text-[0.85rem] text-moss">Explore</span>
             </Link>
           </li>
         ))}

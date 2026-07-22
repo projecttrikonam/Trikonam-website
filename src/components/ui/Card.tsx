@@ -75,12 +75,6 @@ export function Card({
         )}
         <span className="mt-5 inline-flex items-center gap-2 text-[0.82rem] font-medium uppercase tracking-[0.12em] text-moss">
           Read more
-          <span
-            aria-hidden
-            className={`transition-transform duration-300 ${reduced ? '' : 'group-hover/card:translate-x-1'}`}
-          >
-            →
-          </span>
         </span>
         {/* Gold hairline that draws in from the left on hover. */}
         <span className="pointer-events-none absolute inset-x-6 bottom-0 h-px origin-left scale-x-0 bg-gradient-to-r from-gold/60 to-transparent transition-transform duration-700 ease-calm group-hover/card:scale-x-100 sm:inset-x-7" />

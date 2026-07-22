@@ -47,9 +47,6 @@ export const Button = forwardRef<HTMLAnchorElement, ButtonProps>(function Button
     return (
       <a ref={ref} href={href} className={classes} {...externalProps} {...rest}>
         {children}
-        {variant === 'text' && (
-          <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-        )}
       </a>
     );
   }
@@ -57,9 +54,6 @@ export const Button = forwardRef<HTMLAnchorElement, ButtonProps>(function Button
   return (
     <Link href={href} className={classes} {...rest}>
       {children}
-      {variant === 'text' && (
-        <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-      )}
     </Link>
   );
 });

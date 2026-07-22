@@ -48,7 +48,7 @@ export default function TeacherPage({ params }: { params: { slug: string } }) {
           href="/teachers"
           className="link-underline mb-10 inline-flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.16em] text-moss"
         >
-          <span aria-hidden>←</span> All teachers
+          All teachers
         </Link>
 
         <RevealOnScroll className="relative mx-auto max-w-2xl pt-8 text-center">
@@ -81,9 +81,6 @@ export default function TeacherPage({ params }: { params: { slug: string } }) {
             className="group inline-flex items-center gap-3 font-serif text-[1.5rem] text-primary transition-colors hover:text-moss"
           >
             {next.name}
-            <span aria-hidden className="text-moss transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
           </Link>
         </div>
       </Section>

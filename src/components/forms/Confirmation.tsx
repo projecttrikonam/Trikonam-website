@@ -75,7 +75,7 @@ export function Confirmation({
 
         <div className="mt-10">
           <Link href="/" className="text-[0.95rem] font-medium text-moss hover:text-moss-dark">
-            ← Return home
+            Return home
           </Link>
         </div>
       </div>

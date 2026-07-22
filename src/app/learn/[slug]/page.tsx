@@ -47,7 +47,7 @@ export default function LearningPathPage({ params }: { params: { slug: string } 
           href="/practices"
           className="link-underline mb-10 inline-flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.16em] text-moss"
         >
-          <span aria-hidden>←</span> Classical Hatha Yoga
+          Classical Hatha Yoga
         </Link>
 
         <div className="grid items-start gap-12 md:grid-cols-2 md:gap-16">
@@ -113,9 +113,6 @@ export default function LearningPathPage({ params }: { params: { slug: string } 
             className="group inline-flex items-center gap-3 text-right font-serif text-[1.35rem] leading-tight text-primary transition-colors hover:text-moss sm:text-[1.5rem]"
           >
             {next.name}
-            <span aria-hidden className="text-moss transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
           </Link>
         </div>
       </Section>

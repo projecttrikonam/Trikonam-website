@@ -99,14 +99,13 @@ export async function getArticleBySlug(slug: string): Promise<Article | undefine
 }
 
 /**
- * The article that leads the Journal. A featured article only leads when it actually has
- * a hero image — the lead slot is the page's visual focal point, so a text-only piece
- * pinned there would leave the Journal opening with nothing to look at. Otherwise the
- * newest article leads. @cms
+ * The article that leads the Journal — always the newest one. The `featured` flag is
+ * deliberately not consulted: the Journal reads as a publication where the most recent
+ * piece opens the page, rather than one where an older article can be pinned above it.
+ * @cms
  */
 export async function getFeaturedArticle(): Promise<Article | undefined> {
-  const all = await getAllArticles();
-  return all.find((a) => a.featured && a.coverImage) ?? all[0];
+  return (await getAllArticles())[0];
 }
 
 /** Newest-first, excluding one slug (keeps the featured article out of the grid). */
