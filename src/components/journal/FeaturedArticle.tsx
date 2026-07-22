@@ -1,12 +1,14 @@
 import Link from 'next/link';
-import { ArticleMeta } from './ArticleMeta';
+import { CategoryLabel } from './CategoryLabel';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
-import { readingTime } from '@/lib/journal';
+import { formatDate, readingTime } from '@/lib/journal';
 import type { Article, Category } from '@/content/journal/types';
 
 /**
- * The featured article at the head of the Journal — given more room than a card. Text
- * carries it (a cover image shows only when one truly exists).
+ * The lead article at the head of the Journal — the page's focal point. A full-width
+ * landscape image with the words centred beneath it, given far more room than a card, so
+ * the page opens like a publication rather than a feed. Square corners and no card
+ * chrome, matching the article page's hero.
  */
 export function FeaturedArticle({
   article,
@@ -16,40 +18,43 @@ export function FeaturedArticle({
   categories: Category[];
 }) {
   const category = categories.find((c) => c.slug === article.category);
+  const href = `/journal/${article.slug}`;
 
   return (
     <RevealOnScroll>
-      <article className="group grid gap-8 md:grid-cols-12 md:items-center md:gap-14">
+      <article className="group">
         {article.coverImage && (
-          <Link
-            href={`/journal/${article.slug}`}
-            className="block overflow-hidden rounded-[12px] bg-bg-alt shadow-lift ring-1 ring-black/[0.05] md:col-span-7"
-            aria-hidden
-            tabIndex={-1}
-          >
+          <Link href={href} className="block overflow-hidden bg-bg-alt" tabIndex={-1} aria-hidden>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={article.coverImage}
               alt={article.coverAlt ?? ''}
-              className="aspect-[16/10] w-full object-cover transition-transform duration-[1200ms] ease-calm group-hover:scale-[1.03]"
+              loading="eager"
+              className="aspect-[3/2] w-full object-cover ring-1 ring-black/[0.05] transition-transform duration-[1200ms] ease-calm group-hover:scale-[1.02]"
             />
           </Link>
         )}
-        <div className={article.coverImage ? 'md:col-span-5' : 'md:col-span-9'}>
-          <span className="eyebrow eyebrow--tick mb-5">Featured</span>
-          <ArticleMeta article={article} category={category} readingMinutes={readingTime(article)} className="mb-4" />
-          <h2 className="font-serif text-[clamp(1.64rem,3.06vw,2.5rem)] leading-[1.1] tracking-[-0.01em] text-primary">
-            <Link href={`/journal/${article.slug}`} className="transition-colors hover:text-moss">
+
+        <div className={`mx-auto max-w-2xl text-center ${article.coverImage ? 'mt-11 sm:mt-14' : ''}`}>
+          <CategoryLabel category={category} />
+          <h2 className="mt-4 text-balance font-serif text-[clamp(1.7rem,3.2vw,2.6rem)] leading-[1.12] tracking-[-0.01em] text-primary">
+            <Link href={href} className="transition-colors duration-300 hover:text-moss">
               {article.title}
             </Link>
           </h2>
-          <p className="prose-measure mt-5 text-body-lg text-secondary">{article.excerpt}</p>
+          <p className="mx-auto mt-5 max-w-xl text-body-lg leading-relaxed text-secondary">
+            {article.excerpt}
+          </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[0.74rem] uppercase tracking-[0.14em] text-secondary/80">
+            <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
+            <span aria-hidden className="text-border">·</span>
+            <span>{readingTime(article)} min read</span>
+          </div>
           <Link
-            href={`/journal/${article.slug}`}
-            className="mt-7 inline-flex items-center gap-2 text-[0.85rem] font-medium uppercase tracking-[0.12em] text-moss"
+            href={href}
+            className="mt-9 inline-block border-b border-moss/30 pb-1 text-[0.8rem] font-medium uppercase tracking-[0.16em] text-moss transition-colors duration-300 hover:border-moss hover:text-moss-dark"
           >
-            Read the article
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            Read article
           </Link>
         </div>
       </article>

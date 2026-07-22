@@ -11,18 +11,21 @@ export function ArticleMeta({
   category,
   readingMinutes,
   className = '',
+  showCategory = true,
 }: {
   article: Article;
   category?: Category;
   readingMinutes: number;
   className?: string;
+  /** Off where the listing already shows the category as its own prominent label. */
+  showCategory?: boolean;
 }) {
   return (
     <div
       className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.78rem] uppercase tracking-[0.12em] text-secondary ${className}`}
     >
       <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
-      {category && (
+      {category && showCategory && (
         <>
           <span aria-hidden className="text-border">·</span>
           <Link href={`/journal/category/${category.slug}`} className="text-moss hover:text-moss-dark">

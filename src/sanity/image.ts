@@ -19,3 +19,27 @@ export function imageUrl(source: SanityImageSource | undefined, width = 1200): s
   const b = urlForImage(source);
   return b ? b.width(width).quality(80).auto('format').url() : null;
 }
+
+/**
+ * A CDN-cropped URL at a fixed aspect ratio, for hero/cover images.
+ *
+ * Passing BOTH width and height is what makes @sanity/image-url honour the **crop
+ * rectangle and hotspot** an editor sets in the Studio. URLs assembled by string
+ * concatenation in GROQ cannot do this — they can only centre-crop — which is why every
+ * cover URL is built here instead.
+ */
+export function croppedImageUrl(
+  source: SanityImageSource | undefined,
+  width: number,
+  ratio = 3 / 2,
+): string | undefined {
+  const b = urlForImage(source);
+  if (!b) return undefined;
+  return b
+    .width(width)
+    .height(Math.round(width / ratio))
+    .fit('crop')
+    .auto('format')
+    .quality(80)
+    .url();
+}

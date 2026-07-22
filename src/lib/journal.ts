@@ -16,6 +16,7 @@ import { categories as localCategories, tags as localTags } from '@/content/jour
 import { series as localSeries } from '@/content/journal/series';
 import type { Article, Author, Category, Paginated, Series, Tag } from '@/content/journal/types';
 import { hasSanity } from '@/sanity/env';
+import { croppedImageUrl } from '@/sanity/image';
 import { sanityFetch, ALL_ARTICLES, ALL_CATEGORIES, ALL_SERIES, ALL_AUTHORS, ALL_TAGS } from '@/sanity/queries';
 
 /** How many articles per page in listings. */
@@ -40,6 +41,25 @@ const localDataset = (): Dataset => ({
   tags: localTags,
 });
 
+/**
+ * Sanity returns the hero as a raw image object (`coverImageRef`) rather than a URL, so
+ * the crop rectangle and hotspot an editor sets in the Studio can actually be applied —
+ * see croppedImageUrl(). Both sizes are cropped to the same 3:2, so the hero and the grid
+ * frame a photograph identically. Local-seed articles already carry a plain `coverImage`
+ * string and pass through untouched.
+ */
+type RawArticle = Article & { coverImageRef?: unknown };
+
+function resolveCoverImages(raw: RawArticle): Article {
+  const { coverImageRef, ...article } = raw;
+  if (!coverImageRef) return article;
+  return {
+    ...article,
+    coverImage: croppedImageUrl(coverImageRef as never, 1800),
+    coverImageThumb: croppedImageUrl(coverImageRef as never, 800),
+  };
+}
+
 let cached: Promise<Dataset> | null = null;
 
 async function loadDataset(): Promise<Dataset> {
@@ -59,7 +79,7 @@ async function fetchDataset(): Promise<Dataset> {
   // If the core articles query fails, fall back entirely so a build never breaks.
   if (!a) return localDataset();
   return {
-    articles: a,
+    articles: a.map(resolveCoverImages),
     categories: c && c.length ? c : localCategories,
     series: s ?? [],
     authors: au && au.length ? au : localAuthors,
@@ -78,10 +98,15 @@ export async function getArticleBySlug(slug: string): Promise<Article | undefine
   return (await loadDataset()).articles.find((a) => a.slug === slug);
 }
 
-/** The single featured article (falls back to the newest). @cms */
+/**
+ * The article that leads the Journal. A featured article only leads when it actually has
+ * a hero image — the lead slot is the page's visual focal point, so a text-only piece
+ * pinned there would leave the Journal opening with nothing to look at. Otherwise the
+ * newest article leads. @cms
+ */
 export async function getFeaturedArticle(): Promise<Article | undefined> {
   const all = await getAllArticles();
-  return all.find((a) => a.featured) ?? all[0];
+  return all.find((a) => a.featured && a.coverImage) ?? all[0];
 }
 
 /** Newest-first, excluding one slug (keeps the featured article out of the grid). */

@@ -50,20 +50,27 @@ export default async function JournalPage() {
         <PageHeader
           eyebrow="The Journal"
           title="Quiet writing on the practice."
-          intro="Reflections on Classical Hatha Yoga — how to begin, the ideas beneath it, and living well around it. New pieces, added slowly."
+          align="center"
+          intro="Reflections rather than instruction — on how to begin, the ideas beneath the postures, and what Classical Hatha Yoga asks of an ordinary life. New pieces are added slowly, when there is something worth saying."
         />
-        <div className="mt-12">
+        <div className="mt-12 flex justify-center">
           <CategoryNav categories={categories} />
         </div>
       </Section>
 
       {featured && (
-        <Section tone="bg" width="wide" className="pt-0">
+        <Section tone="bg" width="wide" className="pt-2">
           <FeaturedArticle article={featured} categories={categories} />
         </Section>
       )}
 
       <Section tone="bg-alt" width="wide">
+        {items.length > 0 && (
+          <RevealOnScroll className="mb-12">
+            <span className="eyebrow eyebrow--tick mb-3">More reading</span>
+            <h2 className="text-h3">From the archive</h2>
+          </RevealOnScroll>
+        )}
         <ArticleGrid articles={items} categories={categories} />
         <Pagination
           page={page}
@@ -72,6 +79,7 @@ export default async function JournalPage() {
         />
       </Section>
 
+      {/* Series appear here as soon as any exist in the CMS — nothing to change in code. */}
       {series.length > 0 && (
         <Section tone="bg" width="wide">
           <RevealOnScroll>
