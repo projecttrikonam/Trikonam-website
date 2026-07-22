@@ -114,7 +114,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                 src={article.coverImage}
                 alt={article.coverAlt ?? ''}
                 loading="eager"
-                className="aspect-[16/9] w-full object-cover ring-1 ring-black/[0.05]"
+                className="aspect-[3/2] w-full object-cover ring-1 ring-black/[0.05]"
               />
             </RevealOnScroll>
           )}

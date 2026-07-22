@@ -5,6 +5,11 @@ import { client } from './client';
  * `Category` / `Series` / `Author` / `Tag` shapes from src/content/journal/types.ts, so
  * the data layer stays source-agnostic. Body images keep their asset reference (resolved
  * to URLs by @sanity/image-url in the renderer); hero/cover/og images resolve to URLs.
+ *
+ * The hero URL is cropped server-side to 3:2 around the editor's hotspot
+ * (`crop=focalpoint` + `fp-x`/`fp-y`, defaulting to centre). Cropping on the CDN rather
+ * than with CSS `object-fit` means the hotspot is actually honoured and the browser never
+ * downloads pixels that get cropped away.
  */
 
 const ARTICLE_PROJECTION = /* groq */ `{
@@ -19,7 +24,7 @@ const ARTICLE_PROJECTION = /* groq */ `{
   "series": series->slug.current,
   "seriesTitle": series->title,
   "tags": coalesce(tags[]->slug.current, []),
-  "coverImage": heroImage.asset->url + "?w=1600&fit=max&auto=format&q=80",
+  "coverImage": heroImage.asset->url + "?w=1800&h=1200&fit=crop&crop=focalpoint&fp-x=" + string(coalesce(heroImage.hotspot.x, 0.5)) + "&fp-y=" + string(coalesce(heroImage.hotspot.y, 0.5)) + "&auto=format&q=80",
   "coverAlt": heroImage.alt,
   body,
   "featured": coalesce(featured, false),
