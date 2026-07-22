@@ -56,7 +56,8 @@ export default function OnlineProgramsPage() {
           alt="A student in white joins a live online Classical Hatha Yoga session on a laptop, seated in a sunlit garden."
           sizes="100vw"
           priority
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          fill
+          className="object-cover object-center"
         />
         <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/45 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/85 via-primary/25 to-transparent" />

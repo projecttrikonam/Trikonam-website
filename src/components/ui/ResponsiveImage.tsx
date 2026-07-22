@@ -62,9 +62,8 @@ export function ResponsiveImage({
         alt={alt}
         sizes={sizes}
         priority={priority}
-        className={`absolute inset-0 h-full w-full ${
-          contain ? 'object-contain p-3 sm:p-4' : 'object-cover'
-        } ${imgClassName}`}
+        fill
+        className={`${contain ? 'object-contain p-3 sm:p-4' : 'object-cover'} ${imgClassName}`}
       />
       {goldEdge && (
         <span className="pointer-events-none absolute inset-0 rounded-[10px] ring-1 ring-inset ring-gold/12" />
@@ -88,6 +87,7 @@ export function ResponsiveImg({
   sizes = '100vw',
   className = '',
   priority = false,
+  fill = false,
   width,
   height,
 }: {
@@ -96,6 +96,16 @@ export function ResponsiveImg({
   sizes?: string;
   className?: string;
   priority?: boolean;
+  /**
+   * The image fills a positioned parent rather than sitting in the normal flow.
+   *
+   * This must be set for that case, and it does two things that matter. It positions the
+   * image with inline styles rather than classes, so the box is correct the instant the
+   * markup is parsed instead of waiting on the stylesheet. And it omits the intrinsic
+   * width/height, because declaring 2000×1469 on an element the container is supposed to
+   * size gives the browser a competing aspect ratio.
+   */
+  fill?: boolean;
   /** Override the intrinsic ratio where a layout depends on a declared box (e.g. the
    *  gallery's masonry columns). Omit to use the photograph's real dimensions. */
   width?: number;
@@ -104,10 +114,29 @@ export function ResponsiveImg({
   const meta = images[src];
   const loading = priority ? 'eager' : 'lazy';
 
+  /**
+   * Transparent text colour keeps the `alt` from painting inside the frame while the
+   * image is still loading — without it every lazy image flashes its alt text and then
+   * replaces it with the photograph. Positioning is inline for `fill` so it never
+   * depends on stylesheet timing.
+   */
+  const style: React.CSSProperties = fill
+    ? { position: 'absolute', inset: 0, width: '100%', height: '100%', color: 'transparent' }
+    : { color: 'transparent' };
+
   if (!meta) {
     // Not a local file we generated variants for (e.g. a Sanity CDN URL, already sized).
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt} className={className} loading={loading} decoding="async" />;
+    return (
+      <img
+        src={src}
+        alt={alt}
+        className={className}
+        style={style}
+        loading={loading}
+        decoding="async"
+      />
+    );
   }
 
   const stem = src.slice(0, src.lastIndexOf('.'));
@@ -116,16 +145,20 @@ export function ResponsiveImg({
     `${src} ${meta.width}w`,
   ].join(', ');
 
+  // Intrinsic dimensions reserve the right box in normal flow, but must be withheld in
+  // `fill` mode — there the parent decides the box, and a declared ratio fights it.
+  const dimensions = fill ? {} : { width: width ?? meta.width, height: height ?? meta.height };
+
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       srcSet={srcSet}
       sizes={sizes}
-      width={width ?? meta.width}
-      height={height ?? meta.height}
+      {...dimensions}
       alt={alt}
       className={className}
+      style={style}
       loading={loading}
       decoding={priority ? 'sync' : 'async'}
       {...(priority ? { fetchPriority: 'high' as const } : {})}

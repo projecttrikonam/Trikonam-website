@@ -49,7 +49,8 @@ export function Card({
             src={image}
             alt={imageAlt}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className={`absolute inset-0 h-full w-full object-contain p-4 transition-transform duration-[900ms] ease-calm ${
+            fill
+            className={`object-contain p-4 transition-transform duration-[900ms] ease-calm ${
               reduced ? '' : 'group-hover/card:scale-[1.03]'
             }`}
           />

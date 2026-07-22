@@ -30,7 +30,8 @@ export function Hero() {
         alt="A practitioner sits in quiet meditation at dusk, mountains softening into the distance."
         sizes="100vw"
         priority
-        className="absolute inset-0 h-full w-full object-cover object-center"
+        fill
+        className="object-cover object-center"
       />
 
       {/* Soft gradients for legibility — the middle is left clear so the photograph is

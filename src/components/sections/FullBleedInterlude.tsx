@@ -65,7 +65,8 @@ export function FullBleedInterlude({
           src={src}
           alt={alt}
           sizes="100vw"
-          className="h-full w-full object-cover object-center"
+          fill
+          className="object-cover object-center"
         />
       </motion.div>
       {caption && (
