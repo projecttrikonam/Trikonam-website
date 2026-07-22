@@ -91,7 +91,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
               </Link>
             )}
             <ArticleMeta article={article} category={category} readingMinutes={readingTime(article)} className="justify-center" />
-            <h1 className="mt-5 text-balance font-serif text-[clamp(1.75rem,4.05vw,2.95rem)] leading-[1.08] tracking-[-0.015em] text-primary">
+            <h1 className="mx-auto mt-5 max-w-[40rem] text-balance font-serif text-[clamp(1.75rem,4.05vw,2.95rem)] leading-[1.08] tracking-[-0.015em] text-primary">
               {article.title}
             </h1>
             {article.subtitle && (
@@ -108,13 +108,13 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           </header>
 
           {article.coverImage && (
-            <RevealOnScroll className="mx-auto mt-12 max-w-4xl">
+            <RevealOnScroll className="mt-16">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={article.coverImage}
                 alt={article.coverAlt ?? ''}
                 loading="eager"
-                className="w-full rounded-[12px] shadow-lift ring-1 ring-black/[0.05]"
+                className="aspect-[16/9] w-full object-cover ring-1 ring-black/[0.05]"
               />
             </RevealOnScroll>
           )}

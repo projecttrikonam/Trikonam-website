@@ -191,7 +191,7 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
         const v = value as { text: string; attribution?: string };
         return (
           <figure className="!my-14 text-center">
-            <span aria-hidden className="mx-auto mb-6 block h-px w-12 bg-gradient-to-r from-gold/0 via-gold to-gold/0" />
+            <span aria-hidden className="mx-auto mb-1 block font-serif text-[3.25rem] leading-[0.7] text-gold/40">&ldquo;</span>
             <blockquote className="text-balance font-serif text-[clamp(1.3rem,2.6vw,1.9rem)] font-normal leading-[1.4] text-primary">
               {v.text}
             </blockquote>
