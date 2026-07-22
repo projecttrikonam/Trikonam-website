@@ -1,0 +1,12 @@
+# Cloudflare Pages redirects.
+#
+# Cloudflare Pages keeps serving a path from an earlier deployment when the newest
+# build no longer contains that file, so removing a page from the build is not enough
+# to take it off the web. These rules retire such URLs explicitly.
+#
+# The demo/sample Journal article existed only to exercise the editorial blocks. It was
+# deleted from Sanity, the seed, and the seed generator, so it can never be rebuilt —
+# but the previously-deployed file lingered. Send it to the Journal rather than 404ing,
+# so anyone holding the link (or an index entry) lands somewhere useful.
+/journal/sample-a-morning-with-the-breath   /journal/   301
+/journal/sample-a-morning-with-the-breath/  /journal/   301
