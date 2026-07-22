@@ -56,6 +56,7 @@ export default async function CategoryPage({ params }: { params: { category: str
           articles={articles}
           categories={categories}
           emptyMessage={`No articles in ${category.title} yet.`}
+          srHeading={`Articles in ${category.title}`}
         />
       </Section>
     </>

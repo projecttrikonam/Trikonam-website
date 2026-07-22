@@ -23,7 +23,7 @@ function AtAGlance({ details }: { details: PracticeDetails }) {
     <dl className="mt-9 grid gap-x-10 gap-y-5 border-t border-border pt-7 sm:grid-cols-2">
       {rows.map((r) => (
         <div key={r.label}>
-          <dt className="text-[0.72rem] uppercase tracking-[0.16em] text-moss">{r.label}</dt>
+          <dt className="text-micro uppercase tracking-[0.16em] text-moss">{r.label}</dt>
           <dd className="mt-1 text-body-lg text-primary">{r.value}</dd>
         </div>
       ))}
@@ -74,7 +74,7 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
       <Section tone="bg" width="wide">
         <Link
           href="/practices"
-          className="link-underline mb-10 inline-flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.16em] text-moss"
+          className="link-underline mb-10 inline-flex items-center gap-2 text-label uppercase tracking-[0.16em] text-moss"
         >
           All practices
         </Link>
@@ -91,7 +91,7 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
               </span>
               <RevealOnScroll className="relative">
                 <span className="eyebrow eyebrow--tick mb-5">Classical Hatha Yoga</span>
-                <h1 className="text-balance font-serif text-[clamp(1.95rem,4.05vw,3.19rem)] leading-[1.05] tracking-[-0.015em] text-primary">
+                <h1 className="text-balance font-serif text-[clamp(1.95rem,4.05vw,3.19rem)] leading-[1.16] sm:leading-[1.05] tracking-[-0.015em] text-primary">
                   {practice.name}
                 </h1>
                 <p className="prose-measure mt-8 text-body-lg leading-[1.8] text-secondary text-pretty">
@@ -122,7 +122,7 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
               </span>
             </div>
             <span className="eyebrow eyebrow--tick mx-auto mb-5 w-fit">Classical Hatha Yoga</span>
-            <h1 className="text-balance font-serif text-[clamp(1.95rem,4.5vw,3.41rem)] leading-[1.05] tracking-[-0.015em] text-primary">
+            <h1 className="text-balance font-serif text-[clamp(1.95rem,4.5vw,3.41rem)] leading-[1.16] sm:leading-[1.05] tracking-[-0.015em] text-primary">
               {practice.name}
             </h1>
             <p className="mx-auto mt-8 max-w-[62ch] text-body-lg leading-[1.85] text-secondary text-pretty">
@@ -140,7 +140,7 @@ export default function PracticePage({ params }: { params: { slug: string } }) {
       {/* Onward path to the next practice. */}
       <Section tone="bg" width="wide" className="pt-0">
         <div className="flex items-center justify-between border-t border-border pt-8">
-          <span className="text-[0.78rem] uppercase tracking-[0.16em] text-secondary">
+          <span className="text-label uppercase tracking-[0.16em] text-secondary">
             Next practice
           </span>
           <Link

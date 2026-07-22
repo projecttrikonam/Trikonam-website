@@ -46,7 +46,7 @@ export default function TeacherPage({ params }: { params: { slug: string } }) {
       <Section tone="bg" width="wide">
         <Link
           href="/teachers"
-          className="link-underline mb-10 inline-flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.16em] text-moss"
+          className="link-underline mb-10 inline-flex items-center gap-2 text-label uppercase tracking-[0.16em] text-moss"
         >
           All teachers
         </Link>
@@ -59,7 +59,7 @@ export default function TeacherPage({ params }: { params: { slug: string } }) {
             </span>
           </div>
           <span className="eyebrow eyebrow--tick mx-auto mb-5 w-fit">{teacher.role}</span>
-          <h1 className="text-balance font-serif text-[clamp(1.95rem,4.5vw,3.19rem)] leading-[1.05] tracking-[-0.015em] text-primary">
+          <h1 className="text-balance font-serif text-[clamp(1.95rem,4.5vw,3.19rem)] leading-[1.16] sm:leading-[1.05] tracking-[-0.015em] text-primary">
             {teacher.name}
           </h1>
           <div className="prose-measure mx-auto mt-8 space-y-5 text-left text-body-lg leading-[1.8] text-secondary text-pretty">
@@ -73,7 +73,7 @@ export default function TeacherPage({ params }: { params: { slug: string } }) {
       {/* Onward path to the next teacher. */}
       <Section tone="bg" width="wide" className="pt-0">
         <div className="flex items-center justify-between border-t border-border pt-8">
-          <span className="text-[0.78rem] uppercase tracking-[0.16em] text-secondary">
+          <span className="text-label uppercase tracking-[0.16em] text-secondary">
             Meet another teacher
           </span>
           <Link

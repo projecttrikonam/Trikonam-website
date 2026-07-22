@@ -54,6 +54,7 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
           articles={articles}
           categories={categories}
           emptyMessage={`No articles tagged ${tag.title} yet.`}
+          srHeading={`Articles tagged ${tag.title}`}
         />
       </Section>
     </>

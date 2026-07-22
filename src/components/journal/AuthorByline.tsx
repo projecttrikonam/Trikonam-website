@@ -24,10 +24,10 @@ export function AuthorByline({ author }: { author: Author }) {
           </span>
         )}
         <div>
-          <p className="text-[0.72rem] uppercase tracking-[0.16em] text-secondary">Written by</p>
+          <p className="text-micro uppercase tracking-[0.16em] text-secondary">Written by</p>
           <p className="mt-1 font-serif text-[1.25rem] text-primary">{author.name}</p>
           {(author.designation || author.role) && (
-            <p className="text-[0.85rem] text-moss">{author.designation ?? author.role}</p>
+            <p className="text-caption text-moss">{author.designation ?? author.role}</p>
           )}
           {author.bio && <p className="mt-3 text-body text-secondary">{author.bio}</p>}
           {author.socials && author.socials.length > 0 && (
@@ -38,7 +38,7 @@ export function AuthorByline({ author }: { author: Author }) {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[0.8rem] font-medium text-moss hover:text-moss-dark"
+                  className="text-fine font-medium text-moss hover:text-moss-dark"
                 >
                   {s.platform}
                 </a>

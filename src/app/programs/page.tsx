@@ -14,7 +14,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata: Metadata = pageMetadata({
   title: 'Ways to Learn',
   description:
-    'The ways to experience Classical Hatha Yoga with Trikonam — group workshops, private one-to-one guidance, children’s yoga, and retreats, plus corporate and school programs.',
+    'The ways to experience Classical Hatha Yoga with Trikonam — group workshops, private one-to-one guidance, children’s yoga, retreats and more.',
   path: '/programs',
 });
 
@@ -32,6 +32,7 @@ export default function WaysToLearnPage() {
           title="Learn in the way that suits you."
           intro="Classical Hatha Yoga can be experienced through a variety of formats, depending on your schedule, goals, and stage of practice. Each pathway preserves the authenticity of these timeless practices while making them accessible in the way that fits your life."
         />
+        <h2 className="sr-only">Ways to learn</h2>
         <ul className="mt-14 grid gap-6 sm:grid-cols-2">
           {learningPaths.map((p) => (
             <RevealOnScroll as="li" key={p.slug}>

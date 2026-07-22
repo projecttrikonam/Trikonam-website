@@ -85,13 +85,13 @@ export default async function ArticlePage({ params }: { params: { slug: string }
             {article.seriesTitle && article.series && (
               <Link
                 href={`/journal/series/${article.series}`}
-                className="mb-4 inline-block text-[0.72rem] uppercase tracking-[0.18em] text-moss hover:text-moss-dark"
+                className="mb-4 inline-block text-micro uppercase tracking-[0.18em] text-moss hover:text-moss-dark"
               >
                 {article.seriesTitle}
               </Link>
             )}
             <ArticleMeta article={article} category={category} readingMinutes={readingTime(article)} className="justify-center" />
-            <h1 className="mx-auto mt-5 max-w-[40rem] text-balance font-serif text-[clamp(1.75rem,4.05vw,2.95rem)] leading-[1.08] tracking-[-0.015em] text-primary">
+            <h1 className="mx-auto mt-5 max-w-[40rem] text-balance font-serif text-[clamp(1.75rem,4.05vw,2.95rem)] leading-[1.18] sm:leading-[1.08] tracking-[-0.015em] text-primary">
               {article.title}
             </h1>
             {article.subtitle && (
@@ -112,8 +112,11 @@ export default async function ArticlePage({ params }: { params: { slug: string }
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={article.coverImage}
+                srcSet={article.coverImageSrcSet}
+                sizes="(min-width: 1024px) 1024px, 100vw"
                 alt={article.coverAlt ?? ''}
                 loading="eager"
+                fetchPriority="high"
                 className="aspect-[3/2] w-full object-cover ring-1 ring-black/[0.05]"
               />
             </RevealOnScroll>
@@ -141,12 +144,12 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           {/* Tags */}
           {article.tags.length > 0 && (
             <div className="prose-measure mx-auto mt-14 flex flex-wrap items-center gap-2.5 border-t border-border pt-8">
-              <span className="mr-1 text-[0.78rem] uppercase tracking-[0.12em] text-secondary">Tags</span>
+              <span className="mr-1 text-label uppercase tracking-[0.12em] text-secondary">Tags</span>
               {article.tags.map((t) => (
                 <Link
                   key={t}
                   href={`/journal/tag/${t}`}
-                  className="rounded-full border border-border px-3.5 py-1 text-[0.8rem] text-secondary transition-colors hover:border-moss hover:text-moss"
+                  className="rounded-full border border-border px-3.5 py-1 text-fine text-secondary transition-colors hover:border-moss hover:text-moss"
                 >
                   {t}
                 </Link>

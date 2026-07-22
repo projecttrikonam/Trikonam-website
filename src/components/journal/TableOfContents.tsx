@@ -11,7 +11,7 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
       aria-label="In this article"
       className="prose-measure mx-auto mb-12 rounded-[12px] border border-border/70 bg-surface/40 px-6 py-5"
     >
-      <p className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-moss">In this article</p>
+      <p className="mb-3 text-micro font-medium uppercase tracking-[0.16em] text-moss">In this article</p>
       <ol className="space-y-1.5">
         {headings.map((h) => (
           <li key={h.id} className={h.level === 3 ? 'pl-4' : ''}>

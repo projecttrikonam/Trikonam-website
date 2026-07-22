@@ -22,7 +22,7 @@ export function Pagination({
         <Link
           href={buildHref(page - 1)}
           rel="prev"
-          className="px-3 py-2 text-[0.85rem] text-moss hover:text-moss-dark"
+          className="px-3 py-2 text-caption text-moss hover:text-moss-dark"
         >
           Previous
         </Link>
@@ -33,7 +33,7 @@ export function Pagination({
             <Link
               href={buildHref(n)}
               aria-current={n === page ? 'page' : undefined}
-              className={`flex h-9 w-9 items-center justify-center rounded-full text-[0.85rem] tabular-nums transition-colors ${
+              className={`flex h-9 w-9 items-center justify-center rounded-full text-caption tabular-nums transition-colors ${
                 n === page ? 'bg-moss text-inverse' : 'text-secondary hover:text-moss'
               }`}
             >
@@ -46,7 +46,7 @@ export function Pagination({
         <Link
           href={buildHref(page + 1)}
           rel="next"
-          className="px-3 py-2 text-[0.85rem] text-moss hover:text-moss-dark"
+          className="px-3 py-2 text-caption text-moss hover:text-moss-dark"
         >
           Next
         </Link>

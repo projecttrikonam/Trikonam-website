@@ -54,7 +54,7 @@ export default async function JournalPaginatedPage({ params }: { params: { page:
         </div>
       </Section>
       <Section tone="bg-alt" width="wide" className="pt-0">
-        <ArticleGrid articles={items} categories={categories} />
+        <ArticleGrid articles={items} categories={categories} srHeading="Articles" />
         <Pagination
           page={page}
           totalPages={totalPages}

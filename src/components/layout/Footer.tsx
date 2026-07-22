@@ -38,12 +38,12 @@ export function Footer() {
         {/* Explore */}
         <nav aria-label="Footer">
           <h2 className="eyebrow mb-4">Explore</h2>
-          <ul className="space-y-2.5">
+          <ul className="space-y-1">
             {footerNav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="link-underline text-body text-primary hover:text-moss"
+                  className="link-underline inline-block py-1 text-body text-primary hover:text-moss"
                 >
                   {item.label}
                 </Link>
@@ -55,24 +55,24 @@ export function Footer() {
         {/* Contact */}
         <div>
           <h2 className="eyebrow mb-4">Contact</h2>
-          <ul className="space-y-2.5 text-body text-primary">
+          <ul className="space-y-1 text-body text-primary">
             <li>
               <a
                 href={`tel:${contact.phone.replace(/\s/g, '')}`}
-                className="link-underline hover:text-moss"
+                className="link-underline inline-block py-1 hover:text-moss"
               >
                 {contact.phone}
               </a>
             </li>
-            <li className="pt-1">
+            <li>
               <a
                 href={`mailto:${contact.email}`}
-                className="link-underline break-all hover:text-moss"
+                className="link-underline inline-block break-all py-1 hover:text-moss"
               >
                 {contact.email}
               </a>
             </li>
-            <li className="pt-1 text-secondary">{siteConfig.serviceArea}</li>
+            <li className="pt-2 text-secondary">{siteConfig.serviceArea}</li>
           </ul>
 
           {/* Social row: present but empty until links exist (Handoff §12). */}

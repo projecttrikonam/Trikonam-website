@@ -21,6 +21,12 @@ export interface LearningPath {
   tagline: string;
   image: string;
   imageAlt: string;
+  /**
+   * Search-result summary, ~150 characters. Kept separate from `intro` because a body
+   * paragraph makes a poor meta description — Google truncates it around 155 and the
+   * useful part is lost.
+   */
+  metaDescription: string;
   intro: string[];
   sections: LearningSection[];
   cta: { label: string; journey: string };
@@ -33,6 +39,8 @@ export const learningPaths: LearningPath[] = [
     tagline: 'Experience yoga together.',
     image: '/images/learn/group-workshops.webp',
     imageAlt: 'A group of practitioners holding Classical Hatha Yoga postures together on temple steps at dawn.',
+    metaDescription:
+      'Classical Hatha Yoga for groups — from a single introductory session to an immersive multi-day workshop, shaped around your group’s needs and experience.',
     intro: [
       'Not every yogic journey begins individually. Sometimes it begins with a classroom, a workplace, a residential community, or simply a group of people who wish to learn together. Group Workshops are designed to make the transformative possibility of Classical Hatha Yoga accessible in a shared environment, while preserving the authenticity of these timeless practices.',
       'Whether offered as a short introductory session or a more immersive multi-day workshop, each program is thoughtfully designed according to the group’s needs, experience, and intention. Conducted by certified Classical Hatha Yoga teachers, these workshops create an opportunity for participants to experience greater balance, vitality, clarity, and inner well-being together.',
@@ -88,6 +96,8 @@ export const learningPaths: LearningPath[] = [
     tagline: 'A journey designed around you.',
     image: '/images/programs/private-sessions/private.webp',
     imageAlt: 'A teacher offering warm, individual guidance to a student in a calm space.',
+    metaDescription:
+      'One-to-one Classical Hatha Yoga, with the practice and pace shaped entirely around you — your body, your schedule, and where you are in the practice.',
     intro: [
       'Every individual begins their journey from a different place. While group programs provide a shared learning experience, some situations benefit from dedicated personal attention and guidance. One-to-One Guidance offers an opportunity to understand your current needs, aspirations, and challenges before recommending a practice that is most suitable for you.',
       'The journey begins with a personal consultation, allowing the teacher to design a thoughtful and structured approach tailored to your goals. Whether your intention is to improve overall well-being, build strength, establish a consistent practice, or simply begin exploring yoga with confidence, each session is offered with care, clarity, and individual attention.',
@@ -134,6 +144,8 @@ export const learningPaths: LearningPath[] = [
     tagline: 'Growing with awareness, curiosity, and joy.',
     image: '/images/programs/children/children.webp',
     imageAlt: 'Children seated quietly in practice, mountains softening in the distance.',
+    metaDescription:
+      'Classical Hatha Yoga for children — simple practices offered through play and curiosity, building steadiness, attention, and confidence as they grow.',
     intro: [
       'The early years of life are a wonderful time to cultivate awareness, balance, confidence, and joyful participation. Children’s Yoga introduces young minds to simple yogic practices through engaging experiences that encourage movement, attention, creativity, and connection with nature.',
       'Designed specifically for children between the ages of 7 and 15, these programs combine Classical Hatha Yoga with games, nature-based activities, creative learning, and meaningful group experiences. The intention is not only to support physical health and coordination, but also to help children develop focus, emotional balance, confidence, and a deeper appreciation for themselves and the world around them.',
@@ -174,6 +186,8 @@ export const learningPaths: LearningPath[] = [
     tagline: 'Pause. Breathe. Return to what matters.',
     image: '/images/programs/retreats/retreats.webp',
     imageAlt: 'A small group seated together at dusk in a quiet natural setting, on retreat.',
+    metaDescription:
+      'Residential Classical Hatha Yoga retreats — unhurried days of practice, silence, and simple living, away from the noise of routine.',
     intro: [
       'Stepping away from the pace of everyday life creates a unique opportunity to reconnect with oneself. Trikonam Retreats are designed as immersive yogic experiences where participants can spend a few days surrounded by nature, simplicity, and practices that nurture both body and mind.',
       'Rather than focusing on sightseeing or leisure, these retreats create an environment where yoga, meditation, mindful living, and conscious participation become part of daily life. Conducted in carefully chosen natural settings across India, each retreat is thoughtfully designed to support inner balance while allowing participants to experience the restorative influence of nature.',

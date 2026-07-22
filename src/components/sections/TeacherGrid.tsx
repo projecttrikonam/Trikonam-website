@@ -47,8 +47,8 @@ export function TeacherGrid() {
                 {t.role}
               </p>
               <span aria-hidden className="my-5 block h-px w-8 bg-gradient-to-r from-gold/50 to-gold/0" />
-              <p className="flex-1 text-[0.85rem] leading-relaxed text-secondary">{t.summary}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.12em] text-moss">
+              <p className="flex-1 text-caption leading-relaxed text-secondary">{t.summary}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-label font-medium uppercase tracking-[0.12em] text-moss">
                 Read more
               </span>
             </motion.article>

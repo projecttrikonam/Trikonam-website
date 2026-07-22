@@ -19,7 +19,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!path) return {};
   return pageMetadata({
     title: path.name,
-    description: path.intro[0],
+    description: path.metaDescription,
     path: `/learn/${path.slug}`,
     image: path.image,
   });
@@ -45,7 +45,7 @@ export default function LearningPathPage({ params }: { params: { slug: string } 
       <Section tone="bg" width="wide">
         <Link
           href="/practices"
-          className="link-underline mb-10 inline-flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.16em] text-moss"
+          className="link-underline mb-10 inline-flex items-center gap-2 text-label uppercase tracking-[0.16em] text-moss"
         >
           Classical Hatha Yoga
         </Link>
@@ -53,7 +53,7 @@ export default function LearningPathPage({ params }: { params: { slug: string } 
         <div className="grid items-start gap-12 md:grid-cols-2 md:gap-16">
           <RevealOnScroll>
             <span className="eyebrow eyebrow--tick mb-5">Ways to Learn</span>
-            <h1 className="text-balance font-serif text-[clamp(1.95rem,4.05vw,3.19rem)] leading-[1.05] tracking-[-0.015em] text-primary">
+            <h1 className="text-balance font-serif text-[clamp(1.95rem,4.05vw,3.19rem)] leading-[1.16] sm:leading-[1.05] tracking-[-0.015em] text-primary">
               {path.name}
             </h1>
             <p className="mt-3 font-serif text-[1.15rem] italic text-moss">{path.tagline}</p>
@@ -105,7 +105,7 @@ export default function LearningPathPage({ params }: { params: { slug: string } 
       {/* Onward path to the next way to learn. */}
       <Section tone="bg" width="wide" className="pt-0">
         <div className="flex items-center justify-between border-t border-border pt-8">
-          <span className="text-[0.78rem] uppercase tracking-[0.16em] text-secondary">
+          <span className="text-label uppercase tracking-[0.16em] text-secondary">
             Another way to learn
           </span>
           <Link

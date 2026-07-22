@@ -31,14 +31,14 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
 
   return (
     <div className="flex flex-wrap items-center gap-2.5">
-      <span className="mr-1 text-[0.78rem] uppercase tracking-[0.12em] text-secondary">Share</span>
+      <span className="mr-1 text-label uppercase tracking-[0.12em] text-secondary">Share</span>
       {links.map((l) => (
         <a
           key={l.label}
           href={l.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full border border-border px-3.5 py-1 text-[0.8rem] text-secondary transition-colors hover:border-moss hover:text-moss"
+          className="rounded-full border border-border px-3.5 py-1 text-fine text-secondary transition-colors hover:border-moss hover:text-moss"
         >
           {l.label}
         </a>
@@ -46,7 +46,7 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
       <button
         type="button"
         onClick={copy}
-        className="rounded-full border border-border px-3.5 py-1 text-[0.8rem] text-secondary transition-colors hover:border-moss hover:text-moss"
+        className="rounded-full border border-border px-3.5 py-1 text-fine text-secondary transition-colors hover:border-moss hover:text-moss"
       >
         {copied ? 'Copied' : 'Copy link'}
       </button>

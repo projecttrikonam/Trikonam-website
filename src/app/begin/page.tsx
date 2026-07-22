@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata: Metadata = pageMetadata({
   title: 'Begin Your Journey',
   description:
-    'Welcome to Trikonam. Tell us what you are looking for — Classical Hatha Yoga, live Online Programs, workshops, retreats, and more — and we will guide you towards the most suitable program.',
+    'Tell us what you are looking for — Classical Hatha Yoga, live Online Programs, workshops or retreats — and we will guide you to the right place to begin.',
   path: '/begin',
 });
 

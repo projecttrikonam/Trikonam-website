@@ -12,7 +12,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata: Metadata = pageMetadata({
   title: 'About',
   description:
-    'Trikonam offers Classical Hatha Yoga in its authentic form — taught with precision, care, and deep respect for the integrity of these transformative yogic sciences.',
+    'Trikonam offers Classical Hatha Yoga in its authentic form — taught with precision, care, and deep respect for the integrity of these practices.',
   path: '/about',
 });
 

@@ -22,7 +22,7 @@ export function ArticleMeta({
 }) {
   return (
     <div
-      className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.78rem] uppercase tracking-[0.12em] text-secondary ${className}`}
+      className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-label uppercase tracking-[0.12em] text-secondary ${className}`}
     >
       <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
       {category && showCategory && (

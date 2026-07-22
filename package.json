@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "//optimize-images": "Run LOCALLY when source photos change. Regenerates /public/images from /assets/source-images and commits the results. Not a build hook: Cloudflare's Linux build box has no HEIC decoder.",
-    "optimize-images": "node scripts/optimize-images.mjs"
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "//image-variants": "Run LOCALLY when /public/images changes. Generates responsive width variants + src/content/image-manifest.json, both committed. Not a build hook.",
+    "image-variants": "node scripts/generate-image-variants.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",

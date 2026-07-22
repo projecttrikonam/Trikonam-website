@@ -41,7 +41,7 @@ export function SadhguruQuote({
           {quote.text}
         </blockquote>
         <cite
-          className={`mt-8 block text-[0.78rem] uppercase not-italic tracking-[0.2em] ${
+          className={`mt-8 block text-label uppercase not-italic tracking-[0.2em] ${
             dark ? 'text-inverse/70' : 'text-moss'
           }`}
         >

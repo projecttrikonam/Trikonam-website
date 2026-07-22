@@ -14,7 +14,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata: Metadata = pageMetadata({
   title: 'Contact',
   description:
-    'Get in touch with Trikonam — Classical Hatha Yoga across Andhra Pradesh & Telangana, and online worldwide. Reach us by phone, WhatsApp, or email, or request a consultation.',
+    'Get in touch with Trikonam — Classical Hatha Yoga across Andhra Pradesh & Telangana, and online worldwide. Reach us by phone, WhatsApp, or email.',
   path: '/contact',
 });
 
@@ -78,7 +78,7 @@ export default function ContactPage() {
       >
         <div className="flex flex-col items-center gap-4">
           <BeginJourneyButton label="Send an Enquiry" journey="enquiry" />
-          <p className="text-[0.85rem] text-secondary">
+          <p className="text-caption text-secondary">
             We usually respond within 24 hours.
           </p>
         </div>

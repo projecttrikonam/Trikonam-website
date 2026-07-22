@@ -53,7 +53,7 @@ export function RelatedOfferings({
     <div className="prose-measure mx-auto mt-14 border-t border-border pt-10">
       {practiceItems.length > 0 && (
         <div className="mb-8">
-          <h2 className="mb-4 text-[0.78rem] uppercase tracking-[0.16em] text-secondary">Related practices</h2>
+          <h2 className="mb-4 text-label uppercase tracking-[0.16em] text-secondary">Related practices</h2>
           <ul className="grid gap-3 sm:grid-cols-2">
             {practiceItems.map((p) => (
               <li key={p.href}>
@@ -65,7 +65,7 @@ export function RelatedOfferings({
       )}
       {programItems.length > 0 && (
         <div>
-          <h2 className="mb-4 text-[0.78rem] uppercase tracking-[0.16em] text-secondary">Related programs</h2>
+          <h2 className="mb-4 text-label uppercase tracking-[0.16em] text-secondary">Related programs</h2>
           <ul className="grid gap-3 sm:grid-cols-2">
             {programItems.map((p) => (
               <li key={p.href}>

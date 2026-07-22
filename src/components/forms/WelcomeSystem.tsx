@@ -76,7 +76,7 @@ export function WelcomeSystem() {
             >
               <h3 className="font-serif text-[1.2rem] leading-snug text-primary">{j.label}</h3>
               <p className="mt-2 flex-1 text-body text-secondary">{j.blurb}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.12em] text-moss">
+              <span className="mt-5 inline-flex items-center gap-2 text-label font-medium uppercase tracking-[0.12em] text-moss">
                 Continue
               </span>
             </button>
@@ -89,7 +89,7 @@ export function WelcomeSystem() {
 
 const inputClass =
   'w-full rounded-[8px] border border-border bg-surface/70 px-4 py-3 text-body text-primary placeholder:text-secondary/50 transition-colors duration-200 focus:border-moss focus:outline-none focus:ring-2 focus:ring-moss/25';
-const labelClass = 'mb-2 block text-[0.8rem] font-medium tracking-[0.02em] text-primary';
+const labelClass = 'mb-2 block text-fine font-medium tracking-[0.02em] text-primary';
 
 /** Renders one journey's field schema and submits it through the unified backend. */
 function JourneyForm({
@@ -124,7 +124,7 @@ function JourneyForm({
       <button
         type="button"
         onClick={onBack}
-        className="link-underline mb-8 inline-flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.16em] text-moss"
+        className="link-underline mb-8 inline-flex items-center gap-2 text-label uppercase tracking-[0.16em] text-moss"
       >
         Choose a different journey
       </button>

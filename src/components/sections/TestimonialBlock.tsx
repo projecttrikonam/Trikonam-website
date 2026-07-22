@@ -42,7 +42,7 @@ export function TestimonialBlock({
               <blockquote className="relative font-serif text-[1.4rem] font-normal leading-[1.62] text-primary text-pretty sm:text-[1.55rem] sm:leading-[1.6]">
                 {t.quote}
               </blockquote>
-              <figcaption className="mt-7 text-[0.78rem] uppercase tracking-[0.16em] text-secondary">
+              <figcaption className="mt-7 text-label uppercase tracking-[0.16em] text-secondary">
                 — A Trikonam student
               </figcaption>
             </figure>

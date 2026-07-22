@@ -10,7 +10,7 @@ import type { ReactNode } from 'react';
 const inputClass =
   'w-full rounded-[8px] border border-border bg-surface/70 px-4 py-3 text-body text-primary placeholder:text-secondary/50 transition-colors duration-200 focus:border-moss focus:outline-none focus:ring-2 focus:ring-moss/25';
 
-const labelClass = 'mb-2 block text-[0.8rem] font-medium tracking-[0.02em] text-primary';
+const labelClass = 'mb-2 block text-fine font-medium tracking-[0.02em] text-primary';
 
 function Label({ htmlFor, children, required }: { htmlFor: string; children: ReactNode; required?: boolean }) {
   return (

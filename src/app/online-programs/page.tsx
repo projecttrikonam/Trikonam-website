@@ -3,6 +3,7 @@ import { Section } from '@/components/ui/Section';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { BreathMark } from '@/components/ui/BreathMark';
 import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
+import { ResponsiveImg } from '@/components/ui/ResponsiveImage';
 import {
   whyOnline,
   generalPrograms,
@@ -30,7 +31,7 @@ function ProgramCard({ program }: { program: OnlineProgram }) {
   return (
     <div className="flex h-full flex-col rounded-[12px] surface-elevated p-7 ring-1 ring-black/[0.04]">
       {program.timeOfDay && (
-        <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1 text-[0.72rem] uppercase tracking-[0.14em] text-moss">
+        <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1 text-micro uppercase tracking-[0.14em] text-moss">
           {program.timeOfDay}
         </span>
       )}
@@ -50,10 +51,11 @@ export default function OnlineProgramsPage() {
     <>
       {/* HERO — full-bleed immersive image, in the home-hero idiom. */}
       <section className="relative -mt-24 flex h-[82vh] min-h-[560px] w-full items-end overflow-hidden bg-primary">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <ResponsiveImg
           src="/images/online-programs/hero.webp"
           alt="A student in white joins a live online Classical Hatha Yoga session on a laptop, seated in a sunlit garden."
+          sizes="100vw"
+          priority
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/45 to-transparent" />
@@ -61,10 +63,10 @@ export default function OnlineProgramsPage() {
 
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-20 sm:px-8 md:pb-24">
           <RevealOnScroll>
-            <span className="mb-5 block text-[0.78rem] uppercase tracking-[0.22em] text-inverse/75">
+            <span className="mb-5 block text-label uppercase tracking-[0.22em] text-inverse/75">
               Live Online Programs
             </span>
-            <h1 className="max-w-3xl font-serif text-[clamp(2rem,5vw,3.75rem)] font-normal leading-[1.05] tracking-[-0.02em] text-inverse">
+            <h1 className="max-w-3xl font-serif text-[clamp(2rem,5vw,3.75rem)] font-normal leading-[1.16] sm:leading-[1.05] tracking-[-0.02em] text-inverse">
               Learn Classical Hatha Yoga from Anywhere.
             </h1>
             <p className="mt-6 max-w-xl text-body-lg leading-relaxed text-inverse/85">

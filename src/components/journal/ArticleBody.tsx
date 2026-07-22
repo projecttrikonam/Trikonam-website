@@ -102,7 +102,7 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={(value.alt as string) ?? ''} loading="lazy" decoding="async" className="w-full rounded-[10px] shadow-soft ring-1 ring-black/5" />
         {typeof value.caption === 'string' && value.caption && (
-          <figcaption className="mt-3 text-center text-[0.85rem] text-secondary">{value.caption}</figcaption>
+          <figcaption className="mt-3 text-center text-caption text-secondary">{value.caption}</figcaption>
         )}
       </figure>
     );
@@ -178,7 +178,7 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
           <blockquote className="!my-12 border-l-2 border-gold/60 pl-6">
             <p className="font-serif text-[1.4rem] italic leading-[1.5] text-primary">{v.text}</p>
             {v.attribution && (
-              <cite className="mt-3 block text-[0.78rem] uppercase not-italic tracking-[0.16em] text-moss">— {v.attribution}</cite>
+              <cite className="mt-3 block text-label uppercase not-italic tracking-[0.16em] text-moss">— {v.attribution}</cite>
             )}
           </blockquote>
         );
@@ -196,7 +196,7 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
               {v.text}
             </blockquote>
             {v.attribution && (
-              <figcaption className="mt-6 text-[0.78rem] uppercase tracking-[0.2em] text-moss">— {v.attribution}</figcaption>
+              <figcaption className="mt-6 text-label uppercase tracking-[0.2em] text-moss">— {v.attribution}</figcaption>
             )}
           </figure>
         );
@@ -206,7 +206,7 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
         const tone = CALLOUT_TONE[v.tone ?? 'note'] ?? CALLOUT_TONE.note;
         return (
           <aside className={`!my-10 rounded-[12px] border ${tone.ring} px-6 py-5`}>
-            <p className={`mb-2 text-[0.72rem] font-medium uppercase tracking-[0.16em] ${tone.accent}`}>
+            <p className={`mb-2 text-micro font-medium uppercase tracking-[0.16em] ${tone.accent}`}>
               {v.title || tone.label}
             </p>
             <div className="space-y-3 text-body text-secondary [&_a]:text-moss [&_a]:underline">
@@ -230,7 +230,7 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
                 ) : null;
               })}
             </div>
-            {v.caption && <figcaption className="mt-3 text-center text-[0.85rem] text-secondary">{v.caption}</figcaption>}
+            {v.caption && <figcaption className="mt-3 text-center text-caption text-secondary">{v.caption}</figcaption>}
           </figure>
         );
       },
@@ -250,7 +250,7 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
                 className="absolute inset-0 h-full w-full"
               />
             </div>
-            {v.title && <figcaption className="mt-3 text-center text-[0.85rem] text-secondary">{v.title}</figcaption>}
+            {v.title && <figcaption className="mt-3 text-center text-caption text-secondary">{v.title}</figcaption>}
           </figure>
         );
       },
@@ -264,14 +264,14 @@ export function ArticleBody({ blocks }: { blocks: PortableBlock[] }) {
 
       {footnotes.length > 0 && (
         <section className="!mt-16 border-t border-border pt-8">
-          <h2 className="mb-4 text-[0.78rem] uppercase tracking-[0.16em] text-secondary">References</h2>
+          <h2 className="mb-4 text-label uppercase tracking-[0.16em] text-secondary">References</h2>
           <ol className="space-y-2 text-body text-secondary">
             {footnotes.map((f) => (
               <li key={f.key} id={`fn-${f.n}`} className="flex gap-2">
                 <span className="text-moss">{f.n}.</span>
                 <span>
                   {f.text}{' '}
-                  <a href={`#fnref-${f.n}`} className="text-[0.78rem] text-moss">Back to text</a>
+                  <a href={`#fnref-${f.n}`} className="text-label text-moss">Back to text</a>
                 </span>
               </li>
             ))}

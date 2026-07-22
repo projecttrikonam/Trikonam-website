@@ -14,7 +14,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata: Metadata = pageMetadata({
   title: 'Classical Hatha Yoga',
   description:
-    'The Classical Hatha Yoga practices taught at Trikonam — structured by Sadhguru and preserved in their original form, from Upa-Yoga to Pregnancy Yoga, with meditation and pranayama.',
+    'The Classical Hatha Yoga practices taught at Trikonam — structured by Sadhguru and preserved in their original form, from Upa-Yoga to Pregnancy Yoga.',
   path: '/practices',
 });
 
@@ -39,9 +39,12 @@ export default function PracticesHubPage() {
         <PageHeader
           eyebrow="Classical Hatha Yoga"
           title="A complete path, kept intact and offered in its original form."
-          intro="Classical Hatha Yoga is not about fitness or flexibility. It is a way of preparing the body and the whole system so that it can hold higher levels of energy — bringing body, mind, breath, and inner nature into a single, balanced alignment. The practices we teach are structured by Sadhguru and offered exactly as they have been passed down through an unbroken lineage — from Shiva, the first yogi, to the Saptarishis, and later systematized by Patanjali in the Yoga Sutras. Each is a carefully composed process, not a matter of performance. Below is an honest introduction to each."
+          intro="Classical Hatha Yoga is not about fitness or flexibility. It is a way of preparing the body and the whole system so that it can hold higher levels of energy — bringing body, mind, breath, and inner nature into a single, balanced alignment. The practices we teach are structured by Sadhguru and offered exactly as they have been passed down. The lineage runs from Shiva, the first yogi, to the Saptarishis, and was later systematized by Patanjali in the Yoga Sutras. Each is a carefully composed process, not a matter of performance. Below is an honest introduction to each."
         />
         <div className="mt-16">
+          {/* Names the grid for screen readers so the outline runs h1 → h2 → h3
+              (the cards are h3) rather than skipping a level. */}
+          <h2 className="sr-only">The practices</h2>
           <PracticeGrid />
         </div>
       </Section>

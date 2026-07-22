@@ -50,13 +50,18 @@ const localDataset = (): Dataset => ({
  */
 type RawArticle = Article & { coverImageRef?: unknown };
 
+/** Widths offered to the browser for a cover image, from phone to retina desktop. */
+const COVER_WIDTHS = [480, 768, 1200, 1800];
+
 function resolveCoverImages(raw: RawArticle): Article {
   const { coverImageRef, ...article } = raw;
   if (!coverImageRef) return article;
+  const at = (w: number) => croppedImageUrl(coverImageRef as never, w);
   return {
     ...article,
-    coverImage: croppedImageUrl(coverImageRef as never, 1800),
-    coverImageThumb: croppedImageUrl(coverImageRef as never, 800),
+    coverImage: at(1800),
+    coverImageSrcSet: COVER_WIDTHS.map((w) => `${at(w)} ${w}w`).join(', '),
+    coverImageThumb: at(800),
   };
 }
 
@@ -146,14 +151,27 @@ export async function getRelatedArticles(article: Article, limit = 3): Promise<A
 }
 
 // --- Taxonomy -----------------------------------------------------------------
+/**
+ * Categories that actually have a published article. Everything downstream reads this —
+ * the Journal's category nav, the sitemap, and `generateStaticParams` for the archive
+ * pages — so an empty category is hidden from all three at once and no empty archive is
+ * ever built. Publish an article into a category and it reappears on the next build,
+ * with no code change. Use getCategory() for slug lookups; that stays unfiltered so an
+ * article can always resolve its own category name.
+ */
 export async function getCategories(): Promise<Category[]> {
-  return (await loadDataset()).categories;
+  const { categories, articles } = await loadDataset();
+  const inUse = new Set(articles.map((a) => a.category));
+  return categories.filter((c) => inUse.has(c.slug));
 }
 export async function getCategory(slug: string): Promise<Category | undefined> {
   return (await loadDataset()).categories.find((c) => c.slug === slug);
 }
+/** Series that have at least one published article — same reasoning as getCategories(). */
 export async function getSeriesList(): Promise<Series[]> {
-  return (await loadDataset()).series;
+  const { series, articles } = await loadDataset();
+  const inUse = new Set(articles.map((a) => a.series).filter(Boolean));
+  return series.filter((s) => inUse.has(s.slug));
 }
 export async function getSeries(slug: string): Promise<Series | undefined> {
   return (await loadDataset()).series.find((s) => s.slug === slug);

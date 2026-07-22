@@ -12,7 +12,7 @@ import { pageMetadata } from '@/lib/seo';
 export const metadata: Metadata = pageMetadata({
   title: 'Meet the Teachers',
   description:
-    'Trikonam’s teachers are certified Classical Hatha Yoga instructors, trained over 1,750 hours at Sadhguru Gurukulam and accredited by the Yoga Certification Board, Ministry of AYUSH.',
+    'Trikonam’s teachers are certified Classical Hatha Yoga instructors, trained over 1,750 hours at Sadhguru Gurukulam and accredited by the Ministry of AYUSH.',
   path: '/teachers',
 });
 
@@ -29,7 +29,7 @@ export default function TeachersPage() {
         <PageHeader
           eyebrow="Meet the Teachers"
           title="The people who safeguard the path, and guide each person along it."
-          intro="Trikonam is not defined by individual teachers, but by a shared commitment to the practice itself. It is a growing community of Classical Hatha Yoga teachers united by one intention—to offer these timeless yogic sciences in their authentic form, with humility, sincerity, and deep respect for the tradition. While every teacher brings their own journey and presence, what unites them is a sincere aspiration to create the conditions for transformation, allowing every seeker to experience greater balance, clarity, vitality, and inner well-being through the practice itself."
+          intro="Trikonam is not defined by individual teachers, but by a shared commitment to the practice itself. It is a growing community of Classical Hatha Yoga teachers united by one intention—to offer these timeless yogic sciences in their authentic form, with humility, sincerity, and deep respect for the tradition. Every teacher brings their own journey and presence. What unites them is the aspiration to create the conditions in which the practice can do its work."
         />
       </Section>
 
@@ -50,8 +50,9 @@ export default function TeachersPage() {
               <p>
                 Our teachers are certified Classical Hatha Yoga instructors who have
                 completed over 1,750 hours of intensive residential training at Sadhguru
-                Gurukulam, established under the aegis of Isha Foundation and accredited
-                by the Yoga Certification Board, Ministry of AYUSH, Government of India.
+                Gurukulam. The Gurukulam is established under the aegis of Isha Foundation
+                and accredited by the Yoga Certification Board, Ministry of AYUSH,
+                Government of India.
               </p>
               <p>
                 With 5–7 years of dedicated teaching experience, they have offered

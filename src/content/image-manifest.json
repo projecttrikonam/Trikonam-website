@@ -1,0 +1,244 @@
+{
+ "/images/about/about-hero.webp": {
+  "width": 2000,
+  "height": 1332,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/about/support.webp": {
+  "width": 2560,
+  "height": 1703,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/about/what-is-chy.webp": {
+  "width": 2560,
+  "height": 1703,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/home/about-preview.webp": {
+  "width": 2000,
+  "height": 1333,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/home/hero.webp": {
+  "width": 2400,
+  "height": 1601,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/home/interlude.webp": {
+  "width": 2560,
+  "height": 1707,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/learn/group-workshops.webp": {
+  "width": 1920,
+  "height": 547,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/online-programs/hero.webp": {
+  "width": 1920,
+  "height": 1280,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/angamardhana/angamardhana.webp": {
+  "width": 1920,
+  "height": 1278,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/bhastrika-kriya/bhastrika.webp": {
+  "width": 2000,
+  "height": 1334,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/bhuta-shuddhi/bhuta-shuddhi.webp": {
+  "width": 1920,
+  "height": 1280,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/pavanamuktasana/pavanamuktasana.webp": {
+  "width": 2000,
+  "height": 1208,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/shanmukhi-mudra/shanmukhi-mudra.webp": {
+  "width": 2000,
+  "height": 1334,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/sunayana-eye-care/sunayana.webp": {
+  "width": 2000,
+  "height": 1331,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/surya-kriya/surya-kriya.webp": {
+  "width": 2000,
+  "height": 1331,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/surya-shakti/surya-shakti.webp": {
+  "width": 1920,
+  "height": 1280,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/upa-yoga/upa-yoga.webp": {
+  "width": 2000,
+  "height": 1469,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/practices/yogasanas/yogasanas.webp": {
+  "width": 2000,
+  "height": 1331,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/programs/children/children.webp": {
+  "width": 2000,
+  "height": 1334,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/programs/corporate/corporate.webp": {
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   480,
+   768,
+   1200
+  ]
+ },
+ "/images/programs/online/online.webp": {
+  "width": 220,
+  "height": 147,
+  "widths": []
+ },
+ "/images/programs/private-sessions/private.webp": {
+  "width": 1448,
+  "height": 1086,
+  "widths": [
+   480,
+   768,
+   1200
+  ]
+ },
+ "/images/programs/retreats/retreats.webp": {
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   480,
+   768,
+   1200
+  ]
+ },
+ "/images/programs/schools-colleges/schools.webp": {
+  "width": 2000,
+  "height": 1334,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ },
+ "/images/teachers/training.webp": {
+  "width": 2000,
+  "height": 1333,
+  "widths": [
+   480,
+   768,
+   1200,
+   1600
+  ]
+ }
+}

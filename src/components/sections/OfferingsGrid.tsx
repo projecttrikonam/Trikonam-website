@@ -47,7 +47,7 @@ export function OfferingsGrid() {
                 className="group relative flex items-baseline gap-5 border-t border-border py-6 sm:gap-8 sm:py-7"
               >
                 <span className="pointer-events-none absolute inset-x-[-1.25rem] inset-y-0 -z-0 origin-left scale-x-0 rounded-[8px] bg-bg/70 opacity-0 transition-all duration-500 ease-calm group-hover:scale-x-100 group-hover:opacity-100" />
-                <span className="relative w-8 shrink-0 font-sans text-[0.8rem] tabular-nums tracking-widest text-moss/70">
+                <span className="relative w-8 shrink-0 font-sans text-fine tabular-nums tracking-widest text-moss/70">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span className="relative flex-1">

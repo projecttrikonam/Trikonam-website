@@ -131,6 +131,22 @@
     max-width: 65ch;
   }
 
+  /* --- Small-type scale -------------------------------------------------------
+   * The four sizes the interface actually uses beneath body copy. These replace ~50
+   * one-off `text-[0.7xrem]` values that had drifted apart by fractions of a pixel;
+   * the rendered sizes are unchanged, they simply have names now. Use these rather
+   * than adding another arbitrary value.
+   *
+   *   .text-micro   0.72rem — tiny uppercase tags (card eyebrows, series labels)
+   *   .text-label   0.78rem — the standard uppercase label (meta lines, tags)
+   *   .text-fine    0.80rem — small link/button text
+   *   .text-caption 0.85rem — captions and secondary notes
+   */
+  .text-micro { font-size: 0.72rem; }
+  .text-label { font-size: 0.78rem; }
+  .text-fine { font-size: 0.8rem; }
+  .text-caption { font-size: 0.85rem; }
+
   /* Eyebrow with a small leading tick — a quiet editorial signature. */
   .eyebrow {
     font-family: var(--font-karla), system-ui, sans-serif;

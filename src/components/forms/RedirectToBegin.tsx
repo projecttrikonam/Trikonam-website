@@ -17,6 +17,9 @@ export function RedirectToBegin({ journey }: { journey: string }) {
 
   return (
     <div className="mx-auto max-w-xl px-6 py-32 text-center">
+      {/* This interstitial is noindex and shown for a moment, but it still needs a page
+          heading so the document has an outline for anyone who lands on it. */}
+      <h1 className="sr-only">Redirecting to the Trikonam Welcome System</h1>
       <p className="text-body-lg text-secondary">
         Taking you to the Trikonam Welcome System…{' '}
         <a href={`/begin?journey=${journey}`} className="link-underline text-moss">

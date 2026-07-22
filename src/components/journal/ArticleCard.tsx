@@ -28,6 +28,8 @@ export function ArticleCard({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={image}
+            srcSet={article.coverImageSrcSet}
+            sizes="(min-width: 1024px) 368px, (min-width: 640px) 45vw, 100vw"
             alt={article.coverAlt ?? ''}
             loading="lazy"
             decoding="async"
@@ -42,7 +44,7 @@ export function ArticleCard({
         </Link>
       </h3>
       <p className="mt-3 flex-1 text-body leading-relaxed text-secondary">{article.excerpt}</p>
-      <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.72rem] uppercase tracking-[0.13em] text-secondary/80">
+      <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-micro uppercase tracking-[0.13em] text-secondary/80">
         <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
         <span aria-hidden className="text-border">·</span>
         <span>{readingTime(article)} min read</span>

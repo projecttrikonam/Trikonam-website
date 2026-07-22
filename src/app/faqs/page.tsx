@@ -39,6 +39,7 @@ export default function FaqsPage() {
           intro="A few honest answers. If yours isn’t here, we’re glad to help — just get in touch."
         />
         <div className="mx-auto mt-14 max-w-3xl">
+          <h2 className="sr-only">Common questions</h2>
           <Accordion items={faqs} />
         </div>
       </Section>

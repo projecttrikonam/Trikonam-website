@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { galleryImages } from '@/content/gallery';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
+import { ResponsiveImg } from '@/components/ui/ResponsiveImage';
 
 /**
  * Gallery grid + lightbox (Handoff §6.9). A considered masonry (CSS columns) with a
@@ -52,7 +53,7 @@ export function GalleryGrid() {
             aria-label={`View image: ${img.alt}`}
             className="group relative mb-5 block w-full overflow-hidden rounded-[10px] bg-bg-alt shadow-soft ring-1 ring-black/[0.05] transition-shadow duration-500 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2"
           >
-            <Image
+            <ResponsiveImg
               src={img.src}
               alt={img.alt}
               width={800}
@@ -142,7 +143,7 @@ export function GalleryGrid() {
                 sizes="90vw"
                 className="max-h-[80vh] w-auto rounded-card object-contain"
               />
-              <figcaption className="mt-3 text-center text-[0.85rem] text-inverse/70">
+              <figcaption className="mt-3 text-center text-caption text-inverse/70">
                 {active.alt}
               </figcaption>
             </motion.figure>

@@ -85,6 +85,8 @@ export interface Article {
   tags: string[];
   /** Resolved cover/hero image URL — 3:2, cropped around the editor's crop/hotspot. */
   coverImage?: string;
+  /** Widths of the same crop, so a phone doesn't fetch the hero-sized file. */
+  coverImageSrcSet?: string;
   /** Same image at grid size, so cards don't download the hero-sized file. */
   coverImageThumb?: string;
   coverAlt?: string;

@@ -48,6 +48,7 @@ export default async function SeriesPage({ params }: { params: { slug: string } 
           articles={articles}
           categories={categories}
           emptyMessage={`No articles in ${series.title} yet.`}
+          srHeading={`Articles in ${series.title}`}
         />
       </Section>
     </>

@@ -164,66 +164,6 @@ articles.forEach((a) => {
   });
 });
 
-// --- One fully-populated sample article (exercises every non-image block) --------
-const S = 'sample-a-morning-with-the-breath';
-const sampleBody = [
-  block('s-b0', 'normal', [
-    span('s-b0s0', 'This piece is a working sample. It exists to show every kind of block the Journal can hold — headings, quotes, callouts, a pull quote, an embedded video, a list, ', []),
-    span('s-b0s1', 'links', ['s-link']),
-    span('s-b0s2', ', and footnotes', []),
-    span('s-b0s3', '1', ['s-fn']),
-    span('s-b0s4', ' — so you can see the finished shape before writing your own.', []),
-  ], {
-    markDefs: [
-      { _key: 's-link', _type: 'link', href: 'https://trikonam.in/practices/upa-yoga' },
-      { _key: 's-fn', _type: 'footnote', text: 'Footnotes render as small numbered references and collect into a References list at the foot of the article.' },
-    ],
-  }),
-  block('s-b1', 'h2', [span('s-b1s', 'Beginning with the breath')]),
-  block('s-b2', 'normal', [span('s-b2s', 'A short, honest practice met each morning changes more than a long one attempted rarely. Begin where you are; the breath will meet you there.')]),
-  { _type: 'callout', _key: 's-b3', tone: 'note', title: 'A note before you begin', body: [
-    block('s-b3b', 'normal', [span('s-b3bs', 'Find a quiet space and comfortable clothing. Nothing else is required — no prior experience, no special equipment.')]),
-  ] },
-  block('s-b4', 'h3', [span('s-b4s', 'A simple sequence')]),
-  block('s-b5', 'normal', [span('s-b5s', 'Sit comfortably and let the breath settle of its own accord.')], { listItem: 'bullet', level: 1 }),
-  block('s-b6', 'normal', [span('s-b6s', 'Lengthen the exhale, without forcing it.')], { listItem: 'bullet', level: 1 }),
-  block('s-b7', 'normal', [span('s-b7s', 'Rest for a moment at the end of each breath.')], { listItem: 'bullet', level: 1 }),
-  { _type: 'pullQuote', _key: 's-b8', text: 'In that stillness, peace is not something to be achieved; it becomes your very nature.' },
-  { _type: 'callout', _key: 's-b9', tone: 'tip', title: 'A small tip', body: [
-    block('s-b9b', 'normal', [span('s-b9bs', 'If the mind wanders, simply return to the sensation of the breath. The returning is the practice.')]),
-  ] },
-  { _type: 'videoEmbed', _key: 's-b10', url: 'https://www.youtube.com/watch?v=inpok4MKVLM', title: 'A short guided sitting' },
-  { _type: 'callout', _key: 's-b11', tone: 'reflection', title: 'To carry with you', body: [
-    block('s-b11b', 'normal', [span('s-b11bs', 'What would change if you met tomorrow morning a little more slowly than today?')]),
-  ] },
-  block('s-b12', 'blockquote', [span('s-b12s', 'We do not promise transformation. We offer the practice — and trust that consistency, not persuasion, is what creates change.')]),
-];
-
-docs.push({
-  _id: articleId(S),
-  _type: 'article',
-  title: 'A morning with the breath',
-  subtitle: 'A working sample article, showing every block the Journal can hold.',
-  slug: slugField(S),
-  excerpt: 'A short, honest practice met each morning changes more than a long one attempted rarely. A sample piece exercising every editorial block.',
-  body: sampleBody,
-  author: ref(authorId('trikonam')),
-  category: ref(catId('classical-hatha-yoga')),
-  series: ref(seriesId('first-steps')),
-  tags: ['beginners', 'breath'].map((t) => ({ _type: 'reference', _ref: tagId(t), _key: `${S}-${t}` })),
-  featured: false,
-  publishedAt: toDateTime('2026-07-15'),
-  updatedAt: toDateTime('2026-07-20'),
-  relatedPractices: ['upa-yoga', 'surya-kriya'],
-  relatedPrograms: ['online-programs', 'group-workshops'],
-  seo: {
-    _type: 'seo',
-    metaTitle: 'A morning with the breath — Trikonam Journal',
-    metaDescription: 'A sample Journal article showing the full editorial toolkit: callouts, pull quotes, video, footnotes, and more.',
-    noIndex: false,
-  },
-});
-
 // --- Write NDJSON ---------------------------------------------------------------
 const outDir = resolve(root, 'studio/seed');
 mkdirSync(outDir, { recursive: true });
