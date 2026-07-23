@@ -4,15 +4,20 @@ import { useEffect, useRef, useState } from 'react';
 import type { ElementType, ReactNode } from 'react';
 
 /**
- * Scroll reveal wrapper (Handoff §4.6 row 2): fade in + 16px upward slide as the
- * element enters the viewport, triggering once.
+ * Scroll reveal (Handoff §4.6 row 2): fade in + 16px upward slide as the element enters
+ * the viewport, triggering once.
  *
- * Driven by an IntersectionObserver that toggles a CSS class, with the fade handled by
- * a CSS transition (see `.reveal` in globals.css). This is deliberately CSS- rather than
- * JS-animated: CSS transitions are time-based and always settle to their final state
- * (they never freeze half-finished the way a throttled rAF animation can), they cost no
- * main-thread work, and they fail open — if scripting is unavailable the content is
- * simply shown. Reduced motion is handled entirely in CSS.
+ * IMPORTANT — nothing is hidden before JavaScript runs. This used to render at
+ * `opacity: 0` and wait for an effect to reveal it, which meant the server-rendered HTML
+ * arrived invisible and the page stayed blank until React hydrated. That blank window is
+ * what reads as a flicker on load, and it grows with the size of the JS bundle.
+ *
+ * So the element paints immediately, and is only "armed" (hidden, ready to animate)
+ * after mount and only when it sits below the fold — where hiding it cannot be seen.
+ * Above-the-fold content is therefore never hidden at any point.
+ *
+ * The fade itself stays a CSS transition: time-based, always settles at its final state,
+ * costs no main-thread work, and reduced motion is handled entirely in CSS.
  */
 export function RevealOnScroll({
   children,
@@ -26,29 +31,24 @@ export function RevealOnScroll({
   as?: ElementType;
 }) {
   const ref = useRef<HTMLElement>(null);
-  const [shown, setShown] = useState(false);
+  const [armed, setArmed] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Already within (or near) the viewport at mount → reveal immediately, without
-    // depending on an observer callback. This covers all above-the-fold content and
-    // keeps it robust even where IntersectionObserver ticks are throttled.
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.92) {
-      setShown(true);
-      return;
-    }
+    // Within (or near) the viewport at mount → leave it exactly as painted. No hiding,
+    // no animation, no flash.
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return;
+    if (typeof IntersectionObserver === 'undefined') return;
 
-    if (typeof IntersectionObserver === 'undefined') {
-      setShown(true);
-      return;
-    }
+    // Below the fold: hide it now (unseen), then fade it in when it scrolls into view.
+    setArmed(true);
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setShown(true);
+          setArmed(false);
           io.disconnect();
         }
       },
@@ -56,8 +56,12 @@ export function RevealOnScroll({
     );
     io.observe(el);
 
-    // Ultimate backstop: never leave content hidden if the observer never fires.
-    const failsafe = window.setTimeout(() => setShown(true), 2500);
+    // Backstop: never leave content hidden if the observer never fires.
+    const failsafe = window.setTimeout(() => {
+      setArmed(false);
+      io.disconnect();
+    }, 2500);
+
     return () => {
       io.disconnect();
       window.clearTimeout(failsafe);
@@ -67,7 +71,7 @@ export function RevealOnScroll({
   return (
     <Tag
       ref={ref}
-      className={`reveal ${shown ? 'reveal-in' : ''} ${className}`}
+      className={`${armed ? 'reveal-armed' : 'reveal-in'} ${className}`}
       style={delay ? { transitionDelay: `${delay}s` } : undefined}
     >
       {children}
