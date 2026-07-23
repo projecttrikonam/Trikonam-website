@@ -66,12 +66,7 @@
     background-image:
       radial-gradient(120% 80% at 100% 0%, var(--wash-gold) 0%, transparent 55%),
       radial-gradient(120% 90% at 0% 100%, var(--wash-moss) 0%, transparent 55%);
-    /* DIAGNOSTIC (flicker investigation): `background-attachment: fixed` was removed.
-     * A fixed background forces the browser to repaint the whole viewport whenever
-     * content changes, which is a known cause of desktop paint flicker and matches the
-     * reported symptom being far worse on desktop than mobile. The washes now scroll
-     * with the page — visually near-identical on a static page. Restore this line if
-     * the test comes back negative. */
+    background-attachment: fixed;
     color: rgb(var(--color-text-primary));
     font-family: var(--font-karla), system-ui, sans-serif;
     font-size: 1rem;
