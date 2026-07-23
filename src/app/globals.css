@@ -53,6 +53,17 @@
 
 @layer base {
   html {
+    /* THE CANVAS — this is what the browser paints before, between, and around the
+     * page's own styles.
+     *
+     * Without `color-scheme`, Safari on a Mac in Dark Mode paints a DARK default canvas
+     * during a navigation; without a background on <html> there is no colour of ours to
+     * use until <body>'s styles resolve. That is the white-then-dark flash seen during
+     * transitions: neither frame was ever the site's ivory. Declaring both means the
+     * browser paints ivory from the very first frame, so there is nothing to flash. */
+    color-scheme: light;
+    background-color: rgb(var(--color-bg));
+
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;

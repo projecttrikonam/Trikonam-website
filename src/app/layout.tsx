@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Fraunces, Karla } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
@@ -70,6 +70,16 @@ export const metadata: Metadata = {
 
 // Organization + LocalBusiness structured data — one source in src/lib/seo.ts.
 const orgJsonLd = organizationJsonLd();
+
+/**
+ * Tells the browser (and mobile UI chrome) the page is light and what colour it is, so
+ * the canvas it paints during navigation matches the site instead of defaulting to
+ * white or, in Dark Mode, dark grey.
+ */
+export const viewport: Viewport = {
+  colorScheme: 'light',
+  themeColor: '#FAF7EF',
+};
 
 export default function RootLayout({
   children,
