@@ -112,11 +112,8 @@ export default async function ArticlePage({ params }: { params: { slug: string }
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={article.coverImage}
-                srcSet={article.coverImageSrcSet}
-                sizes="(min-width: 1024px) 1024px, 100vw"
                 alt={article.coverAlt ?? ''}
                 loading="eager"
-                fetchPriority="high"
                 className="aspect-[3/2] w-full object-cover ring-1 ring-black/[0.05]"
               />
             </RevealOnScroll>

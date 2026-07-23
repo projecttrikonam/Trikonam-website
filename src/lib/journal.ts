@@ -50,18 +50,13 @@ const localDataset = (): Dataset => ({
  */
 type RawArticle = Article & { coverImageRef?: unknown };
 
-/** Widths offered to the browser for a cover image, from phone to retina desktop. */
-const COVER_WIDTHS = [480, 768, 1200, 1800];
-
 function resolveCoverImages(raw: RawArticle): Article {
   const { coverImageRef, ...article } = raw;
   if (!coverImageRef) return article;
-  const at = (w: number) => croppedImageUrl(coverImageRef as never, w);
   return {
     ...article,
-    coverImage: at(1800),
-    coverImageSrcSet: COVER_WIDTHS.map((w) => `${at(w)} ${w}w`).join(', '),
-    coverImageThumb: at(800),
+    coverImage: croppedImageUrl(coverImageRef as never, 1800),
+    coverImageThumb: croppedImageUrl(coverImageRef as never, 800),
   };
 }
 

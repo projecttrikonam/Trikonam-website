@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
-import { ResponsiveImg } from '@/components/ui/ResponsiveImage';
 
 /**
  * A full-bleed photographic pause — a single image given the whole width to breathe.
@@ -38,10 +37,12 @@ export function FullBleedInterlude({
   if (preserveComposition) {
     return (
       <section className="relative w-full overflow-hidden bg-primary">
-        <ResponsiveImg
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={src}
           alt={alt}
-          sizes="100vw"
+          loading="lazy"
+          decoding="async"
           className="block h-auto w-full object-contain"
         />
         {caption && (
@@ -61,12 +62,13 @@ export function FullBleedInterlude({
   return (
     <section ref={ref} className="relative h-[70vh] min-h-[420px] w-full overflow-hidden bg-primary">
       <motion.div style={{ y }} className="absolute inset-[-8%]">
-        <ResponsiveImg
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={src}
           alt={alt}
-          sizes="100vw"
-          fill
-          className="object-cover object-center"
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover object-center"
         />
       </motion.div>
       {caption && (

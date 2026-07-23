@@ -3,7 +3,6 @@ import { Section } from '@/components/ui/Section';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { BreathMark } from '@/components/ui/BreathMark';
 import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
-import { ResponsiveImg } from '@/components/ui/ResponsiveImage';
 import {
   whyOnline,
   generalPrograms,
@@ -51,13 +50,11 @@ export default function OnlineProgramsPage() {
     <>
       {/* HERO — full-bleed immersive image, in the home-hero idiom. */}
       <section className="relative -mt-24 flex h-[82vh] min-h-[560px] w-full items-end overflow-hidden bg-primary">
-        <ResponsiveImg
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/images/online-programs/hero.webp"
           alt="A student in white joins a live online Classical Hatha Yoga session on a laptop, seated in a sunlit garden."
-          sizes="100vw"
-          priority
-          fill
-          className="object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/45 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/85 via-primary/25 to-transparent" />

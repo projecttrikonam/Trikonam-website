@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ResponsiveImg } from '@/components/ui/ResponsiveImage';
+import Image from 'next/image';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
@@ -45,11 +45,11 @@ export function Card({
         {image ? (
           // object-contain so full postures (including extended limbs) are never cropped;
           // the posture floats on the soft canvas, consistent with the no-image cards.
-          <ResponsiveImg
+          <Image
             src={image}
             alt={imageAlt}
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className={`object-contain p-4 transition-transform duration-[900ms] ease-calm ${
               reduced ? '' : 'group-hover/card:scale-[1.03]'
             }`}
@@ -68,7 +68,7 @@ export function Card({
       </div>
 
       <div className="relative flex flex-1 flex-col p-6 sm:p-7">
-        {eyebrow && <span className="eyebrow mb-2.5 text-micro">{eyebrow}</span>}
+        {eyebrow && <span className="eyebrow mb-2.5 text-[0.72rem]">{eyebrow}</span>}
         <h3 className="font-serif text-[1.35rem] leading-snug text-primary">{title}</h3>
         {excerpt && (
           <p className="mt-2 flex-1 text-body text-secondary">{excerpt}</p>

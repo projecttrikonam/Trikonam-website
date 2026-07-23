@@ -28,11 +28,8 @@ export function FeaturedArticle({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={article.coverImage}
-              srcSet={article.coverImageSrcSet}
-              sizes="(min-width: 1152px) 1152px, 100vw"
               alt={article.coverAlt ?? ''}
               loading="eager"
-              fetchPriority="high"
               className="aspect-[3/2] w-full object-cover ring-1 ring-black/[0.05] transition-transform duration-[1200ms] ease-calm group-hover:scale-[1.02]"
             />
           </Link>
@@ -55,7 +52,7 @@ export function FeaturedArticle({
           </div>
           <Link
             href={href}
-            className="mt-9 inline-block border-b border-moss/30 pb-1 text-fine font-medium uppercase tracking-[0.16em] text-moss transition-colors duration-300 hover:border-moss hover:text-moss-dark"
+            className="mt-9 inline-block border-b border-moss/30 pb-1 text-[0.8rem] font-medium uppercase tracking-[0.16em] text-moss transition-colors duration-300 hover:border-moss hover:text-moss-dark"
           >
             Read article
           </Link>

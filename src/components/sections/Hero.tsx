@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
-import { ResponsiveImg } from '@/components/ui/ResponsiveImage';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
@@ -23,15 +22,13 @@ export function Hero() {
   return (
     <section className="relative -mt-24 h-[100svh] min-h-[600px] w-full overflow-hidden bg-primary">
       {/* The photograph fills the frame — a single figure at dusk, centred so it holds
-          on both wide screens and tall phones. It simply rests there. `priority` because
-          this is the first thing anyone sees; the srcset keeps phones off the 2560px file. */}
-      <ResponsiveImg
+          on both wide screens and tall phones. Rendered as a plain <img> for reliable
+          full-bleed painting; it simply rests there. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src="/images/home/hero.webp"
         alt="A practitioner sits in quiet meditation at dusk, mountains softening into the distance."
-        sizes="100vw"
-        priority
-        fill
-        className="object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover object-center"
       />
 
       {/* Soft gradients for legibility — the middle is left clear so the photograph is
@@ -46,7 +43,7 @@ export function Hero() {
             initial={{ opacity: 0, y: reduced ? 0 : 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            className="mb-6 text-label uppercase tracking-[0.22em] text-inverse/75"
+            className="mb-6 text-[0.78rem] uppercase tracking-[0.22em] text-inverse/75"
           >
             Authentic Classical Hatha Yoga
           </motion.p>
@@ -54,7 +51,7 @@ export function Hero() {
             initial={{ opacity: 0, y: reduced ? 0 : 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
-            className="max-w-3xl font-serif text-[clamp(2.75rem,7vw,5.5rem)] font-normal leading-[1.12] sm:leading-[1.02] tracking-[-0.02em] text-inverse"
+            className="max-w-3xl font-serif text-[clamp(2.75rem,7vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-inverse"
           >
             Return to stillness.
           </motion.h1>
