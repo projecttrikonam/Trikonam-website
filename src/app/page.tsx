@@ -37,6 +37,11 @@ export default function HomePage() {
           it overlays nothing structural and the sections below are unchanged. */}
       <OnlinePromoCard />
 
+      {/* Start the hero download at the very top of the document, before the browser has
+          even parsed the <img>. The hero section paints bg-primary (dark espresso) until
+          the photograph arrives, so any delay shows as a full-viewport dark flash on
+          desktop where the section is 100svh. */}
+      <link rel="preload" as="image" href="/images/home/hero.webp" fetchPriority="high" />
       <Hero />
 
       {/* A held breath — the frame, in Sadhguru's words. */}

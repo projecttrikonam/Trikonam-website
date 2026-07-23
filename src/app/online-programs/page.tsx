@@ -48,12 +48,19 @@ function ProgramCard({ program }: { program: OnlineProgram }) {
 export default function OnlineProgramsPage() {
   return (
     <>
+      {/* Preload the hero for the same reason as the home page — the section shows
+          bg-primary until the photograph lands. */}
+      <link rel="preload" as="image" href="/images/online-programs/hero.webp" fetchPriority="high" />
+
       {/* HERO — full-bleed immersive image, in the home-hero idiom. */}
       <section className="relative -mt-24 flex h-[82vh] min-h-[560px] w-full items-end overflow-hidden bg-primary">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/online-programs/hero.webp"
           alt="A student in white joins a live online Classical Hatha Yoga session on a laptop, seated in a sunlit garden."
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/45 to-transparent" />

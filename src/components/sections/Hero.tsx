@@ -28,6 +28,9 @@ export function Hero() {
       <img
         src="/images/home/hero.webp"
         alt="A practitioner sits in quiet meditation at dusk, mountains softening into the distance."
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
 
