@@ -1,0 +1,6 @@
+Trikonam Brand Identity v1.0
+Deboss artwork
+
+Blind deboss. Same artwork as emboss; the die is inverted.
+
+Always supply the vector (PDF or EPS). Never send a PNG to a printer.

@@ -1,0 +1,23 @@
+TRIKONAM BRAND IDENTITY v1.0 - COLOUR REFERENCE
+==========================================================================
+
+Trikonam Brand Identity v1.0 - colour palette
+Generated from the master identity. Do not hand-edit.
+CMYK values are unmanaged conversions; proof on stock.
+Pantone references are approximations; confirm against a physical guide.
+
+
+NAME          HEX       RGB             CMYK              PANTONE             ROLE
+--------------------------------------------------------------------------------------------------------------
+Forest Ink    #2F3A2A   47 58 42        19 0 28 77        5605 C              primary logo ink
+Espresso      #2A2620   42 38 32        0 10 24 84        Neutral Black C     primary text
+Stone         #5F564B   95 86 75        0 9 21 63         Warm Gray 11 C      secondary text, captions, meta
+Moss          #5B6B4E   91 107 78       15 0 27 58        5757 C              accent, dividers, icons
+Moss Deep     #46543C   70 84 60        17 0 29 67        5605 C              accent hover
+Ochre Gold    #8A6230   138 98 48       0 29 65 46        730 C               call to action
+Gold Leaf     #A87C3D   168 124 61      0 26 64 34        872 C (metallic)    foil and gilding reference
+Sand          #EFE7D6   239 231 214     0 3 10 6          9224 C              alternate ground
+Ivory         #FAF7EF   250 247 239     0 1 4 2           9184 C              primary ground
+Hairline      #E2D9C6   226 217 198     0 4 12 11         9225 C              rules and card borders
+White         #FFFFFF   255 255 255     0 0 0 0           n/a                 paper, reverse ground
+Black         #000000   0 0 0           0 0 0 100         Process Black C     single-colour print only

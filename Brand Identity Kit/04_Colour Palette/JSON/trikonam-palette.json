@@ -1,0 +1,210 @@
+{
+  "name": "Trikonam Brand Identity",
+  "version": "1.0",
+  "colours": {
+    "forest-ink": {
+      "name": "Forest Ink",
+      "role": "primary logo ink",
+      "hex": "#2F3A2A",
+      "rgb": [
+        47,
+        58,
+        42
+      ],
+      "cmyk": [
+        19,
+        0,
+        28,
+        77
+      ],
+      "pantone": "5605 C"
+    },
+    "espresso": {
+      "name": "Espresso",
+      "role": "primary text",
+      "hex": "#2A2620",
+      "rgb": [
+        42,
+        38,
+        32
+      ],
+      "cmyk": [
+        0,
+        10,
+        24,
+        84
+      ],
+      "pantone": "Neutral Black C"
+    },
+    "stone": {
+      "name": "Stone",
+      "role": "secondary text, captions, meta",
+      "hex": "#5F564B",
+      "rgb": [
+        95,
+        86,
+        75
+      ],
+      "cmyk": [
+        0,
+        9,
+        21,
+        63
+      ],
+      "pantone": "Warm Gray 11 C"
+    },
+    "moss": {
+      "name": "Moss",
+      "role": "accent, dividers, icons",
+      "hex": "#5B6B4E",
+      "rgb": [
+        91,
+        107,
+        78
+      ],
+      "cmyk": [
+        15,
+        0,
+        27,
+        58
+      ],
+      "pantone": "5757 C"
+    },
+    "moss-deep": {
+      "name": "Moss Deep",
+      "role": "accent hover",
+      "hex": "#46543C",
+      "rgb": [
+        70,
+        84,
+        60
+      ],
+      "cmyk": [
+        17,
+        0,
+        29,
+        67
+      ],
+      "pantone": "5605 C"
+    },
+    "ochre-gold": {
+      "name": "Ochre Gold",
+      "role": "call to action",
+      "hex": "#8A6230",
+      "rgb": [
+        138,
+        98,
+        48
+      ],
+      "cmyk": [
+        0,
+        29,
+        65,
+        46
+      ],
+      "pantone": "730 C"
+    },
+    "gold-leaf": {
+      "name": "Gold Leaf",
+      "role": "foil and gilding reference",
+      "hex": "#A87C3D",
+      "rgb": [
+        168,
+        124,
+        61
+      ],
+      "cmyk": [
+        0,
+        26,
+        64,
+        34
+      ],
+      "pantone": "872 C (metallic)"
+    },
+    "sand": {
+      "name": "Sand",
+      "role": "alternate ground",
+      "hex": "#EFE7D6",
+      "rgb": [
+        239,
+        231,
+        214
+      ],
+      "cmyk": [
+        0,
+        3,
+        10,
+        6
+      ],
+      "pantone": "9224 C"
+    },
+    "ivory": {
+      "name": "Ivory",
+      "role": "primary ground",
+      "hex": "#FAF7EF",
+      "rgb": [
+        250,
+        247,
+        239
+      ],
+      "cmyk": [
+        0,
+        1,
+        4,
+        2
+      ],
+      "pantone": "9184 C"
+    },
+    "hairline": {
+      "name": "Hairline",
+      "role": "rules and card borders",
+      "hex": "#E2D9C6",
+      "rgb": [
+        226,
+        217,
+        198
+      ],
+      "cmyk": [
+        0,
+        4,
+        12,
+        11
+      ],
+      "pantone": "9225 C"
+    },
+    "white": {
+      "name": "White",
+      "role": "paper, reverse ground",
+      "hex": "#FFFFFF",
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "cmyk": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pantone": "n/a"
+    },
+    "black": {
+      "name": "Black",
+      "role": "single-colour print only",
+      "hex": "#000000",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "cmyk": [
+        0,
+        0,
+        0,
+        100
+      ],
+      "pantone": "Process Black C"
+    }
+  }
+}
