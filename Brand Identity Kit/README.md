@@ -1,4 +1,4 @@
-# Trikonam Brand Identity v1.0
+# Trikonam Brand Identity v1.1
 
 **Frozen. This folder is the single source of truth for the Trikonam brand.**
 
@@ -7,6 +7,43 @@ template or website update must draw from these files. Do not redraw the mark, d
 not re-set the wordmark from a font, and do not introduce a variation that is not
 in `01_Master Logos`. If something needed is genuinely missing, extend the system
 from `09_Source Files/Editable Sources` and re-version it — do not improvise.
+
+---
+
+## CHANGELOG
+
+### v1.1 — the horizontal lockup, re-spaced optically
+
+**Scope: the horizontal lockup only.** The symbol, the wordmark, the colour palette,
+the typography, and every other lockup are byte-for-byte unchanged from v1.0. This
+was verified by diffing the two kits: of 372 deterministic artwork files, 307 are
+identical and all 65 changed files contain the horizontal lockup.
+
+Two corrections, both measured rather than eyeballed:
+
+**1. The gap: 84 → 23.7 units** (0.075 → 0.02116 of symbol height).
+
+The symbol is a **wedge**. Across the vertical band the wordmark occupies, its ink
+stops at x=561, while the ground line alone reaches x=879. A gap measured off the
+bounding box therefore read as a **402-unit void** beside the type — 4.8× its nominal
+size — and the two elements drifted apart, most visibly on screen. Reducing the
+*geometric* gap does almost nothing to this; the new value closes the **perceived**
+void by 15%, landing the T's left edge on the ground line's terminus. The gap stays
+positive, so the wordmark never overhangs the symbol's box and the clear-space rule
+is unaffected.
+
+**2. The wordmark drops 44.6 units** (0.03982 of symbol height).
+
+The symbol's ink centroid sits 105 units below its bounding-box centre — the legs and
+the earth line carry the mass — so a box-centred wordmark rode visually high. This
+takes back about 40% of that. Chasing the full centroid reads as a slump.
+
+Lockup size: **2977.6 × 1120** (was 3037.9 × 1120). Clear space is unchanged at
+X = the lotus height.
+
+### v1.0 — initial system
+
+Built from the founding artwork and frozen after a measured Creative Director review.
 
 ---
 
@@ -102,3 +139,7 @@ python3 -m venv venv
 ```
 
 `audit.py` re-runs the optical review; `verify_kit.py` re-runs the file verification.
+
+Note: PDF and EPS files carry a creation timestamp, so they differ byte-for-byte on
+every regeneration even when the artwork is identical. Compare SVG or PNG, or the
+decompressed PDF page operators, when checking whether artwork actually changed.

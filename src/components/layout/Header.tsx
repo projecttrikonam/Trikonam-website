@@ -56,7 +56,13 @@ export function Header() {
           <Wordmark light={overHero} className="h-[80px] sm:h-[100px]" />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-4 lg:flex">
+        {/* gap-3.5 rather than gap-4: the bar is justify-between, so the space between
+            the logo and "About" is pure leftover — margin or padding on either side is
+            a no-op, and the only real lever is total content width. Taking 2px from
+            each of the five nav gaps is imperceptible in the nav's own rhythm and
+            returns ~10px to the logo. Combined with the tighter lockup, the logo gains
+            ~13px of breathing room before the navigation begins. */}
+        <nav aria-label="Primary" className="hidden items-center gap-3.5 lg:flex">
           {primaryNav.slice(1).map((item) => {
             // The CHY item is a nested branch of /practices (e.g. /practices/upa-yoga),
             // so treat it as active for any /practices* path.

@@ -30,7 +30,7 @@ def title_page(title, subtitle, tag):
     g, _ = T.paragraph(FRAUNCES_L, subtitle, 20, 470, 434, 560, 1.45, MUTED)
     b += g
     b += f'<line x1="470" y1="560" x2="{PW-MG}" y2="560" stroke="{RULE}" stroke-width="1"/>'
-    b += T.draw(KARLA, "TRIKONAM BRAND IDENTITY V1.0", 11, 470, 592, MOSS, tracking=2.2)[0]
+    b += T.draw(KARLA, "TRIKONAM BRAND IDENTITY V1.1", 11, 470, 592, MOSS, tracking=2.2)[0]
     b += T.draw(KARLA, tag.upper(), 11, 470, 616, MOSS, tracking=2.2)[0]
     return f'<rect width="{PW}" height="{PH}" fill="{IVORY}"/>{b}'
 
@@ -69,8 +69,20 @@ def spec_page():
             ("Primary gap", "0.075 x symbol height, earth line to cap line"),
             ("Primary cap", "0.08698 x symbol height"),
             ("Horizontal cap", "0.205 x symbol height"),
-            ("Horizontal gap", "0.075 x symbol height"),
-            ("Horizontal align", "wordmark centred on the symbol's height"),
+            ("Horizontal gap", "0.02116 x symbol height (23.7 units)  v1.1"),
+            ("Horizontal drop", "0.03982 x symbol height (44.6 units)  v1.1"),
+            ("Horizontal align", "wordmark on the symbol's OPTICAL centre"),
+            ("Horizontal size", "2977.6 x 1120 units"),
+        ]),
+        ("WHAT CHANGED IN v1.1", [
+            ("Scope", "the horizontal lockup only; symbol, wordmark,"),
+            ("", "colour, type and every other lockup are unchanged"),
+            ("Gap", "84 -> 23.7 units. The symbol is a wedge: beside the"),
+            ("", "wordmark its ink stops at x=561 while the ground line"),
+            ("", "reaches x=879, so a box-measured gap read as a 402-unit"),
+            ("", "void. This closes that perceived void by 15%."),
+            ("Drop", "0 -> 44.6 units. The ink centroid sits 105 units"),
+            ("", "below the box centre, so box-centred type rode high."),
         ]),
         ("CLEAR SPACE AND SIZE", [
             ("X", "the lotus height = 0.136 x symbol height"),
@@ -149,7 +161,7 @@ def write_pdf(path, bodies, crop=False):
         w.append(PdfReader(buf))
     w.add_metadata({"/Title": os.path.basename(path).replace(".pdf", ""),
                     "/Author": "Trikonam",
-                    "/Subject": "Trikonam Brand Identity v1.0"})
+                    "/Subject": "Trikonam Brand Identity v1.1"})
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "wb") as f:
         w.write(f)

@@ -250,7 +250,7 @@ HTML = f"""<title>Trikonam — Brand Identity Manual</title>
     <p class="sub">The master logo system for Trikonam — a school of classical Hatha Yoga.
     One construction, drawn once, expressed at every size and in every medium.</p>
   </div>
-  <div class="meta"><span>Version 1.0</span><span>Master logo system</span>
+  <div class="meta"><span>Version 1.1</span><span>Master logo system</span>
   <span>Trikonam</span></div>
 </header>
 </div>
@@ -542,7 +542,7 @@ HTML = f"""<title>Trikonam — Brand Identity Manual</title>
 </div></section>
 
 <footer><div class="wrap">
-  <p>Trikonam — Brand Identity Manual, Version 1.0. The master artwork is the single source of
+  <p>Trikonam — Brand Identity Manual, Version 1.1. The master artwork is the single source of
   truth; this document describes it. Where the two disagree, the artwork is right.</p>
 </div></footer>
 """

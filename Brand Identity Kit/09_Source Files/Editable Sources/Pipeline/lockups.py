@@ -23,7 +23,18 @@ WM_DESC = 0.0                           # all-caps: nothing below the baseline
 PRIMARY_GAP = 0.075                     # of symbol height
 PRIMARY_CAP = (H * SYM_ASPECT) / WM_W_PER_CAP / H    # cap as a fraction of sym height
 HORIZ_CAP = 0.205
-HORIZ_GAP = 0.075                       # of symbol height, between symbol and wordmark
+# v1.1 — the horizontal lockup was re-spaced optically. The symbol is a WEDGE: across
+# the band the wordmark occupies its ink stops at x=561, while the ground line alone
+# reaches x=879. A gap measured off the bounding box therefore reads as a 402-unit void
+# beside the type, 4.8x its nominal size, and the two elements drifted apart. The gap
+# below closes that PERCEIVED void by 15%, landing the T's left edge on the ground
+# line's terminus. It stays positive, so the wordmark never overhangs the symbol's box
+# and the clear-space rule is unaffected.
+HORIZ_GAP = 23.7 / 1120                 # 0.02116 of symbol height (was 0.075)
+# The symbol's ink centroid sits 105 units below its bounding-box centre - the legs and
+# the earth line carry the mass - so a box-centred wordmark rides visually high. This
+# takes back ~40% of that; the full centroid reads as a slump.
+HORIZ_DROP = 44.6 / 1120                # 0.03982 of symbol height (was 0)
 
 
 def _svg(vb, body, w=None, bg=None, extra=""):
@@ -54,7 +65,9 @@ def horizontal(ink=INK, sh=H, weight=None):
     g, _ = B.symbol_g(0, 0, sh, ink, weight)
     # the wordmark is centred on the symbol's full height: against a mark this
     # tall, hanging it off the earth line leaves the type stranded at the foot.
-    baseline = sh / 2 + cap / 2
+    # v1.1 lowers it by HORIZ_DROP to sit on the symbol's optical centre rather
+    # than its bounding-box centre.
+    baseline = sh / 2 + cap / 2 + HORIZ_DROP * sh
     wg, ww = B.wordmark_g(cap, sw + gap, baseline, ink)
     return g + wg, (0, 0, sw + gap + ww, sh), cap
 

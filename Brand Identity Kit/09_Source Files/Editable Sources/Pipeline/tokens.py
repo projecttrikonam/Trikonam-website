@@ -51,7 +51,7 @@ def _ase_group_end():
     return struct.pack(">HI", 0xC002, 0)
 
 
-def write_ase(path, group="Trikonam Brand Identity v1.0"):
+def write_ase(path, group="Trikonam Brand Identity v1.1"):
     blocks = [_ase_group(group)]
     for k in ORDER:
         hexs, name, _ = P[k]
@@ -64,14 +64,14 @@ def write_ase(path, group="Trikonam Brand Identity v1.0"):
 
 
 # ---------------------------------------------------------------- text formats
-HEADER = ("Trikonam Brand Identity v1.0 - colour palette\n"
+HEADER = ("Trikonam Brand Identity v1.1 - colour palette\n"
           "Generated from the master identity. Do not hand-edit.\n"
           "CMYK values are unmanaged conversions; proof on stock.\n"
           "Pantone references are approximations; confirm against a physical guide.\n")
 
 
 def write_json(path):
-    data = {"name": "Trikonam Brand Identity", "version": "1.0",
+    data = {"name": "Trikonam Brand Identity", "version": "1.1",
             "colours": {}}
     for k in ORDER:
         hexs, name, role = P[k]
@@ -120,7 +120,7 @@ def write_tailwind(path):
 
 
 def write_txt(path):
-    w = ["TRIKONAM BRAND IDENTITY v1.0 - COLOUR REFERENCE", "=" * 74, "", HEADER, ""]
+    w = ["TRIKONAM BRAND IDENTITY v1.1 - COLOUR REFERENCE", "=" * 74, "", HEADER, ""]
     w.append(f"{'NAME':<14}{'HEX':<10}{'RGB':<16}{'CMYK':<18}{'PANTONE':<20}ROLE")
     w.append("-" * 110)
     for k in ORDER:

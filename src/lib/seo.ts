@@ -110,7 +110,7 @@ export function organizationJsonLd() {
     image: absolute('/og-image.png'),
     // The brand logo proper, not the social card -- Google shows this in the
     // Knowledge Panel. Horizontal lockup, Compact cut, from the frozen kit.
-    logo: { '@type': 'ImageObject', url: absolute('/brand/trikonam-logo.png'), width: 1200, height: 524 },
+    logo: { '@type': 'ImageObject', url: absolute('/brand/trikonam-logo.png'), width: 1200, height: 532 },
     knowsAbout: [
       'Classical Hatha Yoga',
       'Hatha Yoga',

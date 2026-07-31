@@ -1,5 +1,5 @@
 """
-build_kit.py — assemble the complete Trikonam Brand Identity Kit v1.0.
+build_kit.py — assemble the complete Trikonam Brand Identity Kit v1.1.
 
 Everything is generated from the master construction. No file in the output is a
 placeholder: if something cannot be produced natively it is not written, and the
@@ -14,7 +14,7 @@ import textlayout as T
 from brand import PALETTE as P
 
 ROOT = sys.argv[1] if len(sys.argv) > 1 else "Brand Identity Kit"
-VER = "Trikonam Brand Identity v1.0"
+VER = "Trikonam Brand Identity v1.1"
 INK = P["forest"][0]; IVORY = P["ivory"][0]; SAND = P["sand"][0]
 TEXT = P["espresso"][0]; WHITE = P["white"][0]; BLACK = P["black"][0]
 GOLD = P["gold"][0]; GOLDLEAF = P["goldleaf"][0]; MOSS = P["moss"][0]
@@ -182,7 +182,7 @@ for lock, stem in (("primary", "primary"), ("horizontal", "horizontal"),
 
 # ==================================================================== 04 colour
 f = d("04_Colour Palette", "ASE")
-n = TK.write_ase(os.path.join(f, "Trikonam Brand Palette v1.0.ase"))
+n = TK.write_ase(os.path.join(f, "Trikonam Brand Palette v1.1.ase"))
 made["other"] += 1
 TK.write_json(os.path.join(d("04_Colour Palette", "JSON"), "trikonam-palette.json"))
 TK.write_css(os.path.join(d("04_Colour Palette", "CSS"), "trikonam-palette.css"))

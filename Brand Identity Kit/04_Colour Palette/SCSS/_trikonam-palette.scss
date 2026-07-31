@@ -1,4 +1,4 @@
-// Trikonam Brand Identity v1.0 - colour palette
+// Trikonam Brand Identity v1.1 - colour palette
 // Generated from the master identity. Do not hand-edit.
 // CMYK values are unmanaged conversions; proof on stock.
 // Pantone references are approximations; confirm against a physical guide.

@@ -28,7 +28,7 @@ CROP = False                    # set by build(); adds crop marks + bleed
 def page(body, ground=IVORY, number=None, title=None):
     hdr = ""
     if number is not None:
-        g, _ = T.draw(KARLA, "TRIKONAM  BRAND IDENTITY  V1.0", 10, M, M - 26,
+        g, _ = T.draw(KARLA, "TRIKONAM  BRAND IDENTITY  V1.1", 10, M, M - 26,
                       SOFT, tracking=1.9)
         hdr += g
         g, _ = T.draw(KARLA, f"{number:02d}", 10, PW - M, M - 26, SOFT, anchor="end")
@@ -68,7 +68,7 @@ g, y = T.paragraph(FRAUNCES_L, "The master logo system for Trikonam, a school of
                    "classical Hatha Yoga.", 22, 520, 356, 560, 1.45, MUTED)
 b += g
 b += f'<line x1="520" y1="640" x2="{PW-M}" y2="640" stroke="{RULE}" stroke-width="1"/>'
-b += T.draw(KARLA, "VERSION 1.0", 11, 520, 672, SOFT, tracking=2.2)[0]
+b += T.draw(KARLA, "VERSION 1.1", 11, 520, 672, SOFT, tracking=2.2)[0]
 b += T.draw(KARLA, "MASTER LOGO SYSTEM", 11, 700, 672, SOFT, tracking=2.2)[0]
 page(b)
 
@@ -434,7 +434,7 @@ def build(out, crop=False, bleed=0.0):
         cairosvg.svg2pdf(bytestring=svg.encode(), write_to=buf)
         buf.seek(0)
         w.append(PdfReader(buf))
-    w.add_metadata({"/Title": "Trikonam Brand Identity Manual v1.0",
+    w.add_metadata({"/Title": "Trikonam Brand Identity Manual v1.1",
                     "/Author": "Trikonam", "/Subject": "Master logo system"})
     with open(out, "wb") as f:
         w.write(f)
