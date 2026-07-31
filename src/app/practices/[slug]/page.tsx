@@ -46,7 +46,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: practice.name,
     description: practice.summary,
     path: `/practices/${practice.slug}`,
-    image: practice.image ?? '/og-image.jpg',
+    image: practice.image ?? '/og-image.png',
   });
 }
 

@@ -50,7 +50,10 @@ export function Header() {
           aria-label="Trikonam — home"
           className="shrink-0 transition-opacity hover:opacity-70"
         >
-          <Wordmark light={overHero} />
+          {/* The element height includes the artwork's built-in clear space, so the
+              mark itself renders ~60px / ~75px — the latter is 204px wide, clearing
+              the 200px minimum the manual sets for the horizontal lockup. */}
+          <Wordmark light={overHero} className="h-[80px] sm:h-[100px]" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-4 lg:flex">

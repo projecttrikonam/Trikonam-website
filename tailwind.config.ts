@@ -17,6 +17,9 @@ const config: Config = {
         primary: 'rgb(var(--color-text-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-text-secondary) / <alpha-value>)',
         inverse: 'rgb(var(--color-text-inverse) / <alpha-value>)',
+        // Forest Ink — the logo's ink (Brand Identity Manual §06). Used by the
+        // <Wordmark> component and nothing else; body copy stays `primary`.
+        forest: 'rgb(var(--color-brand-forest) / <alpha-value>)',
         moss: {
           DEFAULT: 'rgb(var(--color-accent-moss) / <alpha-value>)',
           dark: 'rgb(var(--color-accent-moss-dark) / <alpha-value>)',
@@ -24,10 +27,19 @@ const config: Config = {
         gold: {
           DEFAULT: 'rgb(var(--color-accent-gold) / <alpha-value>)',
           dark: 'rgb(var(--color-accent-gold-dark) / <alpha-value>)',
+          leaf: 'rgb(var(--color-accent-gold-leaf) / <alpha-value>)',
         },
         border: 'rgb(var(--color-border) / <alpha-value>)',
         focus: 'rgb(var(--color-focus-ring) / <alpha-value>)',
       },
+      // Tailwind's Preflight otherwise defaults every border to its own grey
+      // (#e5e7eb). Nothing renders it today, but a bare `border` utility added later
+      // would silently pull a non-brand colour into the page. Point it at Hairline so
+      // the palette holds by default.
+      borderColor: ({ theme }) => ({
+        ...theme('colors'),
+        DEFAULT: 'rgb(var(--color-border))',
+      }),
       fontFamily: {
         // Fraunces = display serif; Karla = body/UI sans. Both loaded via
         // next/font/google in layout.tsx, which sets these CSS variables.

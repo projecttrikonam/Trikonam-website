@@ -138,7 +138,7 @@ export function SubmitButton({ children, pending }: { children: ReactNode; pendi
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex items-center justify-center gap-2 rounded-[7px] bg-[linear-gradient(180deg,#8a6230,#6e4d24)] px-8 py-3.5 text-[0.95rem] font-medium tracking-[0.01em] text-inverse shadow-soft ring-1 ring-inset ring-white/10 transition-all duration-300 ease-calm hover:-translate-y-0.5 hover:shadow-lift hover:brightness-[1.06] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+      className="inline-flex items-center justify-center gap-2 rounded-[7px] gradient-gold px-8 py-3.5 text-[0.95rem] font-medium tracking-[0.01em] text-inverse shadow-soft ring-1 ring-inset ring-white/10 transition-all duration-300 ease-calm hover:-translate-y-0.5 hover:shadow-lift hover:brightness-[1.06] focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
     >
       {pending && (
         <span aria-hidden className="h-4 w-4 animate-spin rounded-full border-2 border-inverse/40 border-t-inverse" />

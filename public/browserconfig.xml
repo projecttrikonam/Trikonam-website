@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Windows / Edge pinned-tile configuration — Trikonam Brand Identity v1.0.
+  The tile art is the Reduced Mark, copied verbatim from
+  Brand Identity Kit/02_Icons/. TileColor is Ivory (#FAF7EF), the brand's ground,
+  so the tile reads as the site does rather than as a coloured chip.
+-->
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="/favicon-128x128.png"/>
+      <square150x150logo src="/favicon-256x256.png"/>
+      <square310x310logo src="/favicon-512x512.png"/>
+      <TileColor>#FAF7EF</TileColor>
+    </tile>
+  </msapplication>
+</browserconfig>

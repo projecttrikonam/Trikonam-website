@@ -22,11 +22,17 @@
   --color-text-secondary: 95 86 75; /* warm muted brown-grey — darkened from #6B6155 to meet WCAG AA */
   --color-text-inverse: 250 247 239; /* text on dark/accent backgrounds */
 
+  /* Brand ink — Brand Identity Manual §06. Forest Ink is the logo's colour: the moss
+   * accent taken to its darkest value. It is the mark's ink, NOT a text colour;
+   * body copy stays Espresso. 11.15:1 on ivory. */
+  --color-brand-forest: 47 58 42; /* Forest Ink #2F3A2A */
+
   /* Accents */
   --color-accent-moss: 91 107 78; /* primary accent — links, icons, secondary buttons, dividers */
   --color-accent-moss-dark: 70 84 60; /* hover state for moss elements */
   --color-accent-gold: 138 98 48; /* primary CTA — deepened from #A87C3D so ivory CTA text meets WCAG AA (see note) */
   --color-accent-gold-dark: 110 77 36; /* hover state for gold CTA */
+  --color-accent-gold-leaf: 168 124 61; /* Gold Leaf #A87C3D — foil reference and gradient top */
 
   /* Structural */
   --color-border: 226 217 198; /* hairline dividers, card borders */
@@ -127,13 +133,15 @@
   ::-webkit-scrollbar-track {
     background: rgb(var(--color-bg));
   }
+  /* Palette-only: a soft moss tint rather than the two off-palette sands this
+   * previously used (Brand Identity v1.0 — no colour outside the palette). */
   ::-webkit-scrollbar-thumb {
-    background: #d8ccb4;
+    background: rgb(var(--color-accent-moss) / 0.3);
     border: 3px solid rgb(var(--color-bg));
     border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #c9ba9c;
+    background: rgb(var(--color-accent-moss) / 0.45);
   }
 }
 
@@ -204,9 +212,24 @@
     box-shadow: var(--shadow-soft);
   }
 
+  /* The CTA fill. One definition, used by every gold button — it was previously
+   * repeated as a raw hex pair in three components. Brand Identity Manual §06:
+   * Ochre Gold is a fill colour with ivory text on it, never text on ivory. */
+  .gradient-gold {
+    background-image: linear-gradient(
+      180deg,
+      rgb(var(--color-accent-gold)),
+      rgb(var(--color-accent-gold-dark))
+    );
+  }
+
   /* Gold gradient text — for a single accented display word (used sparingly). */
   .text-gold-gradient {
-    background: linear-gradient(135deg, #a87c3d 0%, #6e4d24 100%);
+    background: linear-gradient(
+      135deg,
+      rgb(var(--color-accent-gold-leaf)) 0%,
+      rgb(var(--color-accent-gold-dark)) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

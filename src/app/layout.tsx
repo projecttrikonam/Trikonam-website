@@ -35,36 +35,50 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: 'Trikonam · Classical Hatha Yoga',
     description: siteConfig.description,
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'A practitioner in quiet meditation at dusk.' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Trikonam — Classical Hatha Yoga' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Trikonam · Classical Hatha Yoga',
     description: siteConfig.description,
-    images: ['/og-image.jpg'],
+    images: ['/twitter-card.png'],
   },
   // No global canonical — each page sets its own via pageMetadata() in src/lib/seo.ts.
   //
-  // Favicon / app icon — regenerated for v1.1 from the bolder icon mark (cropped from
-  // the current header logo, public/trikonam-logo.png) composited onto the same ivory
-  // circle-on-white badge treatment as before, sized up to fill more of the frame. The
-  // original thin-stroke mark read as a faint grey smudge at 16–32px; this version
-  // trades a little fine detail for legibility at true favicon sizes.
-  // scripts/optimize-images.mjs is NOT used here — these are one-off, hand-run sizes;
-  // source master lives at assets/source-images/trikonam-favicon-source.png — regenerate
-  // all sizes from it (or a newer source) if the mark ever changes again. Set once here
-  // so every page inherits it — no page defines its own `icons`, so nothing overrides this.
+  // Icons — Trikonam Brand Identity v1.0. Every file here is copied verbatim from
+  // `Brand Identity Kit/02_Icons/`; none of it is generated or retouched in this repo.
+  // The icon artwork is the REDUCED MARK (the lotus as a single filled path), which is
+  // what the manual prescribes below 60px: the drawn monoline symbol turns to grey mist
+  // at favicon sizes, so the identity steps down to a solid form instead of shrinking.
+  // If the mark ever changes, regenerate the kit — do not hand-edit these.
+  // Declared once here so every page inherits it; no page overrides `icons`.
   icons: {
     icon: [
+      // SVG first: browsers that support it get a resolution-independent mark.
+      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-64x64.png', sizes: '64x64', type: 'image/png' },
+      { url: '/favicon-128x128.png', sizes: '128x128', type: 'image/png' },
+      { url: '/favicon-256x256.png', sizes: '256x256', type: 'image/png' },
+      { url: '/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
       { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
     shortcut: ['/favicon.ico'],
+    other: [
+      // Safari pinned tab / Touch Bar: a single monochrome path, tinted by the browser.
+      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#2F3A2A' },
+    ],
+  },
+  manifest: '/manifest.webmanifest',
+  other: {
+    // Windows / Edge pinned tile. No Next.js metadata field covers this.
+    'msapplication-config': '/browserconfig.xml',
+    'msapplication-TileColor': '#FAF7EF',
   },
 };
 

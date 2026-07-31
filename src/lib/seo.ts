@@ -20,7 +20,7 @@ export function pageMetadata({
   description,
   path,
   type = 'website',
-  image = '/og-image.jpg',
+  image = '/og-image.png',
   publishedTime,
   modifiedTime,
   noIndex = false,
@@ -57,7 +57,14 @@ export function pageMetadata({
       images: [{ url: image, width: 1200, height: 630 }],
       ...(type === 'article' ? { publishedTime, modifiedTime } : {}),
     },
-    twitter: { card: 'summary_large_image', title: flatTitle, description, images: [image] },
+    // Twitter gets the card cut from the Brand Identity Kit (1200x628) when the page
+    // has no artwork of its own; a page-supplied image always wins.
+    twitter: {
+      card: 'summary_large_image',
+      title: flatTitle,
+      description,
+      images: [image === '/og-image.png' ? '/twitter-card.png' : image],
+    },
   };
 }
 
@@ -100,7 +107,10 @@ export function organizationJsonLd() {
     url: siteConfig.url,
     email: siteConfig.contact.email,
     telephone: siteConfig.contact.phone,
-    image: absolute('/og-image.jpg'),
+    image: absolute('/og-image.png'),
+    // The brand logo proper, not the social card -- Google shows this in the
+    // Knowledge Panel. Horizontal lockup, Compact cut, from the frozen kit.
+    logo: { '@type': 'ImageObject', url: absolute('/brand/trikonam-logo.png'), width: 1200, height: 524 },
     knowsAbout: [
       'Classical Hatha Yoga',
       'Hatha Yoga',
@@ -140,7 +150,7 @@ export function articleJsonLd(article: Article, author?: Author, category?: Cate
     publisher: {
       '@type': 'Organization',
       name: siteConfig.name,
-      logo: { '@type': 'ImageObject', url: absolute('/og-image.jpg') },
+      logo: { '@type': 'ImageObject', url: absolute('/brand/trikonam-logo.png') },
     },
   };
 }

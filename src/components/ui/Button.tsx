@@ -19,7 +19,7 @@ const base =
 const variants: Record<Variant, string> = {
   // Gold gradient (both stops meet WCAG AA with ivory text), layered shadow, calm lift.
   primary:
-    'rounded-[7px] px-8 py-3.5 text-[0.95rem] text-inverse shadow-soft bg-[linear-gradient(180deg,#8a6230,#6e4d24)] ring-1 ring-inset ring-white/10 hover:-translate-y-0.5 hover:shadow-lift hover:brightness-[1.06]',
+    'rounded-[7px] px-8 py-3.5 text-[0.95rem] text-inverse shadow-soft gradient-gold ring-1 ring-inset ring-white/10 hover:-translate-y-0.5 hover:shadow-lift hover:brightness-[1.06]',
   // Quiet moss outline that fills on hover, with a faint tint step before the fill.
   secondary:
     'rounded-[7px] border border-moss/70 bg-moss/0 px-8 py-3.5 text-[0.95rem] text-moss hover:-translate-y-0.5 hover:border-moss hover:bg-moss hover:text-inverse hover:shadow-soft',

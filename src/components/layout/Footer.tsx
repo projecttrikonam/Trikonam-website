@@ -15,8 +15,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 sm:px-8 md:grid-cols-[1.3fr_1fr_1fr]">
         {/* Brand + intent + certification badge */}
         <div>
-          <Wordmark />
-          <p className="prose-measure mt-4 max-w-xs text-body text-secondary">
+          {/* The footer sits on Sand, an approved ground for Forest Ink (Manual §08).
+              -ml-3 pulls the artwork's built-in clear space back to the column edge so
+              the mark optically aligns with the copy beneath it, without cropping it. */}
+          <Wordmark className="-ml-3 h-[100px] sm:h-[116px]" />
+          <p className="prose-measure mt-2 max-w-xs text-body text-secondary">
             Authentic Classical Hatha Yoga, offered in its original form — for a
             balanced body, a clear mind, and a joyful life.
           </p>

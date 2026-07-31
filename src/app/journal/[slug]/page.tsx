@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: article.seoDescription ?? article.excerpt,
     path: `/journal/${article.slug}`,
     type: 'article',
-    image: article.ogImage ?? article.coverImage ?? '/og-image.jpg',
+    image: article.ogImage ?? article.coverImage ?? '/og-image.png',
     publishedTime: article.publishedAt,
     modifiedTime: article.updatedAt ?? article.publishedAt,
     noIndex: article.noIndex,
