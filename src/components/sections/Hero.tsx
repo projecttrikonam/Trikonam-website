@@ -1,41 +1,45 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
- * Home hero — an immersive, full-screen arrival (client redesign).
+ * Home hero — an immersive, full-screen arrival (2026 refinement).
  *
- * One exceptional photograph (a solitary meditation in a waterfall cave) fills the
- * viewport. Elegant type rests over it, lifted by a soft gradient rather than a box.
- * The only motion is an almost-imperceptible slow drift of the image and a gentle
- * fade-up of the words — nothing jumps. The header sits transparent over this and
- * solidifies on scroll.
+ * One exceptional photograph fills the viewport. Elegant type rests over it, lifted by a
+ * soft gradient rather than a box. The only motion is an almost-imperceptible slow drift
+ * of the image and a gentle fade-up of the words.
  *
- * No decorative devices (the outlined ring is gone). The image is meant to be felt,
- * not read.
+ * There is deliberately NO call-to-action button here: "Begin Your Journey" lives once,
+ * in the navigation, and the Practice Compass invitation appears as a small card. The
+ * hero communicates identity — authentic Classical Hatha Yoga, a quiet space for the
+ * practice — not an offer.
  */
 export function Hero() {
   const reduced = usePrefersReducedMotion();
 
   return (
     <section className="relative -mt-24 h-[100svh] min-h-[600px] w-full overflow-hidden bg-primary">
-      {/* The photograph fills the frame — a single figure at dusk, centred so it holds
-          on both wide screens and tall phones. Rendered as a plain <img> for reliable
-          full-bleed painting; it simply rests there. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/images/home/hero.webp"
-        alt="A practitioner sits in quiet meditation at dusk, mountains softening into the distance."
-        loading="eager"
-        fetchPriority="high"
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover object-center"
-      />
+      {/* The photograph fills the frame. A 12s ease-out drift from a hair of extra scale
+          gives the arrival a sense of settling, without ever reading as a zoom. */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: reduced ? 1 : 1.06 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 12, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/home/hero.webp"
+          alt="A practitioner sits in quiet meditation at dusk, mountains softening into the distance."
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+      </motion.div>
 
-      {/* Soft gradients for legibility — the middle is left clear so the photograph is
-          felt, with just enough veil at top (for the nav) and bottom (for the words). */}
+      {/* Soft gradients for legibility. */}
       <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/45 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/85 via-primary/25 to-transparent" />
 
@@ -62,18 +66,10 @@ export function Hero() {
             initial={{ opacity: 0, y: reduced ? 0 : 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
-            className="mt-7 max-w-md text-body-lg leading-relaxed text-inverse/85"
+            className="mt-7 max-w-lg text-body-lg leading-relaxed text-inverse/85"
           >
             A quiet space for the practice, kept in its original form.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: reduced ? 0 : 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
-            className="mt-9"
-          >
-            <BeginJourneyButton />
-          </motion.div>
         </div>
       </div>
 

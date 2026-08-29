@@ -33,9 +33,10 @@ export function Header() {
 
   const current = pathname?.replace(/\/+$/, '') || '/';
 
-  // Light type while resting over a full-bleed dark hero (home and the Online Programs
-  // flagship), before any scroll. Both pages open with an immersive image the nav sits on.
-  const overHero = (current === '/' || current === '/online-programs') && !scrolled;
+  // Light type while resting over the full-bleed dark hero on the home page, before any
+  // scroll. (The Online Programs hero is now a left-copy / right-image split on the
+  // ivory page, so it uses the normal dark header.)
+  const overHero = current === '/' && !scrolled;
 
   return (
     <>
