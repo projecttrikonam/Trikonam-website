@@ -72,18 +72,14 @@ export function UpcomingPrograms() {
   );
 
   return (
-    <section className="bg-bg-alt px-6 py-16 sm:px-8 md:py-28">
+    <section className="bg-bg-alt px-6 py-20 sm:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
-        <RevealOnScroll className="max-w-2xl">
-          <span className="eyebrow eyebrow--tick mb-5">Upcoming at Trikonam</span>
-        </RevealOnScroll>
-        <RevealOnScroll variant="rise" delay={0.06}>
-          <h2 className="max-w-2xl text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
+        <RevealOnScroll variant="rise" className="mb-14 max-w-2xl">
+          <span className="eyebrow eyebrow--tick mb-6 block">Upcoming at Trikonam</span>
+          <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
             What’s happening now.
           </h2>
-        </RevealOnScroll>
-        <RevealOnScroll delay={0.14} className="mb-12">
-          <p className="prose-measure mt-5 max-w-2xl text-body-lg text-secondary">
+          <p className="prose-measure mt-8 text-body-lg text-secondary">
             The programs currently scheduled — in person in Hyderabad, and live online.
             Batches are small, so we form them by conversation: tell us you’re interested
             and we’ll take it from there.

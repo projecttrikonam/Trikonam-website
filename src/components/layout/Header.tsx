@@ -87,7 +87,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? 'page' : undefined}
-                className={`relative text-[0.9rem] tracking-[0.01em] transition-colors ${
+                className={`relative inline-block text-[0.9rem] tracking-[0.01em] transition-[color,transform] duration-300 ease-calm hover:-translate-y-px motion-reduce:hover:translate-y-0 ${
                   overHero
                     ? 'text-inverse/85 hover:text-inverse'
                     : active
@@ -95,13 +95,13 @@ export function Header() {
                     : 'text-primary hover:text-moss'
                 }`}
               >
-                <span className={overHero ? '' : 'link-underline'}>{item.label}</span>
-                {active && !overHero && (
-                  <span
-                    aria-hidden
-                    className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-moss"
-                  />
-                )}
+                <span
+                  className={
+                    overHero ? '' : `link-underline${active ? ' link-underline--active' : ''}`
+                  }
+                >
+                  {item.label}
+                </span>
               </Link>
             );
           })}

@@ -46,7 +46,7 @@ export default function TeachersPage() {
             />
           </RevealOnScroll>
           <RevealOnScroll delay={0.05}>
-            <span className="eyebrow eyebrow--tick mb-5">Certified & Accredited</span>
+            <span className="eyebrow eyebrow--tick mb-6 block">Certified & Accredited</span>
             <div className="prose-measure space-y-4 text-body-lg text-secondary">
               <p>
                 Our teachers are certified Classical Hatha Yoga instructors who have
@@ -70,14 +70,10 @@ export default function TeachersPage() {
       </Section>
 
       <Section tone="bg" width="wide">
-        <RevealOnScroll>
-          <span className="eyebrow eyebrow--tick mb-4">Our Teachers</span>
-        </RevealOnScroll>
-        <RevealOnScroll variant="rise" delay={0.06}>
+        <RevealOnScroll variant="rise" className="mb-16">
+          <span className="eyebrow eyebrow--tick mb-6 block">Our Teachers</span>
           <h2 className="text-h2">One lineage. Many teachers. One intention.</h2>
-        </RevealOnScroll>
-        <RevealOnScroll delay={0.14} className="mb-12">
-          <p className="mt-3 text-body-lg text-secondary">
+          <p className="mt-7 text-body-lg text-secondary">
             A growing community of Classical Hatha Yoga teachers.
           </p>
         </RevealOnScroll>

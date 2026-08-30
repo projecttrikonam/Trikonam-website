@@ -79,9 +79,9 @@ export default function AboutPage() {
       {/* SECTION 3 — What is Classical Hatha Yoga? (text, then image below) */}
       <Section tone="bg" width="narrow">
         <RevealOnScroll className="prose-measure">
-          <span className="eyebrow eyebrow--tick mb-4">The Practice</span>
+          <span className="eyebrow eyebrow--tick mb-5">The Practice</span>
           <h2 className="text-h2">What is Classical Hatha Yoga?</h2>
-          <div className="mt-5 space-y-4 text-body-lg text-secondary">
+          <div className="mt-7 space-y-4 text-body-lg text-secondary">
             <p>
               Classical Hatha Yoga is a complete inner science that works on every
               dimension of the human system. Rather than being a collection of physical
@@ -101,14 +101,14 @@ export default function AboutPage() {
           </div>
         </RevealOnScroll>
       </Section>
-      <Section tone="bg" width="wide" className="pt-0">
+      <Section tone="bg" width="narrow" className="pt-0">
         <RevealOnScroll variant="soft">
           <ResponsiveImage
             src="/images/about/what-is-chy.webp"
             parallax
             alt="Practitioners hold classical postures along a sunlit stone colonnade at dawn."
-            aspect="aspect-[3/2]"
-            sizes="(min-width: 1024px) 72rem, 100vw"
+            aspect="aspect-[16/9]"
+            sizes="(min-width: 768px) 48rem, 100vw"
           />
         </RevealOnScroll>
       </Section>
@@ -116,9 +116,9 @@ export default function AboutPage() {
       {/* SECTION 4 — Our Approach (kept, trimmed for repetition) */}
       <Section tone="bg-alt" width="narrow">
         <RevealOnScroll>
-          <span className="eyebrow eyebrow--tick mb-4">Our Approach</span>
+          <span className="eyebrow eyebrow--tick mb-5">Our Approach</span>
           <h2 className="text-h2">Consistent practice, not quick solutions.</h2>
-          <div className="prose-measure mt-5 space-y-4 text-body-lg text-secondary">
+          <div className="prose-measure mt-7 space-y-4 text-body-lg text-secondary">
             <p>
               We believe that meaningful transformation happens through consistent
               practice rather than quick solutions. We encourage every participant to
@@ -137,11 +137,11 @@ export default function AboutPage() {
       {/* What We Offer (kept) */}
       <Section tone="bg" width="default">
         <RevealOnScroll>
-          <span className="eyebrow mb-4 block">What We Offer</span>
+          <span className="eyebrow mb-5 block">What We Offer</span>
           <h2 className="text-h2">
             Programs for individuals, groups, institutions, and communities.
           </h2>
-          <p className="prose-measure mt-5 text-body-lg text-secondary">
+          <p className="prose-measure mt-7 text-body-lg text-secondary">
             We conduct Classical Hatha Yoga programs for individuals, groups,
             educational institutions, organisations, and communities.
           </p>
@@ -168,9 +168,9 @@ export default function AboutPage() {
       {/* Conscious Living (kept) */}
       <Section tone="bg-alt" width="narrow">
         <RevealOnScroll className="prose-measure">
-          <span className="eyebrow eyebrow--tick mb-4">Conscious Living</span>
+          <span className="eyebrow eyebrow--tick mb-5">Conscious Living</span>
           <h2 className="text-h2">Well-being is not shaped on the mat alone.</h2>
-          <div className="mt-5 space-y-4 text-body-lg text-secondary">
+          <div className="mt-7 space-y-4 text-body-lg text-secondary">
             <p>
               The balance you cultivate in practice is meant to extend into everyday
               life. Alongside the practices themselves, we guide the way you live around
@@ -198,7 +198,7 @@ export default function AboutPage() {
       {/* Invitation (kept) */}
       <Section tone="bg" width="narrow" className="pt-6 text-center">
         <RevealOnScroll variant="rise">
-          <span className="eyebrow mb-4 block">Invitation</span>
+          <span className="eyebrow mb-5 block">Invitation</span>
           <p className="mx-auto max-w-2xl font-serif text-h2 leading-[1.4] text-primary">
             Whether you are taking your very first step into yoga or looking to deepen an
             existing practice, you are welcome at Trikonam.

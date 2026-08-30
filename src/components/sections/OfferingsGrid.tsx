@@ -31,7 +31,7 @@ export function OfferingsGrid() {
             <h2 className="text-balance text-h2">
               For individuals, groups, institutions, and communities.
             </h2>
-            <p className="prose-measure mt-5 text-body text-secondary">
+            <p className="prose-measure mt-7 text-body text-secondary">
               One practice, offered in many settings — the integrity of it never changes,
               only where and how it is met.
             </p>

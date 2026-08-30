@@ -42,7 +42,7 @@ export default function ContactPage() {
       <Section tone="bg" width="wide">
         <div className="grid gap-14 md:grid-cols-2 md:gap-20">
           <RevealOnScroll>
-            <span className="eyebrow eyebrow--tick mb-4">Where We Teach</span>
+            <span className="eyebrow eyebrow--tick mb-5">Where We Teach</span>
             <h2 className="text-h2">Currently offering sessions in</h2>
             <ul className="mt-6 space-y-3 text-body-lg text-primary">
               <li className="flex items-start gap-3">
@@ -61,9 +61,9 @@ export default function ContactPage() {
           </RevealOnScroll>
 
           <RevealOnScroll delay={0.05}>
-            <span className="eyebrow eyebrow--tick mb-4">Online, Worldwide</span>
+            <span className="eyebrow eyebrow--tick mb-5">Online, Worldwide</span>
             <h2 className="text-h2">Join us from anywhere.</h2>
-            <p className="prose-measure mt-5 text-body-lg text-secondary">
+            <p className="prose-measure mt-7 text-body-lg text-secondary">
               Our online sessions are designed so that sincere seekers anywhere in the
               world can experience authentic Classical Hatha Yoga from the comfort of
               home.

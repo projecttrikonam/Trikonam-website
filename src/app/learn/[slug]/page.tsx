@@ -82,7 +82,7 @@ export default function LearningPathPage({ params }: { params: { slug: string } 
           {path.sections.map((section) => (
             <RevealOnScroll key={section.heading}>
               <h2 className="text-balance text-h2">{section.heading}</h2>
-              <div className="prose-measure mt-5 space-y-4 text-body-lg text-secondary">
+              <div className="prose-measure mt-7 space-y-4 text-body-lg text-secondary">
                 {section.body.map((para, i) => (
                   <p key={i}>{para}</p>
                 ))}

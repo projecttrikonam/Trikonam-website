@@ -89,9 +89,9 @@ export default function PracticesHubPage() {
       {/* Ways to Learn (v2.1) — the four learning pathways, each its own page under /learn. */}
       <Section tone="bg-alt" width="narrow">
         <RevealOnScroll>
-          <span className="eyebrow eyebrow--tick mb-4">Ways to Learn</span>
+          <span className="eyebrow eyebrow--tick mb-5">Ways to Learn</span>
           <h2 className="text-balance text-h2">Meet the practice in the way that suits you.</h2>
-          <p className="prose-measure mt-5 text-body-lg text-secondary">
+          <p className="prose-measure mt-7 text-body-lg text-secondary">
             Classical Hatha Yoga can be experienced through a variety of learning formats,
             depending on your schedule, goals, and stage of practice. Whether you are
             looking for immersive workshops, private sessions, retreats, or children’s

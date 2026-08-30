@@ -121,7 +121,7 @@ export default function OnlineProgramsPage() {
       {/* WHY ONLINE — preserved verbatim. DO NOT TOUCH. */}
       <Section tone="bg" width="wide">
         <RevealOnScroll className="mb-12 max-w-3xl">
-          <span className="eyebrow eyebrow--tick mb-4">Why Online</span>
+          <span className="eyebrow eyebrow--tick mb-5">Why Online</span>
           <h2 className="text-balance text-h2">
             The full depth of the practice, brought to your own space.
           </h2>
@@ -140,9 +140,9 @@ export default function OnlineProgramsPage() {
       {/* THE JOURNEYS */}
       <Section id="programs" tone="bg-alt" width="wide">
         <RevealOnScroll className="mb-12 max-w-2xl">
-          <span className="eyebrow eyebrow--tick mb-4">The Journeys</span>
+          <span className="eyebrow eyebrow--tick mb-5">The Journeys</span>
           <h2 className="text-balance text-h2">Choose a journey, not a checklist.</h2>
-          <p className="prose-measure mt-4 text-body-lg text-secondary">
+          <p className="prose-measure mt-7 text-body-lg text-secondary">
             Each journey is a guided arc of live practice in a small batch. We keep the
             specific practices for a conversation once you’re interested — what matters
             first is how far you’d like to go. Beginners are always welcome.
@@ -160,9 +160,9 @@ export default function OnlineProgramsPage() {
       {/* THEMED SESSIONS */}
       <Section tone="bg" width="wide">
         <RevealOnScroll className="mb-12 max-w-2xl">
-          <span className="eyebrow eyebrow--tick mb-4">Themed Sessions</span>
+          <span className="eyebrow eyebrow--tick mb-5">Themed Sessions</span>
           <h2 className="text-balance text-h2">Single sessions, for a specific need.</h2>
-          <p className="prose-measure mt-4 text-body-lg text-secondary">
+          <p className="prose-measure mt-7 text-body-lg text-secondary">
             Shorter, focused sessions you can join on their own — for eating well, rest,
             steadiness, and the immune system.
           </p>
@@ -184,9 +184,9 @@ export default function OnlineProgramsPage() {
             opacity={0.1}
           />
           <div className="relative">
-            <span className="eyebrow eyebrow--tick mb-4">For Organisations</span>
+            <span className="eyebrow eyebrow--tick mb-5">For Organisations</span>
             <h2 className="text-balance text-h2">Online yoga for the workplace.</h2>
-            <p className="prose-measure mt-4 text-body-lg text-secondary">
+            <p className="prose-measure mt-7 text-body-lg text-secondary">
               Structured live programs for teams — bringing steadiness, clarity, and
               wellbeing into the working week, wherever your people are based.
             </p>

@@ -63,17 +63,13 @@ export function PracticePhotographs() {
   };
 
   return (
-    <section className="bg-bg py-16 md:py-28">
-      <div className="mx-auto mb-10 max-w-6xl px-6 sm:px-8">
-        <RevealOnScroll>
-          <span className="eyebrow eyebrow--tick mb-5">A visual pause</span>
-        </RevealOnScroll>
-        <RevealOnScroll variant="rise" delay={0.06}>
-          <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
-            Practice, as it is lived.
-          </h2>
-        </RevealOnScroll>
-      </div>
+    <section className="bg-bg py-20 md:py-32">
+      <RevealOnScroll variant="rise" className="mx-auto mb-12 max-w-6xl px-6 sm:px-8">
+        <span className="eyebrow eyebrow--tick mb-6 block">A visual pause</span>
+        <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
+          Practice, as it is lived.
+        </h2>
+      </RevealOnScroll>
 
       <div className="group relative">
         {/* Edge fades (desktop) */}

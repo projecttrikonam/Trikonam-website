@@ -2,10 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { useEffect, useId, useRef, useState } from 'react';
 import { chyMega } from '@/content/site-config';
-import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
  * Classical Hatha Yoga mega menu (v2.0) — desktop only.
@@ -30,7 +28,6 @@ export function MegaMenu({
   overHero: boolean;
   active: boolean;
 }) {
-  const reduced = usePrefersReducedMotion();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -87,7 +84,7 @@ export function MegaMenu({
         aria-haspopup="true"
         aria-controls={panelId}
         onFocus={openNow}
-        className={`relative inline-flex items-center gap-1.5 text-[0.9rem] tracking-[0.01em] transition-colors ${
+        className={`relative inline-flex items-center gap-1.5 text-[0.9rem] tracking-[0.01em] transition-[color,transform] duration-300 ease-calm hover:-translate-y-px motion-reduce:hover:translate-y-0 ${
           overHero
             ? 'text-inverse/85 hover:text-inverse'
             : active
@@ -95,7 +92,13 @@ export function MegaMenu({
             : 'text-primary hover:text-moss'
         }`}
       >
-        <span className={overHero ? '' : 'link-underline'}>{label}</span>
+        <span
+          className={
+            overHero ? '' : `link-underline${active ? ' link-underline--active' : ''}`
+          }
+        >
+          {label}
+        </span>
         <svg
           width="10"
           height="10"
@@ -106,28 +109,20 @@ export function MegaMenu({
         >
           <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        {active && !overHero && (
-          <span
-            aria-hidden
-            className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-moss"
-          />
-        )}
       </Link>
 
       {/* Rendered directly on `open` (no AnimatePresence exit) so the panel unmounts
-          cleanly when it closes — never left mounted at opacity 0 blocking clicks. The
-          fade + slide-in entrance is preserved. x:'-50%' stays in the motion transform
-          (not a Tailwind -translate-x-1/2 class) so the animated y doesn't overwrite the
-          horizontal centering. */}
+          cleanly when it closes — never left mounted at opacity 0 blocking clicks.
+          Centering is the Tailwind `-translate-x-1/2` (the resting state, and what
+          reduced-motion visitors see). `.mega-panel` layers a fade + slight drop on
+          top for full-motion visitors only (globals.css), its keyframe keeping the
+          same -50% X so the horizontal position never shifts. */}
       {open && (
-          <motion.div
+          <div
             id={panelId}
-            initial={{ opacity: 0, y: reduced ? 0 : -8, x: '-50%' }}
-            animate={{ opacity: 1, y: 0, x: '-50%' }}
-            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             onMouseEnter={openNow}
             onMouseLeave={scheduleClose}
-            className="fixed left-1/2 top-[calc(6rem+0.25rem)] z-50 w-[min(56rem,calc(100vw-3rem))]"
+            className="mega-panel fixed left-1/2 top-[calc(6rem+0.25rem)] z-50 w-[min(56rem,calc(100vw-3rem))] -translate-x-1/2"
           >
             <div className="glass overflow-hidden rounded-[14px] border border-border/70 shadow-float">
               <div className="grid grid-cols-3 gap-x-8 gap-y-2 p-8">
@@ -150,7 +145,7 @@ export function MegaMenu({
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
     </div>
   );

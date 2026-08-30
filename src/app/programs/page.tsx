@@ -82,7 +82,7 @@ export default function WaysToLearnPage() {
           <h2 className="text-balance font-serif text-[clamp(1.38rem,2.7vw,2.05rem)] leading-[1.25] text-primary">
             Begin together, and go further.
           </h2>
-          <p className="prose-measure mx-auto mt-5 text-body-lg text-secondary">
+          <p className="prose-measure mx-auto mt-7 text-body-lg text-secondary">
             Practice deepens in good company. Bring your friends or family along, and we’ll
             shape a workshop around your group — a gentle, shared way to begin.
           </p>

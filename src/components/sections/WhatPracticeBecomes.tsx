@@ -40,18 +40,14 @@ export function WhatPracticeBecomes() {
   const { groupProps, getPeerProps } = useFocusGroup(dimensions.length);
 
   return (
-    <section className="bg-bg px-6 py-16 sm:px-8 md:py-28">
+    <section className="bg-bg px-6 py-20 sm:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
-        <RevealOnScroll className="max-w-2xl">
-          <span className="eyebrow eyebrow--tick mb-5">In an ordinary life</span>
-        </RevealOnScroll>
-        <RevealOnScroll delay={0.06}>
-          <h2 className="max-w-2xl text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
+        <RevealOnScroll variant="rise" className="mb-14 max-w-2xl">
+          <span className="eyebrow eyebrow--tick mb-6 block">In an ordinary life</span>
+          <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
             What can practice become in your life?
           </h2>
-        </RevealOnScroll>
-        <RevealOnScroll delay={0.12}>
-          <p className="prose-measure mt-5 max-w-2xl text-body-lg text-secondary">
+          <p className="prose-measure mt-8 text-body-lg text-secondary">
             Each practice has its own purpose. Together, over time, they become a quiet
             support beneath everything — working on every dimension of how a life is
             lived.
@@ -60,7 +56,7 @@ export function WhatPracticeBecomes() {
 
         <ul
           {...groupProps}
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
           {dimensions.map((d, i) => (
             <RevealOnScroll as="li" key={d.label} delay={0.18 + i * 0.09} className="h-full">

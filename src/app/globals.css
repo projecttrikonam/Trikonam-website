@@ -183,17 +183,21 @@
     opacity: 0.9;
   }
 
-  /* Animated underline for text links (Handoff §4.6). */
+  /* Animated underline for text links (Handoff §4.6; 2026 navigation refinement).
+   * The line grows from the centre out on hover/focus, in the link's own colour, on the
+   * one calm easing curve. `.link-underline--active` holds it drawn — a quiet persistent
+   * state for the current page in the navigation. */
   .link-underline {
-    background-image: linear-gradient(rgb(var(--color-accent-moss)), rgb(var(--color-accent-moss)));
+    background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px;
-    background-position: 0 100%;
+    background-position: 50% 100%;
     background-repeat: no-repeat;
-    transition: background-size 220ms cubic-bezier(0.22, 1, 0.36, 1);
-    padding-bottom: 2px;
+    transition: background-size 0.34s var(--ease-calm);
+    padding-bottom: 3px;
   }
   .link-underline:hover,
-  .link-underline:focus-visible {
+  .link-underline:focus-visible,
+  .link-underline--active {
     background-size: 100% 1px;
   }
 
@@ -265,13 +269,15 @@
    * costs no main thread and stays identical everywhere it is used. */
   .tactile {
     transition:
-      transform 0.55s var(--ease-calm),
-      box-shadow 0.55s var(--ease-calm),
-      border-color 0.55s var(--ease-calm);
+      transform 0.6s var(--ease-calm),
+      box-shadow 0.6s var(--ease-calm),
+      border-color 0.6s var(--ease-calm);
   }
   @media (hover: hover) {
     .tactile:hover {
-      transform: translateY(-4px) scale(1.012);
+      /* A few pixels toward the reader — a lift, not a zoom. No scale (it shimmers
+       * text at sub-pixel values and reads as "the website is animating a card"). */
+      transform: translateY(-3px);
       box-shadow: var(--shadow-lift);
     }
   }
@@ -279,13 +285,13 @@
     box-shadow: var(--shadow-lift);
   }
   .tactile-media {
-    transition: transform 0.9s var(--ease-calm);
+    transition: transform 1s var(--ease-calm);
     will-change: transform;
   }
   @media (hover: hover) {
     .group:hover .tactile-media,
     .tactile:hover .tactile-media {
-      transform: scale(1.035);
+      transform: scale(1.018);
     }
   }
 
@@ -300,12 +306,12 @@
       box-shadow 0.6s var(--ease-calm);
   }
   .focus-peer[data-state='focus'] {
-    transform: translateY(-6px) scale(1.025);
+    transform: translateY(-5px) scale(1.018);
     box-shadow: var(--shadow-lift);
   }
   .focus-peer[data-state='dim'] {
-    opacity: 0.5;
-    transform: scale(0.99);
+    opacity: 0.58;
+    transform: scale(0.992);
   }
 
   /* A quiet seam between two tonal bands — a faint gradient that lets one section
@@ -379,13 +385,15 @@
 }
 /* Variants (opt-in via RevealOnScroll `variant`):
  *   soft — opacity only, for full-bleed images / large panels where a slide reads wrong
- *   rise — a longer, slower lift for a section's opening statement
- *   still — no transform, slightly slower fade for quiet interior blocks */
+ *   rise — a slightly longer, slower lift for a section's opening statement. Kept small
+ *          (14px) so that even mid-transition a heading never visually overlaps the
+ *          copy immediately beneath it.
+ *   still — no transform, a slow fade for quiet interior blocks */
 .reveal--soft {
   transform: none;
 }
 .reveal--rise {
-  transform: translateY(30px);
+  transform: translateY(14px);
   transition:
     opacity 0.9s var(--ease-calm),
     transform 0.9s var(--ease-calm);
@@ -402,8 +410,56 @@
   }
 }
 
+/* Route-change transition (see PageTransition). A short, time-based opacity settle —
+ * `both` fill so it can never leave the page at 0, opacity-only so `position: fixed`
+ * descendants keep their viewport reference. The easing shows content within a frame or
+ * two, then eases to rest. Neutralised by the reduced-motion rule below. */
+@keyframes page-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.page-enter {
+  animation: page-enter 0.38s cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+
+/* Navigation surfaces — mobile overlay, its links, and the desktop mega panel.
+ * Every element is fully visible in its resting CSS; the entrance is layered on
+ * ONLY for full-motion visitors via the `no-preference` query. Reduced-motion
+ * visitors never receive the animation at all, so nothing can be stranded at
+ * opacity 0 while a preference resolves after mount — the failure mode the old
+ * framer entrances had here. */
+@keyframes nav-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes nav-item-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes mega-panel-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-nav-overlay {
+    animation: nav-fade-in 0.3s cubic-bezier(0.33, 1, 0.68, 1) both;
+  }
+  .mobile-nav-item {
+    animation: nav-item-in 0.44s var(--ease-calm) both;
+    animation-delay: calc(60ms + var(--stagger, 0) * 45ms);
+  }
+  .mega-panel {
+    animation: mega-panel-in 0.24s var(--ease-calm) both;
+  }
+}
+
 /* ------------------------------------------------------------------ *
  * REDUCED MOTION — quality floor, not optional (Section 4.6, 11.2)
+ * The *-delay resets matter as much as the durations: a `transition-delay`
+ * (RevealOnScroll's `delay` prop) or `animation-delay` left intact keeps the
+ * effect parked in its delay phase, holding the start value — which for a
+ * reveal is opacity 0. Without these two lines, every staggered reveal is
+ * invisible to reduced-motion visitors.
  * ------------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -411,7 +467,9 @@
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: -1ms !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
   }
 }

@@ -13,18 +13,14 @@ import { Button } from '@/components/ui/Button';
  */
 export function WhyClassicalHatha() {
   return (
-    <section className="bg-bg-alt px-6 py-16 sm:px-8 md:py-28">
+    <section className="bg-bg-alt px-6 py-20 sm:px-8 md:py-32">
       <div className="mx-auto max-w-4xl">
-        <RevealOnScroll>
-          <span className="eyebrow eyebrow--tick mb-5">Why Classical Hatha Yoga</span>
-        </RevealOnScroll>
-        <RevealOnScroll variant="rise" delay={0.06}>
-          <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
+        <RevealOnScroll variant="rise">
+          <span className="eyebrow eyebrow--tick mb-6 block">Why Classical Hatha Yoga</span>
+          <h2 className="max-w-3xl text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
             Not exercise, not stretching, not a way to relax — a complete inner science.
           </h2>
-        </RevealOnScroll>
-        <RevealOnScroll delay={0.14}>
-          <div className="prose-measure mt-6 space-y-4 text-body-lg text-secondary">
+          <div className="prose-measure mt-8 space-y-4 text-body-lg text-secondary">
             <p>
               Classical Hatha Yoga is often mistaken for a fitness routine. In its
               original form it is something quite different: a precise system for bringing
@@ -41,7 +37,7 @@ export function WhyClassicalHatha() {
           </div>
         </RevealOnScroll>
 
-        <RevealOnScroll variant="soft" delay={0.1} className="mt-12">
+        <RevealOnScroll variant="soft" delay={0.1} className="mt-14">
           <YouTubeFacade
             id="UIK3hR-NjYU"
             poster="/images/home/why-chy-video.webp"
