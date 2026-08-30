@@ -61,31 +61,28 @@ export function Hero() {
         style={{ y: wordsY, opacity: wordsOpacity }}
         className="absolute inset-x-0 bottom-0 top-0 flex items-end"
       >
+        {/* The headline group rests fully visible; a slow staggered rise is layered on
+            for full-motion visitors only (`.hero-enter`, globals.css). Kept off framer
+            so the preference resolving after mount can never strand it at opacity 0. */}
         <div className="mx-auto w-full max-w-6xl px-6 pb-24 sm:px-8 md:pb-28">
-          <motion.p
-            initial={{ opacity: 0, y: reduced ? 0 : 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            className="mb-6 text-[0.78rem] uppercase tracking-[0.22em] text-inverse/75"
+          <p
+            style={{ '--stagger': 0 } as React.CSSProperties}
+            className="hero-enter mb-6 text-[0.78rem] uppercase tracking-[0.22em] text-inverse/75"
           >
             Authentic Classical Hatha Yoga
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: reduced ? 0 : 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
-            className="max-w-3xl font-serif text-[clamp(2.75rem,7vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-inverse"
+          </p>
+          <h1
+            style={{ '--stagger': 1 } as React.CSSProperties}
+            className="hero-enter max-w-3xl font-serif text-[clamp(2.75rem,7vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-inverse"
           >
             Return to stillness.
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: reduced ? 0 : 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
-            className="mt-7 max-w-lg text-body-lg leading-relaxed text-inverse/85"
+          </h1>
+          <p
+            style={{ '--stagger': 2 } as React.CSSProperties}
+            className="hero-enter mt-7 max-w-lg text-body-lg leading-relaxed text-inverse/85"
           >
             A quiet space for the practice, kept in its original form.
-          </motion.p>
+          </p>
         </div>
       </motion.div>
 
