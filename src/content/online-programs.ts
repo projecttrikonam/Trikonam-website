@@ -182,3 +182,11 @@ export const BATCH_CUSTOM = 'Or specify a suitable time';
 
 export const getOnlineProgram = (slug: string): OnlineProgram | undefined =>
   [...generalPrograms, ...corporatePrograms].find((p) => p.slug === slug);
+
+/**
+ * Adjectival form of a `duration` for inline use in prose — "3 Days" → "3-day",
+ * "1 Month" → "1-month". Keeps the pre-filled WhatsApp messages reading naturally
+ * ("the 3-day online journey", not "the 3 days online journey").
+ */
+export const durationAdjective = (duration: string): string =>
+  duration.trim().toLowerCase().replace(/\s+/g, '-').replace(/s$/, '');

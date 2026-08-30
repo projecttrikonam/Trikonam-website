@@ -13,7 +13,7 @@
  * docs / brief Part 9).
  */
 
-import { journeyPrograms } from './online-programs';
+import { journeyPrograms, durationAdjective } from './online-programs';
 import { whatsappUrl } from '@/lib/whatsapp';
 
 export interface AssessmentOption {
@@ -386,7 +386,7 @@ export function computeCompass(answers: AnswerMap): CompassResult {
       body: j.blurb + themeSentence,
       href: '/online-programs',
       whatsappHref: whatsappUrl(
-        `Hi Trikonam, I took the Practice Compass and it suggested ${j.name} — the ${j.duration.toLowerCase()} online journey${
+        `Hi Trikonam, I took the Practice Compass and it suggested ${j.name} — the ${durationAdjective(j.duration)} online journey${
           j.price ? ` (${j.price})` : ''
         }. I'd like to know more.`,
       ),

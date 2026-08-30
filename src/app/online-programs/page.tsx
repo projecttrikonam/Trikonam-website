@@ -8,6 +8,7 @@ import {
   journeyPrograms,
   themedPrograms,
   corporatePrograms,
+  durationAdjective,
   type OnlineProgram,
 } from '@/content/online-programs';
 import { whatsappUrl } from '@/lib/whatsapp';
@@ -34,7 +35,7 @@ export const metadata: Metadata = pageMetadata({
 function interestHref(program: OnlineProgram) {
   const label =
     program.group === 'journey'
-      ? `${program.name} — the ${program.duration.toLowerCase()} online journey${
+      ? `${program.name} — the ${durationAdjective(program.duration)} online journey${
           program.price ? ` (${program.price})` : ''
         }`
       : `the ${program.name} online session`;
