@@ -1,46 +1,66 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { BeginJourneyButton } from '@/components/ui/BeginJourneyButton';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
- * Home hero — an immersive, full-screen arrival (client redesign).
+ * Home hero — an immersive, full-screen arrival (2026 interaction layer).
  *
- * One exceptional photograph (a solitary meditation in a waterfall cave) fills the
- * viewport. Elegant type rests over it, lifted by a soft gradient rather than a box.
- * The only motion is an almost-imperceptible slow drift of the image and a gentle
- * fade-up of the words — nothing jumps. The header sits transparent over this and
- * solidifies on scroll.
+ * One exceptional photograph fills the viewport. Elegant type rests over it, lifted by a
+ * soft gradient rather than a box. On load the image settles from a hair of extra scale;
+ * as the reader scrolls on, it drifts up a little and the words fade — the hero recedes
+ * so the story can rise over it. Nothing reads as a zoom.
  *
- * No decorative devices (the outlined ring is gone). The image is meant to be felt,
- * not read.
+ * There is deliberately NO call-to-action button here: "Begin Your Journey" lives once,
+ * in the navigation, and the Practice Compass invitation appears as a small card.
  */
 export function Hero() {
   const reduced = usePrefersReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], reduced ? ['0%', '0%'] : ['0%', '-9%']);
+  const wordsY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -40]);
+  const wordsOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
 
   return (
-    <section className="relative -mt-24 h-[100svh] min-h-[600px] w-full overflow-hidden bg-primary">
-      {/* The photograph fills the frame — a single figure at dusk, centred so it holds
-          on both wide screens and tall phones. Rendered as a plain <img> for reliable
-          full-bleed painting; it simply rests there. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/images/home/hero.webp"
-        alt="A practitioner sits in quiet meditation at dusk, mountains softening into the distance."
-        loading="eager"
-        fetchPriority="high"
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover object-center"
-      />
+    <section
+      ref={ref}
+      className="relative -mt-24 h-[100svh] min-h-[600px] w-full overflow-hidden bg-primary"
+    >
+      {/* The photograph fills the frame. A 12s ease-out drift from a hair of extra scale
+          gives the arrival a sense of settling; a small scroll-linked rise lets it
+          recede as the reader moves on. */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ y: imgY }}
+        initial={{ scale: reduced ? 1.16 : 1.22 }}
+        animate={{ scale: 1.16 }}
+        transition={{ duration: 12, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/home/hero.webp"
+          alt="A practitioner sits in quiet meditation at dusk, mountains softening into the distance."
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+      </motion.div>
 
-      {/* Soft gradients for legibility — the middle is left clear so the photograph is
-          felt, with just enough veil at top (for the nav) and bottom (for the words). */}
+      {/* Soft gradients for legibility. */}
       <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-primary/45 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/85 via-primary/25 to-transparent" />
 
-      {/* Words, resting low. */}
-      <div className="absolute inset-x-0 bottom-0 top-0 flex items-end">
+      {/* Words, resting low — they lift and fade as the reader scrolls on. */}
+      <motion.div
+        style={{ y: wordsY, opacity: wordsOpacity }}
+        className="absolute inset-x-0 bottom-0 top-0 flex items-end"
+      >
         <div className="mx-auto w-full max-w-6xl px-6 pb-24 sm:px-8 md:pb-28">
           <motion.p
             initial={{ opacity: 0, y: reduced ? 0 : 14 }}
@@ -62,20 +82,12 @@ export function Hero() {
             initial={{ opacity: 0, y: reduced ? 0 : 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
-            className="mt-7 max-w-md text-body-lg leading-relaxed text-inverse/85"
+            className="mt-7 max-w-lg text-body-lg leading-relaxed text-inverse/85"
           >
             A quiet space for the practice, kept in its original form.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: reduced ? 0 : 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
-            className="mt-9"
-          >
-            <BeginJourneyButton />
-          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* A whisper of a scroll cue. */}
       <motion.div

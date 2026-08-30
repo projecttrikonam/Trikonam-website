@@ -5,8 +5,9 @@ import type { Article, Category } from '@/content/journal/types';
 
 /**
  * An article preview in the Journal grid. Every image is framed to the same 3:2 so a row
- * of cards reads as one collection. Hovering lifts the card gently and eases the image in
- * a little — deliberately the only two movements, to keep the page calm.
+ * of cards reads as one collection. On hover or keyboard focus the card lifts a few
+ * pixels and the image drifts within its frame — the shared `.tactile` vocabulary,
+ * deliberately the only two movements, to keep the page calm.
  *
  * Uses `coverImageThumb` (grid-sized) rather than the hero-sized `coverImage`.
  */
@@ -22,7 +23,7 @@ export function ArticleCard({
   const href = `/journal/${article.slug}`;
 
   return (
-    <article className="group flex h-full flex-col transition-transform duration-500 ease-calm hover:-translate-y-1">
+    <article className="group flex h-full flex-col transition-transform duration-500 ease-calm hover:-translate-y-1 focus-within:-translate-y-1 motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0">
       {image && (
         <Link href={href} className="mb-6 block overflow-hidden bg-bg-alt" tabIndex={-1} aria-hidden>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -31,7 +32,7 @@ export function ArticleCard({
             alt={article.coverAlt ?? ''}
             loading="lazy"
             decoding="async"
-            className="aspect-[3/2] w-full object-cover ring-1 ring-black/[0.05] transition-transform duration-[900ms] ease-calm group-hover:scale-[1.03]"
+            className="tactile-media aspect-[3/2] w-full object-cover ring-1 ring-black/[0.05]"
           />
         </Link>
       )}

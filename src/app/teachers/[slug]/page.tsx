@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { BreathMark } from '@/components/ui/BreathMark';
@@ -52,12 +53,26 @@ export default function TeacherPage({ params }: { params: { slug: string } }) {
         </Link>
 
         <RevealOnScroll className="relative mx-auto max-w-2xl pt-8 text-center">
-          <div className="relative mx-auto mb-2 flex h-40 w-40 items-center justify-center">
-            <BreathMark className="absolute inset-0 h-full w-full" opacity={0.4} />
-            <span className="font-serif text-[5rem] leading-none text-moss/20">
-              {teacher.name.charAt(0)}
-            </span>
-          </div>
+          {teacher.photo ? (
+            <div className="relative mx-auto mb-7 aspect-[4/5] w-52 overflow-hidden rounded-[12px] bg-bg-alt shadow-lift ring-1 ring-black/[0.05]">
+              <Image
+                src={teacher.photo}
+                alt={teacher.photoAlt ?? teacher.name}
+                fill
+                sizes="13rem"
+                priority
+                className="object-cover"
+              />
+              <span className="pointer-events-none absolute inset-0 rounded-[12px] ring-1 ring-inset ring-gold/12" />
+            </div>
+          ) : (
+            <div className="relative mx-auto mb-2 flex h-40 w-40 items-center justify-center">
+              <BreathMark className="absolute inset-0 h-full w-full" opacity={0.4} />
+              <span className="font-serif text-[5rem] leading-none text-moss/20">
+                {teacher.name.charAt(0)}
+              </span>
+            </div>
+          )}
           <span className="eyebrow eyebrow--tick mx-auto mb-5 w-fit">{teacher.role}</span>
           <h1 className="text-balance font-serif text-[clamp(1.95rem,4.5vw,3.19rem)] leading-[1.16] sm:leading-[1.05] tracking-[-0.015em] text-primary">
             {teacher.name}

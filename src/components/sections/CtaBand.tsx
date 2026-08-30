@@ -20,7 +20,7 @@ export function CtaBand({
 }) {
   return (
     <section className="bg-bg px-6 py-16 sm:px-8 md:py-24">
-      <RevealOnScroll className="mx-auto max-w-4xl">
+      <RevealOnScroll variant="rise" className="mx-auto max-w-4xl">
         <div className="relative overflow-hidden rounded-[16px] border border-border/70 bg-[radial-gradient(120%_140%_at_50%_-20%,rgba(138,98,48,0.07),transparent_60%)] px-6 py-16 text-center shadow-soft sm:px-16 sm:py-20">
           <BreathMark
             className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2"

@@ -1,15 +1,16 @@
 /**
- * Teachers (Handoff Section 6.3 & 12) — v1.1 finalized bios.
+ * Teachers (Handoff Section 6.3 & 12) — v1.1 bios; 2026 refinement adds portraits and
+ * the physician-meditator profile.
  *
  * Bios are the client's approved copy, used VERBATIM (paragraphs split only on the
  * blank lines in the source), the same convention as practices.ts. `summary` is a
  * first-sentence excerpt of each bio's opening paragraph — used on the teacher grid
  * card, mirroring practices.ts's summary pattern.
  *
- * Do NOT caption any photo with a teacher's name: no source images were confirmed as
- * being of a specific named teacher, and a wrong name-to-face pairing is worse than no
- * photo (Handoff §14.5). Detail pages therefore use the same "no image" centred
- * composition as a practice page without a confirmed photo.
+ * `photo` (2026) — a confirmed, client-supplied portrait of that named teacher, so the
+ * name-to-face pairing is safe. Portraits are graded to one calm register in
+ * scripts/process-2026-refresh.mjs. A teacher without a `photo` falls back to the
+ * monogram-in-a-breath-ring treatment.
  */
 
 export interface Teacher {
@@ -20,6 +21,9 @@ export interface Teacher {
   summary: string;
   /** Full approved biography, one entry per paragraph (verbatim). */
   bio: string[];
+  /** Confirmed portrait (4:5). Optional — falls back to a monogram. */
+  photo?: string;
+  photoAlt?: string;
 }
 
 export const teachers: Teacher[] = [
@@ -27,6 +31,8 @@ export const teachers: Teacher[] = [
     slug: 'vasishta',
     name: 'Vasishta Bhargavi',
     role: 'Hatha Yoga Teacher',
+    photo: '/images/teachers/vasishta.webp',
+    photoAlt: 'Portrait of Vasishta Bhargavi, Classical Hatha Yoga teacher at Trikonam.',
     summary:
       'My academic journey has been shaped by a deep curiosity about human behaviour, learning, identity, and the ways in which people experience and make meaning of the world around them.',
     bio: [
@@ -38,7 +44,9 @@ export const teachers: Teacher[] = [
   {
     slug: 'suresh',
     name: 'M Suresh Kumar',
-    role: 'Hatha Yoga Teacher',
+    role: 'Hatha Yoga Teacher & Strength Trainer',
+    photo: '/images/teachers/suresh.webp',
+    photoAlt: 'Portrait of M Suresh Kumar, Classical Hatha Yoga teacher at Trikonam.',
     summary:
       'Health, movement, and adventure have been an integral part of my life for as long as I can remember.',
     bio: [
@@ -53,6 +61,8 @@ export const teachers: Teacher[] = [
     slug: 'chandana',
     name: 'Kakustam Hari Chandana',
     role: 'Hatha Yoga Teacher',
+    photo: '/images/teachers/chandana.webp',
+    photoAlt: 'Portrait of Kakustam Hari Chandana, Classical Hatha Yoga teacher at Trikonam.',
     summary: 'My journey into yoga did not begin with a desire to become a teacher.',
     bio: [
       "My journey into yoga did not begin with a desire to become a teacher. Like many, I was exploring life through education, travel, and new experiences. After completing my Master's in Project Management in the United Kingdom, I returned to India with a growing feeling that, despite everything I had experienced, there was still something essential I was searching for.",
@@ -65,6 +75,8 @@ export const teachers: Teacher[] = [
     slug: 'shirisha',
     name: 'Shirisha',
     role: 'Hatha Yoga Teacher',
+    photo: '/images/teachers/shirisha.webp',
+    photoAlt: 'Portrait of Shirisha, Classical Hatha Yoga teacher at Trikonam.',
     summary:
       'From a young age, I found myself drawn to questions about life, creation, and the very nature of existence.',
     bio: [
@@ -72,6 +84,28 @@ export const teachers: Teacher[] = [
       'That search eventually led me to Isha Foundation through the Inner Engineering program in 2018. What began as an exploration soon became a profound turning point, bringing a sense of clarity that gradually dissolved many of the questions I had carried for years.',
       'My introduction to Classical Hatha Yoga in 2019 deepened this journey in ways I had never imagined. Until then, I had seen yoga largely as a physical discipline, but through the intensive Classical Hatha Yoga Teacher Training at Sadhguru Gurukulam in 2021, I came to experience it as a complete and transformative path. As my practice deepened, I experienced greater lightness, vitality, and an effortless sense of meditativeness that naturally became part of everyday life.',
       'Offering these practices is simply an expression of gratitude for everything they have brought into my own life. My aspiration is to make this possibility available to as many people as I can, so they too may experience the profound impact of Classical Hatha Yoga.',
+    ],
+  },
+  {
+    // A physician and meditator who is part of the Trikonam community. Deliberately given
+    // the same treatment as every other profile — not framed as a medical authority, and
+    // making no medical treatment claims. Bio is the client's approved copy, verbatim.
+    slug: 'sasi-vadana',
+    name: 'Dr. Sasi Vadana',
+    role: 'Physician & Meditator',
+    photo: '/images/teachers/sasi-vadana.webp',
+    photoAlt: 'Portrait of Dr. Sasi Vadana, physician and meditator, part of the Trikonam community.',
+    summary:
+      'I have been associated with Isha since 2018, and over the years, I had the opportunity to explore and complete the various programs offered, including Samyama.',
+    bio: [
+      'I have been associated with Isha since 2018, and over the years, I had the opportunity to explore and complete the various programs offered, including Samyama.',
+      'What kept drawing me deeper into the practices was seeing the changes they were bringing about in people around me — not just in the way they felt, but in the way they lived and experienced life.',
+      'As a doctor, this naturally made me curious. I wanted to understand more about the human system — both through the lens of physiology and through the science of yoga. And as I continued practicing, I began noticing the physical changes in myself and in others. There were times when the body responded to the practices in ways I had not expected, even in situations where medication had not brought the same results.',
+      'This made me want to look more closely at the body and, more importantly, learn to listen to it.',
+      'Every body speaks differently. Understanding what it is telling us, and approaching our practices with the right awareness and guidance, can make a meaningful difference to how we grow and move through our lives.',
+      'This understanding is what brought me to Trikonam.',
+      'I joined Trikonam because I want to support people in approaching yoga with the right guidance — not simply as something to do, but as a way of understanding and working with oneself.',
+      'I hope that, together with the Trikonam community, we can take these practices to more people and help them discover for themselves the possibilities that yoga can open up.',
     ],
   },
 ];

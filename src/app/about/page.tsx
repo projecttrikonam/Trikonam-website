@@ -5,8 +5,6 @@ import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage';
 import { BreathDivider } from '@/components/ui/BreathDivider';
 import { Button } from '@/components/ui/Button';
-import { SadhguruQuote } from '@/components/sections/SadhguruQuote';
-import { quotes } from '@/content/quotes';
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = pageMetadata({
@@ -15,26 +13,6 @@ export const metadata: Metadata = pageMetadata({
     'Trikonam offers Classical Hatha Yoga in its authentic form — taught with precision, care, and deep respect for the integrity of these practices.',
   path: '/about',
 });
-
-/** The four dimensions Classical Hatha Yoga supports (client copy). */
-const supports = [
-  {
-    label: 'Body',
-    text: 'Supports strength, flexibility, posture, stability, and overall physical well-being.',
-  },
-  {
-    label: 'Mind',
-    text: 'Brings greater mental clarity, focus, steadiness, and the ability to respond rather than react.',
-  },
-  {
-    label: 'Energy',
-    text: "Creates balance within the body's energy system, helping one experience vitality, ease, and inner aliveness.",
-  },
-  {
-    label: 'Emotions',
-    text: 'Helps cultivate emotional balance, inner stability, and a more joyful experience of life.',
-  },
-];
 
 /**
  * About page. Storytelling refinement (visual rhythm, image-beside/image-below, feature
@@ -73,9 +51,10 @@ export default function AboutPage() {
             </div>
           </PageHeader>
 
-          <RevealOnScroll delay={0.1}>
+          <RevealOnScroll variant="soft" delay={0.1}>
             <ResponsiveImage
               src="/images/about/about-hero.webp"
+              parallax
               alt="Practitioners in white sit in meditation before the Adiyogi, a large sculpted face of the first yogi."
               aspect="aspect-[4/5]"
               sizes="(min-width: 768px) 45vw, 100vw"
@@ -87,7 +66,7 @@ export default function AboutPage() {
 
       {/* SECTION 2 — Our Vision (unchanged) */}
       <Section tone="bg-alt" width="narrow">
-        <RevealOnScroll className="text-center">
+        <RevealOnScroll variant="rise" className="text-center">
           <span className="eyebrow mb-5 block">Our Vision</span>
           <p className="mx-auto max-w-2xl font-serif text-h2 leading-[1.35] text-primary">
             To make authentic Classical Hatha Yoga available to anyone seeking greater
@@ -123,9 +102,10 @@ export default function AboutPage() {
         </RevealOnScroll>
       </Section>
       <Section tone="bg" width="wide" className="pt-0">
-        <RevealOnScroll>
+        <RevealOnScroll variant="soft">
           <ResponsiveImage
             src="/images/about/what-is-chy.webp"
+            parallax
             alt="Practitioners hold classical postures along a sunlit stone colonnade at dawn."
             aspect="aspect-[3/2]"
             sizes="(min-width: 1024px) 72rem, 100vw"
@@ -206,50 +186,18 @@ export default function AboutPage() {
         </RevealOnScroll>
       </Section>
 
-      {/* Sadhguru — consciousness as the source. */}
-      <SadhguruQuote quote={quotes.consciousness} tone="dark" />
-
-      {/* SECTION 5 — How these practices support you (cards + large image) */}
-      <Section tone="bg" width="wide">
-        <RevealOnScroll className="max-w-2xl">
-          <span className="eyebrow eyebrow--tick mb-4">Trikonam Offers</span>
-          <h2 className="text-h2">How these practices support you</h2>
-          <p className="prose-measure mt-5 text-body-lg text-secondary">
-            At Trikonam, every offering is rooted in the science of Classical Hatha Yoga.
-            While each practice has its own purpose, together they create a balanced
-            system that supports every dimension of your life.
-          </p>
-        </RevealOnScroll>
-
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {supports.map((s, i) => (
-            <RevealOnScroll
-              as="li"
-              key={s.label}
-              delay={(i % 4) * 0.06}
-              className="flex h-full flex-col rounded-[10px] surface-elevated p-6 ring-1 ring-black/[0.04] sm:p-7"
-            >
-              <span className="eyebrow mb-3 block">{s.label}</span>
-              <p className="text-body text-secondary">{s.text}</p>
-            </RevealOnScroll>
-          ))}
-        </ul>
-
-        <RevealOnScroll className="mt-14">
-          <ResponsiveImage
-            src="/images/about/support.webp"
-            alt="A practitioner sits in a quiet gesture of prayer beneath a traditional tiled pavilion."
-            aspect="aspect-[16/10]"
-            sizes="(min-width: 1024px) 72rem, 100vw"
-          />
-        </RevealOnScroll>
-      </Section>
+      {/*
+        The Sadhguru "consciousness" quote and the "How these practices support you"
+        cards + pavilion image were removed here (2026): the four dimensions now live on
+        the homepage ("What can practice become in your life?"), and the pavilion
+        photograph moved to the homepage full-bleed interlude.
+      */}
 
       <BreathDivider className="pb-4" />
 
       {/* Invitation (kept) */}
       <Section tone="bg" width="narrow" className="pt-6 text-center">
-        <RevealOnScroll>
+        <RevealOnScroll variant="rise">
           <span className="eyebrow mb-4 block">Invitation</span>
           <p className="mx-auto max-w-2xl font-serif text-h2 leading-[1.4] text-primary">
             Whether you are taking your very first step into yoga or looking to deepen an
