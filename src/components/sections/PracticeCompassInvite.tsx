@@ -12,7 +12,7 @@ import { BreathMark } from '@/components/ui/BreathMark';
 export function PracticeCompassInvite() {
   return (
     <section className="bg-bg px-6 pb-16 pt-0 sm:px-8 md:pb-24">
-      <RevealOnScroll className="mx-auto max-w-5xl">
+      <RevealOnScroll variant="rise" className="mx-auto max-w-5xl">
         <div className="relative isolate overflow-hidden rounded-[22px] bg-primary px-6 py-14 text-center shadow-lift sm:px-14 sm:py-16">
           {/* Warm light — gold from above, a breath of moss from below. */}
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_50%_-10%,rgba(168,124,61,0.28),transparent_60%)]" />

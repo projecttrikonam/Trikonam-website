@@ -25,7 +25,7 @@ function ProgramCard({ program }: { program: UpcomingProgram }) {
     `Hi Trikonam, I'm interested in ${program.interest}. Please tell me more.`,
   );
   return (
-    <article className="flex h-full flex-col rounded-[12px] surface-elevated p-7 ring-1 ring-black/[0.04]">
+    <article className="tactile group flex h-full flex-col rounded-[12px] surface-elevated p-7 ring-1 ring-black/[0.04]">
       <div className="flex items-center gap-2 text-micro uppercase tracking-[0.14em] text-moss">
         <span>{modeLabel(program.mode)}</span>
         <span aria-hidden className="h-1 w-1 rounded-full bg-moss/40" />
@@ -54,10 +54,10 @@ function ProgramCard({ program }: { program: UpcomingProgram }) {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-fine font-medium uppercase tracking-[0.12em] text-moss transition-colors hover:text-moss-dark"
+          className="group/link inline-flex items-center gap-2 text-fine font-medium uppercase tracking-[0.12em] text-moss transition-colors hover:text-moss-dark"
         >
           I’m Interested
-          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden>
+          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden className="transition-transform duration-300 ease-calm group-hover/link:translate-x-1">
             <path d="M1 5h13M10 1l4 4-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </a>
@@ -74,12 +74,16 @@ export function UpcomingPrograms() {
   return (
     <section className="bg-bg-alt px-6 py-16 sm:px-8 md:py-28">
       <div className="mx-auto max-w-6xl">
-        <RevealOnScroll className="mb-12 max-w-2xl">
+        <RevealOnScroll className="max-w-2xl">
           <span className="eyebrow eyebrow--tick mb-5">Upcoming at Trikonam</span>
-          <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
+        </RevealOnScroll>
+        <RevealOnScroll variant="rise" delay={0.06}>
+          <h2 className="max-w-2xl text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
             What’s happening now.
           </h2>
-          <p className="prose-measure mt-5 text-body-lg text-secondary">
+        </RevealOnScroll>
+        <RevealOnScroll delay={0.14} className="mb-12">
+          <p className="prose-measure mt-5 max-w-2xl text-body-lg text-secondary">
             The programs currently scheduled — in person in Hyderabad, and live online.
             Batches are small, so we form them by conversation: tell us you’re interested
             and we’ll take it from there.
@@ -88,7 +92,7 @@ export function UpcomingPrograms() {
 
         <ul className="grid gap-6 sm:grid-cols-2">
           {upcomingPrograms.map((program, i) => (
-            <RevealOnScroll as="li" key={program.slug} delay={(i % 2) * 0.08} className="h-full">
+            <RevealOnScroll as="li" key={program.slug} delay={0.05 + (i % 2) * 0.1} className="h-full">
               <ProgramCard program={program} />
             </RevealOnScroll>
           ))}
@@ -96,7 +100,7 @@ export function UpcomingPrograms() {
 
         {/* The community practice, presented apart — not a paid workshop. */}
         <RevealOnScroll delay={0.1} className="mt-6">
-          <div className="flex flex-col items-start gap-4 rounded-[12px] border border-dashed border-moss/30 bg-bg/40 p-7 sm:flex-row sm:items-center sm:justify-between">
+          <div className="tactile group flex flex-col items-start gap-4 rounded-[12px] border border-dashed border-moss/30 bg-bg/40 p-7 sm:flex-row sm:items-center sm:justify-between">
             <div className="max-w-xl">
               <div className="flex items-center gap-2 text-micro uppercase tracking-[0.14em] text-moss">
                 <span>{communityPractice.meta}</span>
@@ -110,10 +114,10 @@ export function UpcomingPrograms() {
               href={communityHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 inline-flex items-center gap-2 text-fine font-medium uppercase tracking-[0.12em] text-moss transition-colors hover:text-moss-dark"
+              className="group/link inline-flex shrink-0 items-center gap-2 text-fine font-medium uppercase tracking-[0.12em] text-moss transition-colors hover:text-moss-dark"
             >
               Join the Practice
-              <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden>
+              <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden className="transition-transform duration-300 ease-calm group-hover/link:translate-x-1">
                 <path d="M1 5h13M10 1l4 4-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>

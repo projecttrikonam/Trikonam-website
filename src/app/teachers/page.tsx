@@ -36,12 +36,13 @@ export default function TeachersPage() {
       {/* Credentials + gurukulam training image. */}
       <Section tone="bg-alt" width="wide" className="pt-0 md:pt-0">
         <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
-          <RevealOnScroll>
+          <RevealOnScroll variant="soft">
             <ResponsiveImage
               src="/images/teachers/training.webp"
               alt="Trainees seated in rows at Sadhguru Gurukulam during a Classical Hatha Yoga teacher-training session."
               aspect="aspect-[4/3]"
               sizes="(min-width: 768px) 45vw, 100vw"
+              parallax
             />
           </RevealOnScroll>
           <RevealOnScroll delay={0.05}>
@@ -69,9 +70,13 @@ export default function TeachersPage() {
       </Section>
 
       <Section tone="bg" width="wide">
-        <RevealOnScroll className="mb-12">
+        <RevealOnScroll>
           <span className="eyebrow eyebrow--tick mb-4">Our Teachers</span>
+        </RevealOnScroll>
+        <RevealOnScroll variant="rise" delay={0.06}>
           <h2 className="text-h2">One lineage. Many teachers. One intention.</h2>
+        </RevealOnScroll>
+        <RevealOnScroll delay={0.14} className="mb-12">
           <p className="mt-3 text-body-lg text-secondary">
             A growing community of Classical Hatha Yoga teachers.
           </p>

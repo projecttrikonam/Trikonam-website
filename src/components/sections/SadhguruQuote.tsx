@@ -31,7 +31,7 @@ export function SadhguruQuote({
       {dark && (
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_-10%,rgba(91,107,78,0.22),transparent_60%)]" />
       )}
-      <RevealOnScroll className="relative mx-auto max-w-3xl text-center">
+      <RevealOnScroll variant="still" className="relative mx-auto max-w-3xl text-center">
         <span aria-hidden className="mx-auto mb-8 block h-px w-12 bg-gradient-to-r from-gold/0 via-gold to-gold/0" />
         <blockquote
           className={`text-balance font-serif text-[clamp(1.3rem,2.88vw,2.18rem)] font-normal leading-[1.36] ${

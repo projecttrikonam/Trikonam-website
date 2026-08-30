@@ -44,7 +44,7 @@ function interestHref(program: OnlineProgram) {
 
 function ProgramCard({ program }: { program: OnlineProgram }) {
   return (
-    <article className="flex h-full flex-col rounded-[12px] surface-elevated p-7 ring-1 ring-black/[0.04]">
+    <article className="tactile group flex h-full flex-col rounded-[12px] surface-elevated p-7 ring-1 ring-black/[0.04]">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h3 className="font-serif text-[1.35rem] leading-snug text-primary">
           {program.name}
@@ -65,10 +65,10 @@ function ProgramCard({ program }: { program: OnlineProgram }) {
           href={interestHref(program)}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-fine font-medium uppercase tracking-[0.12em] text-moss transition-colors hover:text-moss-dark"
+          className="group/link inline-flex items-center gap-2 text-fine font-medium uppercase tracking-[0.12em] text-moss transition-colors hover:text-moss-dark"
         >
           I’m Interested
-          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden>
+          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden className="transition-transform duration-300 ease-calm group-hover/link:translate-x-1">
             <path d="M1 5h13M10 1l4 4-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </a>
@@ -105,13 +105,14 @@ export default function OnlineProgramsPage() {
             </a>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={0.1}>
+          <RevealOnScroll variant="soft" delay={0.1}>
             <ResponsiveImage
               src="/images/online-programs/hero.webp"
               alt="A student in white joins a live online Classical Hatha Yoga session on a laptop, seated in a sunlit garden."
               aspect="aspect-[4/3]"
               sizes="(min-width: 768px) 46vw, 100vw"
               priority
+              parallax
             />
           </RevealOnScroll>
         </div>

@@ -64,12 +64,16 @@ export function PracticePhotographs() {
 
   return (
     <section className="bg-bg py-16 md:py-28">
-      <RevealOnScroll className="mx-auto mb-10 max-w-6xl px-6 sm:px-8">
-        <span className="eyebrow eyebrow--tick mb-5">A visual pause</span>
-        <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
-          Practice, as it is lived.
-        </h2>
-      </RevealOnScroll>
+      <div className="mx-auto mb-10 max-w-6xl px-6 sm:px-8">
+        <RevealOnScroll>
+          <span className="eyebrow eyebrow--tick mb-5">A visual pause</span>
+        </RevealOnScroll>
+        <RevealOnScroll variant="rise" delay={0.06}>
+          <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
+            Practice, as it is lived.
+          </h2>
+        </RevealOnScroll>
+      </div>
 
       <div className="group relative">
         {/* Edge fades (desktop) */}
@@ -118,7 +122,7 @@ export function PracticePhotographs() {
           {practicePhotos.map((photo, i) => (
             <li key={photo.src} className="shrink-0">
               <figure
-                className="relative h-60 overflow-hidden rounded-[10px] bg-bg-alt shadow-lift ring-1 ring-black/[0.05] sm:h-72 lg:h-[22rem]"
+                className="tactile group relative h-60 overflow-hidden rounded-[10px] bg-bg-alt shadow-lift ring-1 ring-black/[0.05] sm:h-72 lg:h-[22rem]"
                 style={{ aspectRatio: photo.aspect.replace('/', ' / ') }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -129,7 +133,7 @@ export function PracticePhotographs() {
                   alt={photo.alt}
                   loading={i === 0 ? 'eager' : 'lazy'}
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="tactile-media absolute inset-0 h-full w-full object-cover"
                 />
                 <span className="pointer-events-none absolute inset-0 rounded-[10px] ring-1 ring-inset ring-gold/10" />
               </figure>

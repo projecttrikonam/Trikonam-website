@@ -1,19 +1,19 @@
-'use client';
-
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
- * Base card (Handoff §8) — Creative Director revision.
+ * Base card (Handoff §8) — 2026 interaction layer.
  *
  * Image-forward and quiet: a soft elevated surface (no heavy border), a hairline gold
- * rule that draws in on hover, the inner image easing to ~1.04 within an overflow
- * wrapper, and a layered shadow that deepens as the card lifts (§4.6 row 4). Cards
- * without a photo get a calm gradient canvas with a large faint monogram and a breath
- * ring — so image-less practices never read as broken. Movement removed under
- * prefers-reduced-motion.
+ * rule that draws in on hover, the inner image easing within an overflow wrapper, and a
+ * layered shadow that deepens as the card lifts a few pixels toward the reader. All of
+ * it is the shared `.tactile` / `.tactile-media` vocabulary (globals.css) — pure CSS, so
+ * every card across the site responds identically and it costs no main-thread work.
+ * Movement is removed under prefers-reduced-motion; keyboard focus deepens the shadow
+ * via `:focus-within`.
+ *
+ * Cards without a photo get a calm gradient canvas with a large faint monogram and a
+ * breath ring — so image-less practices never read as broken.
  */
 export function Card({
   href,
@@ -34,10 +34,8 @@ export function Card({
   aspect?: string;
   external?: boolean;
 }) {
-  const reduced = usePrefersReducedMotion();
-
   const cardClass =
-    'group/card relative flex h-full flex-col overflow-hidden rounded-[10px] surface-elevated ring-1 ring-black/[0.04] transition-shadow duration-500 ease-calm hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2';
+    'tactile group/card relative flex h-full flex-col overflow-hidden rounded-[10px] surface-elevated ring-1 ring-black/[0.04] focus-visible:outline-2 focus-visible:outline-offset-2';
 
   const inner = (
     <>
@@ -50,9 +48,7 @@ export function Card({
             alt={imageAlt}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className={`object-contain p-4 transition-transform duration-[900ms] ease-calm ${
-              reduced ? '' : 'group-hover/card:scale-[1.03]'
-            }`}
+            className="tactile-media object-contain p-4"
           />
         ) : (
           // Calm canvas for image-less practices — a large faint monogram + breath ring.
@@ -82,21 +78,13 @@ export function Card({
     </>
   );
 
-  return (
-    <motion.div
-      whileHover={reduced ? undefined : { y: -4 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="h-full"
-    >
-      {external ? (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={cardClass}>
-          {inner}
-        </a>
-      ) : (
-        <Link href={href} className={cardClass}>
-          {inner}
-        </Link>
-      )}
-    </motion.div>
+  return external ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={cardClass}>
+      {inner}
+    </a>
+  ) : (
+    <Link href={href} className={cardClass}>
+      {inner}
+    </Link>
   );
 }

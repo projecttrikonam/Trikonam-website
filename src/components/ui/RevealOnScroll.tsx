@@ -18,11 +18,18 @@ export function RevealOnScroll({
   children,
   className = '',
   delay = 0,
+  variant,
   as: Tag = 'div' as ElementType,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  /**
+   * Motion character. Default is the standard fade + 16px rise. `soft` fades with no
+   * movement (full-bleed images), `rise` gives a longer lift to a section's opening
+   * statement, `still` is an almost-motionless slow fade for quiet interior blocks.
+   */
+  variant?: 'soft' | 'rise' | 'still';
   as?: ElementType;
 }) {
   const ref = useRef<HTMLElement>(null);
@@ -67,7 +74,7 @@ export function RevealOnScroll({
   return (
     <Tag
       ref={ref}
-      className={`reveal ${shown ? 'reveal-in' : ''} ${className}`}
+      className={`reveal ${variant ? `reveal--${variant}` : ''} ${shown ? 'reveal-in' : ''} ${className}`}
       style={delay ? { transitionDelay: `${delay}s` } : undefined}
     >
       {children}

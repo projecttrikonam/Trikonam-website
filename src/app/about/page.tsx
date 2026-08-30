@@ -51,9 +51,10 @@ export default function AboutPage() {
             </div>
           </PageHeader>
 
-          <RevealOnScroll delay={0.1}>
+          <RevealOnScroll variant="soft" delay={0.1}>
             <ResponsiveImage
               src="/images/about/about-hero.webp"
+              parallax
               alt="Practitioners in white sit in meditation before the Adiyogi, a large sculpted face of the first yogi."
               aspect="aspect-[4/5]"
               sizes="(min-width: 768px) 45vw, 100vw"
@@ -65,7 +66,7 @@ export default function AboutPage() {
 
       {/* SECTION 2 — Our Vision (unchanged) */}
       <Section tone="bg-alt" width="narrow">
-        <RevealOnScroll className="text-center">
+        <RevealOnScroll variant="rise" className="text-center">
           <span className="eyebrow mb-5 block">Our Vision</span>
           <p className="mx-auto max-w-2xl font-serif text-h2 leading-[1.35] text-primary">
             To make authentic Classical Hatha Yoga available to anyone seeking greater
@@ -101,9 +102,10 @@ export default function AboutPage() {
         </RevealOnScroll>
       </Section>
       <Section tone="bg" width="wide" className="pt-0">
-        <RevealOnScroll>
+        <RevealOnScroll variant="soft">
           <ResponsiveImage
             src="/images/about/what-is-chy.webp"
+            parallax
             alt="Practitioners hold classical postures along a sunlit stone colonnade at dawn."
             aspect="aspect-[3/2]"
             sizes="(min-width: 1024px) 72rem, 100vw"
@@ -195,7 +197,7 @@ export default function AboutPage() {
 
       {/* Invitation (kept) */}
       <Section tone="bg" width="narrow" className="pt-6 text-center">
-        <RevealOnScroll>
+        <RevealOnScroll variant="rise">
           <span className="eyebrow mb-4 block">Invitation</span>
           <p className="mx-auto max-w-2xl font-serif text-h2 leading-[1.4] text-primary">
             Whether you are taking your very first step into yoga or looking to deepen an

@@ -39,12 +39,16 @@ export function Stories() {
   return (
     <section className="bg-bg-alt px-6 py-16 sm:px-8 md:py-28">
       <div className="mx-auto max-w-3xl">
-        <RevealOnScroll className="mb-12 text-center">
-          <span className="eyebrow eyebrow--tick mx-auto mb-5 w-fit">Stories from the Practice</span>
-          <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
-            In the words of those who practise here.
-          </h2>
-        </RevealOnScroll>
+        <div className="mb-12 text-center">
+          <RevealOnScroll>
+            <span className="eyebrow eyebrow--tick mx-auto mb-5 w-fit">Stories from the Practice</span>
+          </RevealOnScroll>
+          <RevealOnScroll variant="rise" delay={0.06}>
+            <h2 className="text-balance font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] font-normal leading-[1.22] text-primary">
+              In the words of those who practise here.
+            </h2>
+          </RevealOnScroll>
+        </div>
 
         <RevealOnScroll>
           <div className="relative min-h-[19rem] sm:min-h-[16rem]">

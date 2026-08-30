@@ -48,6 +48,11 @@
   /* Atmospheric tints — used sparingly for soft radial gradient washes. */
   --wash-moss: rgba(91, 107, 78, 0.06);
   --wash-gold: rgba(138, 98, 48, 0.05);
+
+  /* The one easing curve the whole site moves on — calm, weighted, no overshoot.
+   * Mirrors tailwind.config `transitionTimingFunction.calm`; named here so raw CSS
+   * (reveal, tactile cards, seams) and JS (framer transitions) share one feel. */
+  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* CONTRAST NOTES (WCAG AA 4.5:1 is a non-negotiable quality floor — Handoff §11.2).
@@ -246,6 +251,86 @@
       transparent
     );
   }
+
+  /* ------------------------------------------------------------------ *
+   * INTERACTION SYSTEM (2026) — a small, shared vocabulary of tactile
+   * response. Movement is restrained and always settles; every effect
+   * is disabled or reduced under prefers-reduced-motion, and pointer
+   * transforms are gated to real hover devices so touch never sticks.
+   * ------------------------------------------------------------------ */
+
+  /* Tactile card — a card is "picked up" a few pixels toward the reader on hover or
+   * keyboard focus, its shadow deepening with it. Pair with `.tactile-media` on an
+   * inner <img>/frame for a matching, slower drift within the frame. Purely CSS so it
+   * costs no main thread and stays identical everywhere it is used. */
+  .tactile {
+    transition:
+      transform 0.55s var(--ease-calm),
+      box-shadow 0.55s var(--ease-calm),
+      border-color 0.55s var(--ease-calm);
+  }
+  @media (hover: hover) {
+    .tactile:hover {
+      transform: translateY(-4px) scale(1.012);
+      box-shadow: var(--shadow-lift);
+    }
+  }
+  .tactile:focus-within {
+    box-shadow: var(--shadow-lift);
+  }
+  .tactile-media {
+    transition: transform 0.9s var(--ease-calm);
+    will-change: transform;
+  }
+  @media (hover: hover) {
+    .group:hover .tactile-media,
+    .tactile:hover .tactile-media {
+      transform: scale(1.035);
+    }
+  }
+
+  /* Focus-group member — used by useFocusGroup for the Body / Mind / Energy / Emotions
+   * pattern and any peer set where one item is brought into awareness while the others
+   * recede. The hook sets `data-state` (focus | dim | idle); transitions live here so
+   * the feel is consistent and CSS-cheap. */
+  .focus-peer {
+    transition:
+      transform 0.6s var(--ease-calm),
+      opacity 0.6s var(--ease-calm),
+      box-shadow 0.6s var(--ease-calm);
+  }
+  .focus-peer[data-state='focus'] {
+    transform: translateY(-6px) scale(1.025);
+    box-shadow: var(--shadow-lift);
+  }
+  .focus-peer[data-state='dim'] {
+    opacity: 0.5;
+    transform: scale(0.99);
+  }
+
+  /* A quiet seam between two tonal bands — a faint gradient that lets one section
+   * settle into the next rather than butting against it. */
+  .section-seam {
+    height: 4rem;
+    margin-top: -4rem;
+    pointer-events: none;
+  }
+}
+
+/* Interaction system — reduced-motion floor. Emphasis stays (it aids focus and
+ * comprehension); movement goes. */
+@media (prefers-reduced-motion: reduce) {
+  .tactile:hover,
+  .tactile:focus-within,
+  .focus-peer[data-state='focus'],
+  .focus-peer[data-state='dim'] {
+    transform: none;
+  }
+  .tactile-media,
+  .group:hover .tactile-media,
+  .tactile:hover .tactile-media {
+    transform: none;
+  }
 }
 
 @layer utilities {
@@ -284,13 +369,30 @@
   opacity: 0;
   transform: translateY(16px);
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.7s var(--ease-calm),
+    transform 0.7s var(--ease-calm);
   will-change: opacity, transform;
 }
 .reveal-in {
   opacity: 1;
   transform: none;
+}
+/* Variants (opt-in via RevealOnScroll `variant`):
+ *   soft — opacity only, for full-bleed images / large panels where a slide reads wrong
+ *   rise — a longer, slower lift for a section's opening statement
+ *   still — no transform, slightly slower fade for quiet interior blocks */
+.reveal--soft {
+  transform: none;
+}
+.reveal--rise {
+  transform: translateY(30px);
+  transition:
+    opacity 0.9s var(--ease-calm),
+    transform 0.9s var(--ease-calm);
+}
+.reveal--still {
+  transform: none;
+  transition: opacity 0.95s var(--ease-calm);
 }
 /* Fail open: if scripting is unavailable, show content immediately. */
 @media (scripting: none) {
